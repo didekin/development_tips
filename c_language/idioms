@@ -1,0 +1,31 @@
+* Para calcular el tamaño de un array:
+
+	# define SIZE ( (int) (sizeof(a) / sizeof(a[0])) )
+
+	* el cast a int es porque sizeof devuelve un size_t, que es unsigned int.
+
+* Para calcular el tiempo de ejecución de una función:
+
+	/* do profiling */
+	tstart = clock();
+
+	for (n = 0; n < ntests; n++)
+		fibonacci();
+
+	tend = clock();
+	/* end profiling */
+
+	/* compute average execution time */
+	favg = ((double)(tend - tstart))/CLOCKS_PER_SEC/ntests;
+
+*  This directive, inserted at the top of a header (.h) file, will ensure that
+	the file is included only once.
+
+	#pragma once
+
+*	Use of assertions implica la inclusión del header in the .c file:
+
+	#include <assert.h>.
+
+	Depending on the options specified at compile time, the assert() expressions will be left in
+	the code for testing, or may be ignored.

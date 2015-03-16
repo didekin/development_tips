@@ -1,0 +1,153 @@
+BASE GRAPHS
+===========
+
+To get help about the parameters to be used with base graphics:
+>?par
+To get the current value of a parameter:
+>par("name of the parameter")
+
+Boxplots
+--------
+
+The box gives an indication of the location and spread of the central portion of the data,
+while the extent of the lines (the “whiskers”) provides an idea of the range of the bulk
+of the data. In some implementations, outliers (observations that are very different
+from the rest of the data) are plotted as separate points.
+
+The basic construction of the box part of the boxplot is as follows:
+
+1. A horizontal line is drawn at the median. 
+2. Split the data into two halves, each containing the median. 
+3. Calculate the upper and lower quartiles as the medians of each half, and draw
+horizontal lines at each of these values. Then connect the lines to form a rectangular
+box.
+
+The box thus drawn defines the interquartile range (IQR). This is the difference between
+the upper quartile and the lower quartile. We use the IQR to give a measure of the
+amount of variability in the central portion of the dataset, since about 50% of the
+data will lie within the box.
+
+The lower whisker is drawn from the lower end of the box to the smallest value that is
+no smaller than 1.5 IQR below the lower quartile. Similarly, the upper whisker is drawn
+from the middle of the upper end of the box to the largest value that is no larger
+than 1.5 IQR above the upper quartile. The rationale for these definitions is that when
+data are drawn from the normal distribution or other distributions with a similar shape,
+about 99% of the observations will fall between the whiskers.
+
+>boxplot(pollution$pm25,col="blue")
+>abline(h=12)
+
+Multiple boxplots:
+>boxplot(Sepal.Length~Species, data = iris, ylab = "Sepal length (cm)",
+main = "Iris measurements",boxwex = 0.5)
+
+Histograms
+----------
+A histogram is a special type of bar chart that is used to show the frequency distribution
+of a collection of numbers. Each bar represents the count of x values that fall in the
+range indicated by the base of the bar
+
+>hist(pollution$pm25,col="green",breaks=100)
+>rug(pollution$pm25)
+>abline(v=median(pollution$pm25),col="magenta",lwd=4)
+
+Multiple histograms:
+>par(mfrow=c(2,1),mar=c(4,4,2,1))
+>hist(subset(pollution, region=="east")$pm25,col=green)
+>hist(subset(pollution,region=="west")$pm25,col="green")
+
+Barplots and dot charts
+-----------------------
+Bar charts and dot charts do this by displaying a bar or dot whose length or position
+corresponds to a number.
+>barplot(table(pollution$region),col="blue",main="Number of ...") #Number observations
+per region.
+>barplot(VADeaths, beside=TRUE, legend=TRUE, ylim=c0, 90), ylab="Deaths per 1000",
+main="Death rates in Virginia")
+
+>dotchart(VADeaths,xlim=c(0,75),xlab="Deaths per 1000",main="Death rates in Virginia")
+
+Scatterplot
+-----------
+In a scatterplot, points (xi,yi), i = 1, . . . , n are drawn using dots or other symbols.
+These are drawn to show relationships between the xi and yi values. Its basic usage is
+plot(x, y, ...)where x and y are numeric vectors of the same length
+holding the data to be plotted.
+
+>with(pollution,plot(lattitude,pm25))
+>abline(h=12,lwd=2,lty=2)
+
+Plots (general)
+---------------
+Some function to combine with plot():
+
+>lines() # add lines to a plot, given a vector x values and a corresponding vector of
+y values; this function just connects the dots.
+
+>ablines()
+
+>points() # add points to a plot.
+
+>legend() # add a square with the description of the diff elements of the plot.
+>legend("topright", pch = 1, col = c("blue", "red"), legend = c("May", "Other Months"))
+
+>text()  # add text labels to a plot using specified x, y coordinates.
+
+>title() # add annotations to x, y axis labels, title, subtitle, outer margin.
+
+>mtext() # add arbitrary text to the margins (inner or outer) of the plot.
+
+>axis() # adding axis ticks/labels.
+
+Multiple base plots:
+>par(mfrow = c(1, 3), mar = c(4, 4, 2, 1), oma = c(0, 0, 2, 0))
+>with(airquality, {
+    plot(Wind, Ozone, main = "Ozone and Wind")
+    plot(Solar.R, Ozone, main = "Ozone and Solar Radiation")
+    plot(Temp, Ozone, main = "Ozone and Temperature")
+    mtext("Ozone and Weather in New York City", outer = TRUE)
+})
+
+DEVICES
+-------
+The most common place for a plot to be "sent" is the screen device.
+On a Mac the screen device is launched with the quartz().
+On Unix/Linux the screen device is launched with x11().
+>?Devices
+
+>pdf(file = "myplot.pdf")  ## Open PDF device; create 'myplot.pdf' in my working
+directory
+>with(faithful, plot(eruptions, waiting))
+>title(main = "Old Faithful Geyser data")
+>dev.off()  ## Close the PDF file device
+
+Plotting can only occur on one graphics device at a time
+>dev.cur() # gives the currently active graphics device.
+
+>dev.set(integer) # to change the current device. Where 'integer' is the number
+associated with the graphics device you want to switch to.
+
+To copy a plot from the screen:
+>with(faithful, plot(eruptions, waiting))  ## Create plot on screen device
+>dev.copy(png, file = "geyserplot.png")  ## Copy my plot to a PNG file
+>dev.off()  ## Don't forget to close the PNG device!
+With a pdf file:
+>dev.copy2pdf()
+
+LATTICE FUNCTIONS
+=================
+>xyplot()  # this is the main function for creating scatterplots.
+>xyplot(Ozone ~ Wind | Month, data = airquality, layout = c(5, 1))
+>xyplot(y ~ x | f, layout = c(2, 1))
+
+>bwplot()  # box-and-whiskers plots (“boxplots”).
+>histogram() # histograms.
+>stripplot() # like a boxplot but with actual points.
+>dotplot() # plot dots on "violin strings".
+>splom() # scatterplot matrix.
+>levelplot(), contourplot(): for plotting "image" data.
+
+GGPLOT2
+=======
+
+

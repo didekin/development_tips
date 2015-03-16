@@ -1,0 +1,5 @@
+Mac OSX no trae instalado gdb, sino lldb.
+Se puede instalar gdb con brew install gdb.
+
+# Para lanzar lldb: 'xcrun lldb' o 'lldb'
+# 'help -a' para listar los alias o command abbreviation.

@@ -1,0 +1,117 @@
+FILES
+=====
+
+To read a file or a connection object:
+>readLines(connection,..)
+
+To count the number of character in a line:
+>nchar(line)
+
+>file.exists("directoryName")  #will check to see if the directory exists.
+>dir.create("directoryName")   #will create a directory if it doesn't exist.
+
+To see files in a directory:
+>list.files("./directory").
+
+To delete files or directories:
+>unlink(..)
+
+- To download a file:
+>fileUrl <- "https://...."
+>download.file(fileUrl, destfile = "./data/f.csv", method = "curl")
+
+To load a "flat" file already downloading, or local:
+>read.table("path")
+
+To load an Excel file:
+>library(xlsx)
+>read.xlsx("path",sheetIndex=1,header=TRUE)
+More about Excel files in: XLConnect.
+
+To parse a remote XML file:
+>library(XML)
+>fileUrl <- "http://www.w3schools.com/xml/simple.xml"
+>doc <- xmlTreeParse(fileUrl,useInternal=TRUE)
+>rootNode <- xmlRoot(doc)
+
+Xpath:
+ /node Top level node
+ //node Node at any level
+ node[@attr-name] Node with an attribute name
+ node[@attr-name='bob'] Node with attribute name attr-name='bob'
+
+>xpathSApply(rootNode,"//name",xmlValue)
+>scores <- xpathSApply(doc,"//li[@class='score']",xmlValue)
+
+To parse a remote JSON file:
+>library(jsonlite)
+>jsonData <- fromJSON("https://api.github.com/users/jtleek/repos")
+
+To write a data.frame to a JSON file:
+>myjson <- toJSON(iris, pretty=TRUE)
+To convert back to JSON:
+>iris2 <- fromJSON(myjson)
+
+MYSQL
+
+To install package on Mac:
+>install.packages("RMySQL")
+
+To connect to a server:
+>ucsDb <- dbConnect(MySQL(), user="genome",host="genome-mysql")
+>result <- dbGetQuery(ucsDB,"show databases;");dbDisconnect(ucsDB)
+To connect to a particular database:
+>hg19 <- dbConnect(MySQL(),user="genome",db="hg19",host="genome")
+>allTables <- dbListTables(hg19)
+
+To inspect and query a table:
+>dbListFields(hg19,"table1")
+>dbGetQuery(hg19,"select count(*) from table1")
+>count(*)
+
+>query <- dbSendQuery(hg19, "select * from table1 where misMatches between 1 and 3")
+>misMatch <- fetch(query); quantile(misMatch$misMatches)
+>misMatchSmall <- fetch(query,n=10); dbClearResult(query);
+>dbDisconnect(hg19)
+
+To read from a table:
+>table1Data <- dbReadTable(hg19,"table1")
+>head(table1Data)
+
+HDF5 (http://www.hdfgroup.org)
+
+To install (http://bioconductor.org/packages/release/bioc/html/rhdf5.html):
+>source("http://bioconductor.org/biocLite.R")
+>biocLite("rhdf5")
+
+To create a hdf5 file:
+>library(rhdf5)
+>created = h5createFile("example.h5")
+created
+
+WEB PAGES
+
+>con = url("http://...")
+>htmlCode = readLines(con)
+>close(con)
+
+>library(XML)
+>url <- "http://.."
+>html <- htmlTreeParse(url, useInternalNodes=T)
+>xpathSApply(html, "//title", xmlValue)
+
+With the httr package:
+>library(httr); html2 = GET(url)
+>content2 = content(html2,as="text")
+>parsedHtml = htmlParse(content2,asText=TRUE)
+>xpathSApply(parsedHtml, "//title", xmlValue)
+
+To authenticate:
+pg2 = GET("http://httpbin.org/basic-auth/user/passwd",
+    authenticate("user","passwd"))
+
+RDS FILES
+>readRDS("path to the file")
+
+
+

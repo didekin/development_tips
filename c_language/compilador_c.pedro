@@ -1,0 +1,25 @@
+# Opción 'g': para debugging: -g
+# -ggdb compile for debugging with gdb.
+# -std=gnu99 is gcc specific: gcc should allow code conforming to the C99 and POSIX standards.
+# -O optimization, -03 indicates optimization level three.
+
+$ gcc -c -g -O -Wall -O3 -std=gnu99 math1.c -o math1
+
+# Directorios para librerías C:
+/usr/lib
+# dinamyc linking in the command line:
+opción 1: gcc db1.o -L /usr/lib -lsqlite3 -o db1
+opción 2: gcc -lsqlite3 db1.o -o db1
+
+# Standard header directory:
+/usr/include
+/usr/local/include
+
+# objdump displays information about one or more object files. Instalado con brew.
+$ gobjdump -d name.o  // gobjdump -d name
+# Equivalente de la herramienta objdump en Mac:
+$ otool -tV name.o  // otool -tv name.o
+
+
+
+

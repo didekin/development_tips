@@ -1,0 +1,7 @@
+Para tipos numéricos:
+<limits.h>
+<float.h>
+<stdint.h> # Names for integer types with a particular number of bits.
+Para tipos alfabéticos:
+<ctype.h>
+<string.h>

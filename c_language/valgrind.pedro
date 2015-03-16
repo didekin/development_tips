@@ -1,0 +1,5 @@
+Instalada con homebrew la versión 3.9.0
+
+#Instrucción para analizar un programa:
+valgrind --tool=memcheck --leak-check=full --show-reachable=yes program argument(s)
+# If . is not in your unix path, you must explicitly specify ./program.

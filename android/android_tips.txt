@@ -1,0 +1,30 @@
+#  ?android:
+
+You can apply a style from the app’s theme to a widget using a theme attribute
+reference. This is what you are doing when you use the
+value ?android:listSeparatorTextViewStyle.
+
+In a theme attribute reference, you tell Android’s runtime resource manager,
+“Go to the app’s theme and find the attribute named
+listSeparatorTextViewStyle. This attribute points to another style resource.
+Put the value of that resource here.”
+............................................
+
+#   $./adb shell dumpsys activity b
+
+Permite ver los receivers registrados DINÁMICAMENTE. La información es ingente. La
+ayuda: ./adb shell dumpsys activity -h
+
+#   $./adb shell dumpsys package
+
+Para los receviers registrados ESTÁTICAMENTE.
+............................................
+LOGOUT: http://stackoverflow.com/questions/3007998/on-logout-clear-activity-history-stack-preventing-back-button-from
+-opening-l/9580057#9580057
+See answer Doraemon.
+La repuesta de xbakesk también parece buena.
+...........................................
+
+
+
+

@@ -1,0 +1,151 @@
+DATA SETS
+=========
+
+To create a vector with repeated values from another vector:
+>c("a","b")[c(1,2,1,2,1,1)]
+[1] "a" "b" "a" "b" "a" "a"
+
+To create a matrix:
+>A = matrix(1:10,nr=5,nc=2)
+
+To create a multidimensional array:
+>B = array(seq(0.1,2.0,by=0.1),dim=c(5,2,2))
+
+To get the number of rows or columns:
+>nrow(dataset), ncol(dataset)
+Para dataframes y vectores, también: NCOL y NROW.
+
+NA
+--
+
+To filter rows with NA values:
+>dataset[complete.cases(dataset),]
+
+To filter rows with NA values in certain columns:
+>dataset[complete.cases(dataset[,i:j]),]
+
+To know the NA values in a column:
+>sum(is.na(pid$WKHP))
+Or to know if there is NA values in a column:
+>any(is.na(pid$WKHP))
+To know the number of NA occurrences in each column of a data set:
+>colSums(is.na(pid))
+To validate the existence of NA values in the data set.
+>all(colSums(is.na(pid)) ==0)
+
+More on calculating NA values in a column, in tabular form:
+>pid$isNaJWMNP <- ifelse(is.na(pid$JWMNP),TRUE,FALSE)
+>table(pid$isNaJWMNP,is.na(pid$JWMNP))
+
+To validate the full set of values of a column:
+>all(pid$WKHP > 0)
+
+To select rows with a logical conditions and to avoid NA values:
+>x[which(x$var2 >=9),]
+
+To sort puttind NA values at the end of the vector:
+>sort(x$var2,na.last=T)
+---------
+
+To order a dataframe by the values of a particular column:
+>x[order(x$var1),]
+Or:
+>library(plyr)
+>arrange(x,var1)
+
+To search for any of the values in a vector:
+>table(pid$PWGTP %in% c(90,91))
+To select rows based on the values pertaining to a vector:
+pid[pid$PWGTP %in% c(90),]
+
+To add a column to a 5 * 3 dataframe:
+>x$var4 <- rnorm(5)
+Or:
+>y <- cbind(x,rnorm(5))
+Más sobre subsetting and order: ￼
+
+To tabulate the observations with the same value in a certain variable (column):
+>table(pid$PUMA,useNA='ifany')
+
+To crosstabs the ocurrences of a variable (Freq):
+>xt <- xtabs(Freq ~ Gender + Admit, data=DF)
+More options of crosstabs:
+>xt <- xtabs(breaks ~.,data=warpbreaks)
+>ftable(xt)  # Igual que la anterior en formato compacto.
+
+To see the size (bytes or similar) of a dataset:
+>object.size(dataset)
+
+Variables manipulation
+----------------------
+To group values in quantiles:
+>pid$JWMNPgr <- cut(pid$JWMNP,breaks=quantile(pid$JWMNP,na.rm=T))
+To see the groups:
+>table(pid$JWMNPgr)
+>table(pid$JWMNPgr,pid$JWMNP)
+Or with library Hmisc:
+>pid$JWMNPgr <- cut2(pid$JWMNP,g=4))
+
+
+--------------------------------------------------------------------------
+
+lapply Loops over a list and evaluate a function on each element. It takes
+three arguments:
+(1) a list X;
+(2) a function (or the name of a function) FUN;
+(3) other arguments via its ... argument. If X is not a list, it will be
+coerced to a list using as.list.
+
+>x <- list(a = matrix(1:4, 2, 2), b = matrix(1:6, 3, 2))
+
+An anonymous function for extracting the first column of each matrix.
+
+> lapply(x, function(elt) elt[,1])
+
+sapply will try to simplify the result of lapply if possible: If the result is a
+list where every element is length 1, then a vector is returned. If the result is
+a list where every element is a vector of the same length (> 1), a matrix
+is returned. If it can’t figure things out, a list is returned
+
+> x <- list(a = 1:4, b = rnorm(10), c = rnorm(20, 1), d = rnorm(100, 5))
+> sapply(x, mean)
+
+apply is used to a evaluate a function (often an anonymous one) over the margins
+of an array. It is most often used to apply a function to the rows or columns
+of a matrix. It can be used with general arrays, e.g. taking the average of an
+array of matrices.
+
+> x <- matrix(rnorm(200), 20, 10)
+> apply(x, 2, mean)  ## the margin 2 indicates 'by column', 1 'by row'.
+
+mapply is a multivariate apply of sorts which applies a function in parallel
+over a set of arguments.
+
+>list(rep(1, 4), rep(2, 3), rep(3, 2), rep(4, 1))
+> mapply(rep, 1:4, 4:1)  ## The equivalent with mapply.
+
+>list(noise(1, 1, 2), noise(2, 2, 2),
+     noise(3, 3, 2), noise(4, 4, 2),
+     noise(5, 5, 2))
+> mapply(noise, 1:5, 1:5, 2) ## Equivalent with mapply.
+
+split takes a vector or other objects and splits it into groups determined by
+a factor or list of factors.
+
+> x <- c(rnorm(10), runif(10), rnorm(10, 1))
+> f <- gl(3, 10)
+> split(x, f)
+
+> s <- split(airquality, airquality$Month)
+> lapply(s, function(x) colMeans(x[, c("Ozone", "Solar.R", "Wind")]))
+
+> sapply(s, function(x) colMeans(x[, c("Ozone", "Solar.R", "Wind")],
+                                 na.rm = TRUE))
+---------------------------------------------------------------------
+The operator '[' can be used to extract elements of a list or
+vector:
+>sapply(strsplit(x, split = "_"), "[", 2)
+# Extracts the second element of the 2-vector-element which
+# compose the list where sappy is applied. Similar to:
+> library(stringr)
+>str_split_fixed(x, "_", 2)[, 2]

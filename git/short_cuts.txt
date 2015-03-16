@@ -1,0 +1,20 @@
+# To remove a tracked file:
+- delete.
+- 'git rm' to commit the physical deleting.
+
+If the file is modified after the delete instruction, and
+previus to 'git rm file', is necessary to use 'git rm -f file'.
+
+If we do not want to remove physically a file, only not to have git
+track anymore:
+$ git rm --cached file
+
+Example of removing multiple files:
+$ git rm log/\*.log    // removes all files that have the .log extension
+ in the log directory.
+
+# To commit snapshots without previously adding them with 'git add':
+
+$ git -a
+$ git -a -m 'text of the commit'
+

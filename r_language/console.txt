@@ -1,0 +1,64 @@
+He pegado la siguiente línea en el terminal bash, para evitar los warnings iniciales en R console:
+$ defaults write org.R-project.R force.LANG en_US.UTF-8
+.............................................
+>str(object)  # to see the description of an object.
+
+Para cargar los datos que vienen en la distribución estándar de R:
+> library(datasets)
+> data(iris)
+
+Para ver los argumentos de una función:
+>args(function)
+
+Variables predefinidas:
+LETTERS, letters, month.name, month.abb
+
+Para definir un índice negativo, se define un vector -c(..) con las posiciones a excluir.
+
+Para borrar todas las variables del workspace:
+>rm(list = ls())
+
+>getwd()   			//para conoer el directorio actual.
+>setwd(mydir) 		//para cambiar el directorio de trabajo.
+
+>help.search(word)		//para búsquedas más amplias.
+>RSiteSearch("keywords")  // will do a search in the R-help mailing list and other web resources.
+
+To install a new package:
+>install.packages("xlsx")
+
+To detach a package from the current session:
+>detach("package:packagename")
+
+Ejemplo de cálculo de nuevas columnas de un data.frame con within:
+>thue4 <- within(thuenesen, {
+	log.gluc <- log(blood.glucose)
+	m <- mean(log.gluc)
+	centered.log.gluc <- log.gluc - m
+	rm(m)
+})
+
+Para localizar un directorio dentro de un paquete:
+>system.file("rawdata","thuesen.txt", package="ISWR") // file "thuesen.txt",
+                                                    //del directorio "rawdata"
+
+Type quit() or q() to leave R console.
+
+Para ver un ejemplo de utilización de una función:
+>example(function)
+
+>dump("usefuldata", "useful.R")  // Archiva la definición del objeto usefuldata en el archivo useful.R.
+>source("useful.R")   // Recupera el contenido del archivo useful.R y crea el objeto usefuldata.
+>dump(list=objects(), "all.R")
+>source("all.R")
+>dump(c("humidity", "temp","rain"), "weather.R")
+
+To measure the execution time of a function or expression:
+>system.time(function)
+>system.time({ code })
+
+To list the files in a dir:
+>dir()    or   > list.files()
+Similar: >list.dirs,  >file.exists(),  >dir.create()
+
+

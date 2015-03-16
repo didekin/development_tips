@@ -1,0 +1,20 @@
+DISTRIBUCIONES
+==============
+punif
+pnorm
+pbinom
+pchisq
+pbeta
+
+Statistics
+---------
+To get the quantiles corresponding to certain probabilities:
+>quantile(pid$PWGTP, probs=c(0.5, 0.8,.9))
+
+Regression
+----------
+
+To fit a regression line without intercept
+>lm(y~x -1)
+With intercept:
+>lm(y~x)
