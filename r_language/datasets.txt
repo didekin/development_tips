@@ -86,7 +86,6 @@ To see the groups:
 Or with library Hmisc:
 >pid$JWMNPgr <- cut2(pid$JWMNP,g=4))
 
-
 --------------------------------------------------------------------------
 
 lapply Loops over a list and evaluate a function on each element. It takes
