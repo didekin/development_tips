@@ -8,12 +8,6 @@ To get the current value of a parameter:
 
 Boxplots
 --------
-
-The box gives an indication of the location and spread of the central portion of the data,
-while the extent of the lines (the “whiskers”) provides an idea of the range of the bulk
-of the data. In some implementations, outliers (observations that are very different
-from the rest of the data) are plotted as separate points.
-
 The basic construction of the box part of the boxplot is as follows:
 
 1. A horizontal line is drawn at the median. 
@@ -120,6 +114,11 @@ directory
 >with(faithful, plot(eruptions, waiting))
 >title(main = "Old Faithful Geyser data")
 >dev.off()  ## Close the PDF file device
+
+Antother example: to save a jpg file called "rplot.jpg" containing a plot of x and y,
+> jpeg('rplot.jpg')
+> plot(x,y)
+> dev.off()
 
 Plotting can only occur on one graphics device at a time
 >dev.cur() # gives the currently active graphics device.
