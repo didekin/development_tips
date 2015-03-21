@@ -1,0 +1,7 @@
+If you have installed the Startup Item, use this command to start the server:
+
+> sudo /Library/StartupItems/MySQLCOM/MySQLCOM start
+
+If you have installed the Startup Item, use this command to stop the server:
+
+> sudo /Library/StartupItems/MySQLCOM/MySQLCOM stop
