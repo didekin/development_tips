@@ -1,7 +1,18 @@
-If you have installed the Startup Item, use this command to start the server:
+#To have launchd start mysql at login:
+    ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
+Then to load mysql now:
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
 
-> sudo /Library/StartupItems/MySQLCOM/MySQLCOM start
+# To start/stop manually mysql server:
+$ mysql.server start
+$ mysql.server stop
 
-If you have installed the Startup Item, use this command to stop the server:
+#To change root password:
 
-> sudo /Library/StartupItems/MySQLCOM/MySQLCOM stop
+$ /usr/local/opt/mysql/bin/mysqladmin -u root password 'new-password'
+Or:
+$ /usr/local/opt/mysql/bin/mysqladmin -u root -h Pedros-iMac.local
+		password 'new-password'
+
+Alternatively:
+$ /usr/local/opt/mysql/bin/mysql_secure_installation
