@@ -1,14 +1,13 @@
 #To have launchd start mysql at login:
-    ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
+$ ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
 Then to load mysql now:
-    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+$ launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
 
 # To start/stop manually mysql server:
 $ mysql.server start
 $ mysql.server stop
 
 #To change root password:
-
 $ /usr/local/opt/mysql/bin/mysqladmin -u root password 'new-password'
 Or:
 $ /usr/local/opt/mysql/bin/mysqladmin -u root -h Pedros-iMac.local
@@ -16,3 +15,68 @@ $ /usr/local/opt/mysql/bin/mysqladmin -u root -h Pedros-iMac.local
 
 Alternatively:
 $ /usr/local/opt/mysql/bin/mysql_secure_installation
+
+# To see the current user:
+$ SELECT USER();
+
+# To determine the current global or session sql_mode value:
+$ SELECT @@GLOBAL.sql_mode;
+$ SELECT @@SESSION.sql_mode;
+
+..........................................................
+To enable load files from the client:
+$ mysql -h localhost -u pedro -p  --local-infile=1
+
+To CANCEL a command not executed:
+$ \c
+
+# To find out which database is currently selected:
+$ select database();
+
+# To see the create statement of a table:
+$ show create table <table>
+
+# To view the properties of InnoDB tables:
+$ show table status from didekin like 'direccion' \G;
+
+# To view the tables of a database:
+$ show tables;
+.........................................................
+
+STATEMENTS
+==========
+
+$ UPDATE <table> SET <column-name> = '1989-08-31' WHERE <unique-col-name> = 'Bowser';
+
+$ SELECT * FROM pet WHERE (species = 'cat' AND sex = 'm')
+      OR (species = 'dog' AND sex = 'f');
+
+$ SELECT name, birth FROM pet;
+
+$ SELECT DISTINCT owner FROM pet;
+
+$ SELECT name, birth FROM pet ORDER BY birth;
+
+$ SELECT name, birth FROM pet ORDER BY birth DESC;
+
+# To sort by type of animal in ascending order, then by birth date within animal
+  type in descending order (youngest animals first):
+$ SELECT name, species, birth FROM pet
+      ORDER BY species, birth DESC;
+
+# To test for a boolean condition:
+$ select (0 is not null);
+
+# To join a table with itself:
+$ SELECT p1.name, p1.sex, p2.name, p2.sex, p1.species
+     FROM pet AS p1 INNER JOIN pet AS p2
+     	ON p1.species = p2.species AND p1.sex = 'f' AND p2.sex = 'm';
+
+# To select records with the 'value' in the SET colum set_col:
+$ SELECT * FROM tbl_name WHERE FIND_IN_SET('value',set_col)>0;
+
+# Similar, but for the first (1) value of the set:
+$ SELECT * FROM tbl_name WHERE set_col & 1;
+
+o determine all possible values for a SET column, set_col in this example:
+$ SHOW COLUMNS FROM tbl_name LIKE set_col;
