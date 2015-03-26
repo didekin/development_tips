@@ -17,7 +17,6 @@ Para dataframes y vectores, también: NCOL y NROW.
 
 NA
 --
-
 To filter rows with NA values:
 >dataset[complete.cases(dataset),]
 
@@ -47,34 +46,39 @@ To sort puttind NA values at the end of the vector:
 >sort(x$var2,na.last=T)
 ---------
 
-To order a dataframe by the values of a particular column:
+To ORDER a dataframe by the values of a particular column:
 >x[order(x$var1),]
 Or:
 >library(plyr)
 >arrange(x,var1)
 
-To search for any of the values in a vector:
+To SEARCH for any of the values in a vector:
 >table(pid$PWGTP %in% c(90,91))
 To select rows based on the values pertaining to a vector:
 pid[pid$PWGTP %in% c(90),]
 
-To add a column to a 5 * 3 dataframe:
+To ADD A COLUMN to a 5 * 3 dataframe:
 >x$var4 <- rnorm(5)
 Or:
 >y <- cbind(x,rnorm(5))
 Más sobre subsetting and order: ￼
 
-To tabulate the observations with the same value in a certain variable (column):
+To TABULATE the observations with the same value in a certain variable (column):
 >table(pid$PUMA,useNA='ifany')
 
-To crosstabs the ocurrences of a variable (Freq):
+To CROSSTABS the ocurrences of a variable (Freq):
 >xt <- xtabs(Freq ~ Gender + Admit, data=DF)
 More options of crosstabs:
 >xt <- xtabs(breaks ~.,data=warpbreaks)
 >ftable(xt)  # Igual que la anterior en formato compacto.
 
-To see the size (bytes or similar) of a dataset:
+To see the SIZE (bytes or similar) of a dataset:
 >object.size(dataset)
+
+To MERGE two data frames:
+>CPS = merge(CPS, MetroAreaMap, by.x="MetroAreaCode", by.y="Code", all.x=TRUE)
+(all.x=TRUE means we want to keep all rows from the "x" data frame (CPS), even
+ if some of the rows' MetroAreaCode doesn't match any codes in MetroAreaMap).
 
 Variables manipulation
 ----------------------
@@ -88,7 +92,7 @@ Or with library Hmisc:
 
 --------------------------------------------------------------------------
 
-lapply Loops over a list and evaluate a function on each element. It takes
+LAPPLY Loops over a list and evaluate a function on each element. It takes
 three arguments:
 (1) a list X;
 (2) a function (or the name of a function) FUN;
@@ -101,7 +105,7 @@ An anonymous function for extracting the first column of each matrix.
 
 > lapply(x, function(elt) elt[,1])
 
-sapply will try to simplify the result of lapply if possible: If the result is a
+SAPPLY will try to simplify the result of lapply if possible: If the result is a
 list where every element is length 1, then a vector is returned. If the result is
 a list where every element is a vector of the same length (> 1), a matrix
 is returned. If it can’t figure things out, a list is returned
@@ -109,7 +113,7 @@ is returned. If it can’t figure things out, a list is returned
 > x <- list(a = 1:4, b = rnorm(10), c = rnorm(20, 1), d = rnorm(100, 5))
 > sapply(x, mean)
 
-apply is used to a evaluate a function (often an anonymous one) over the margins
+APPLY is used to a evaluate a function (often an anonymous one) over the margins
 of an array. It is most often used to apply a function to the rows or columns
 of a matrix. It can be used with general arrays, e.g. taking the average of an
 array of matrices.
@@ -117,7 +121,7 @@ array of matrices.
 > x <- matrix(rnorm(200), 20, 10)
 > apply(x, 2, mean)  ## the margin 2 indicates 'by column', 1 'by row'.
 
-mapply is a multivariate apply of sorts which applies a function in parallel
+MAPPLY is a multivariate apply of sorts which applies a function in parallel
 over a set of arguments.
 
 >list(rep(1, 4), rep(2, 3), rep(3, 2), rep(4, 1))
@@ -128,7 +132,7 @@ over a set of arguments.
      noise(5, 5, 2))
 > mapply(noise, 1:5, 1:5, 2) ## Equivalent with mapply.
 
-split takes a vector or other objects and splits it into groups determined by
+SPLIT takes a vector or other objects and splits it into groups determined by
 a factor or list of factors.
 
 > x <- c(rnorm(10), runif(10), rnorm(10, 1))
@@ -148,3 +152,6 @@ vector:
 # compose the list where sappy is applied. Similar to:
 > library(stringr)
 >str_split_fixed(x, "_", 2)[, 2]
+
+To get a TRUE/FALSE vector of whether an interviewee is Asian:
+>CPS$Race == "Asian"
