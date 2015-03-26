@@ -6,6 +6,9 @@ To get help about the parameters to be used with base graphics:
 To get the current value of a parameter:
 >par("name of the parameter")
 
+To see all of the color options in R, type:
+>colors()
+
 Boxplots
 --------
 The basic construction of the box part of the boxplot is as follows:
