@@ -1,0 +1,16 @@
+To run the application directly:
+> ./gradlew bootRun
+
+To create an executable jar:
+> ./gradlew build
+
+To attach a debugger to your packaged application:
+> java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8000,
+		suspend=n \ -jar target/myproject-0.0.1-SNAPSHOT.jar
+
+To see the libraries in the classpath:
+> ./gradlew dependencies
+
+To see the local IP address in a WI-FI network:
+> ifconfig | grep inet | grep -v 127.0.0.1.
+

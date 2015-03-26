@@ -1,13 +1,24 @@
-The EOF is typed in the keyboard as Control-D, after a new line character.
-Secuencia: caracteres + ENTER + Control-D. Otra: caracteres + Control-D + Control-D.
+# The EOF is typed in the keyboard as Control-D, after a new line character:
+$ caracteres + ENTER + Control-D
+Otra:
+$ caracteres + Control-D + Control-D
 
-Terminal behavior by using the command “man 4 tty” in Terminal.
-You can learn more about the termios line discipline by using the command “man termios”.
+# Terminal behavior by using:
+$ man 4 tty
 
-If you want to see what EOF is set as in your terminal: "stty all".
+# You can learn more about the termios line discipline by using the command
+$ man termios
 
-* Tilde ~ se consigue con la combinación fn+alt + ñ, en mi caso: fn + bloqueo mayúscula + ñ.
+#If you want to see what EOF is set as in your terminal:
+$ stty all
+
+# Tilde ~ se consigue con la combinación fn+alt + ñ, en mi caso:
+$ fn + bloqueo mayúscula + ñ.
 
 # Para contar las filas de un fichero tabulado:
-
 $ wc {nombre del fichero}
+
+# To know the environment variables:
+$ printenv
+$ env
+
