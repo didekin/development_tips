@@ -16,5 +16,10 @@ Regression
 
 To fit a regression line without intercept
 >lm(y~x -1)
+
 With intercept:
 >lm(y~x)
+>model <- lm(y ~ x + z,data=data.frame)
+
+To get the residuals:
+>model$residuals
