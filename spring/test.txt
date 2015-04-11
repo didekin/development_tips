@@ -1,0 +1,4 @@
+TESTS
+=====
+--- It is often desirable to call setWebEnvironment(false) when using
+    SpringApplication within a JUnit test.

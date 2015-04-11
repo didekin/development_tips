@@ -1,5 +1,0 @@
-It is often desirable to call setWebEnvironment(false) when using
-SpringApplication within a JUnit test.
-..................................................................
-@Value("${name}")
-private String name;

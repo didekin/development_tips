@@ -1,0 +1,114 @@
+GENERAL
+=======
+
+--- @PostConstruct (Application or Service classes)
+    After all beans are initialized in the  application context, any methods
+    with @PostConstruct are invoked automatically.
+
+WEB
+===
+
+--- @RequestMapping  (at the class level) Ej: /spittles
+
+    @Controller
+    @RequestMapping("/spittles")
+    public class SpittleController {
+    }
+
+--- @RequestParam (at the parameter level) Ej: /spittles/show?max=12345&count=20
+
+    It qualifies the @RequestMapping annotation in the class level, with
+    path (/show) and parameters information, at the method level.
+
+    @RequestMapping(value = "/show", method=RequestMethod.GET)
+    public List<Spittle> spittles(
+        @RequestParam
+            (value="max", defaultValue=MAX_LONG_AS_STRING) long max,
+        @RequestParam
+            (value="count", defaultValue="20") int count
+    )
+    {
+      return spittleRepository.findSpittles(max, count);
+    }
+
+--- @PathVariable   Ej: /spittles/12345
+
+    @RequestMapping(value="/{spittleId}", method=RequestMethod.GET)
+    public String spittle(
+        @PathVariable("spittleId") long spittleId,
+        Model model)
+    {
+      model.addAttribute(spittleRepository.findOne(spittleId));
+      return "spittle";
+    }
+
+    Where 12345 is the value taken by spittleID in the request.
+
+    Similar:
+
+    @RequestMapping(value="/{spittleId}", method=RequestMethod.GET)
+    public String spittle(@PathVariable long spittleId, Model model)
+    {
+      model.addAttribute(spittleRepository.findOne(spittleId));
+      return "spittle";
+    }
+
+    If no value attribute is given for @PathVariable, it assumes the placeholder’s
+    name is the same as the method parameter name.
+
+--- @Valid
+    It indicates that the command object has validation constraints that have
+    to be enforced.
+
+    @RequestMapping(value="/register", method=POST)
+    public String processRegistration(@Valid Spitter spitter,Errors errors)
+    {
+        if (errors.hasErrors()) {
+          return "registerForm";
+        }
+        spitterRepository.save(spitter);
+        return "redirect:/spitter/" + spitter.getUsername();
+    }
+
+--- @ResponseStatus
+
+    @ResponseStatus(value=HttpStatus.NOT_FOUND,reason="Spittle Not Found")
+    public class SpittleNotFoundException extends RuntimeException {
+    }
+
+    if a SpittleNotFoundException were to be thrown from a controller method,
+    the response would have a status code of 404 and a reason of Spittle Not
+    Found.
+
+--- @ExceptionHandler (in the method of a CONTROLLER)
+
+    @ExceptionHandler(DuplicateSpittleException.class)
+    public String handleDuplicateSpittle() {
+      return "error/duplicate";
+    }
+
+    @ExceptionHandler methods handle the exceptions of that type from any
+    handler method in the same controller, althought it is defined for a
+    particular method in the controller.
+
+--- @ControllerAdvice
+
+	One of the most practical uses for @ControllerAdvice is to gather all
+	@Exception- Handler methods in a single class so that exceptions from all
+	controllers are handled consistently in one place.
+
+	@ControllerAdvice
+    public class AppWideExceptionHandler {
+      @ExceptionHandler(DuplicateSpittleException.class)
+      public String duplicateSpittleHandler() {
+        return "error/duplicate";
+      }
+    }
+
+    Now, if a DuplicateSpittleException is thrown from any controller method,
+    no mat- ter which controller it’s in, this duplicateSpittleHandler() method
+    will be called to handle the exception.
+
+
+
+
