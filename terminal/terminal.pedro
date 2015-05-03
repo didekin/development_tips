@@ -22,3 +22,5 @@ $ wc {nombre del fichero}
 $ printenv
 $ env
 
+--- HTTP Authentication
+	$ curl  "https://$username:$password@myhost/resource"

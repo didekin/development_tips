@@ -33,7 +33,7 @@ WEB
 
 --- @PathVariable   Ej: /spittles/12345
 
-    @RequestMapping(value="/{spittleId}", method=RequestMethod.GET)
+    @RequestMapping(value=" /spittles/{spittleId}", method=RequestMethod.GET)
     public String spittle(
         @PathVariable("spittleId") long spittleId,
         Model model)
@@ -108,6 +108,13 @@ WEB
     Now, if a DuplicateSpittleException is thrown from any controller method,
     no mat- ter which controller it’s in, this duplicateSpittleHandler() method
     will be called to handle the exception.
+
+--- @RequestBody
+
+    It tells tells Spring that you want to send the returned object as a resource to the
+    client, converted into some representational form that the client can accept. More
+    specifically, DispatcherServlet considers the request’s Accept header and looks for
+    a message converter that can give the client the representation it wants.
 
 
 
