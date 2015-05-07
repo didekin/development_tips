@@ -39,11 +39,11 @@ More on calculating NA values in a column, in tabular form:
 To validate the full set of values of a column:
 >all(pid$WKHP > 0)
 
-To select rows with a logical conditions and to avoid NA values:
->x[which(x$var2 >=9),]
-
 To sort puttind NA values at the end of the vector:
 >sort(x$var2,na.last=T)
+
+To select rows with a logical conditions and to avoid NA values:
+>x[which(x$var2 >=9),]
 ---------
 
 To ORDER a dataframe by the values of a particular column:
