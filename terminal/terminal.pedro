@@ -24,3 +24,6 @@ $ env
 
 --- HTTP Authentication
 	$ curl  "https://$username:$password@myhost/resource"
+
+-- To see the local IP address in a WI-FI network:
+   $ ifconfig | grep inet | grep -v 127.0.0.1.

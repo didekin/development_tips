@@ -1,4 +1,4 @@
-To run the application directly:
+To run the application directly (spring boot):
 > ./gradlew bootRun
 
 To create an executable jar:
@@ -11,6 +11,6 @@ To attach a debugger to your packaged application:
 To see the libraries in the classpath:
 > ./gradlew dependencies
 
-To see the local IP address in a WI-FI network:
-> ifconfig | grep inet | grep -v 127.0.0.1.
+-- To run your tests with the Gradle Wrapper:
+   $ ./gradlew build connectedCheck
 

@@ -8,7 +8,6 @@ In a theme attribute reference, you tell Android’s runtime resource manager,
 “Go to the app’s theme and find the attribute named
 listSeparatorTextViewStyle. This attribute points to another style resource.
 Put the value of that resource here.”
-............................................
 
 #   $./adb shell dumpsys activity b
 
@@ -17,14 +16,20 @@ ayuda: ./adb shell dumpsys activity -h
 
 #   $./adb shell dumpsys package
 
-Para los receviers registrados ESTÁTICAMENTE.
-............................................
-LOGOUT: http://stackoverflow.com/questions/3007998/on-logout-clear-activity-history-stack-preventing-back-button-from
+Para los receivers registrados ESTÁTICAMENTE.
+
+-- LOGOUT:
+
+   http://stackoverflow.com/questions/3007998/on-logout-clear-activity-history-stack-preventing-back-button-from
 -opening-l/9580057#9580057
-See answer Doraemon.
-La repuesta de xbakesk también parece buena.
-...........................................
+   See answer Doraemon.
+   La repuesta de xbakesk también parece buena.
 
+-- To see permissions currently defined in a device:
 
+   $ adb shell pm list permissions
 
+   For developers, the adb '-s' option displays the permissions in a form similar to how the user
+   will see them.
 
+   $ adb shell pm list permissions -s

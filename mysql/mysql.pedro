@@ -13,19 +13,12 @@ Or:
 $ /usr/local/opt/mysql/bin/mysqladmin -u root -h Pedros-iMac.local
 		password 'new-password'
 
-Alternatively:
-$ /usr/local/opt/mysql/bin/mysql_secure_installation
-
 # To see the current user:
 $ SELECT USER();
 
-# To determine the current global or session sql_mode value:
-$ SELECT @@GLOBAL.sql_mode;
-$ SELECT @@SESSION.sql_mode;
-
-..........................................................
 To enable load files from the client:
 $ mysql -h localhost -u pedro -p  --local-infile=1
+..........................................................
 
 To CANCEL a command not executed:
 $ \c
@@ -37,7 +30,7 @@ $ select database();
 $ show create table <table>
 
 # To view the properties of InnoDB tables:
-$ show table status from didekin like 'direccion' \G;
+$ show table status from didekin like 'table_name' \G;
 
 # To view the tables of a database:
 $ show tables;

@@ -1,0 +1,10 @@
+-- To use the traditional Spanish ordering that treats ch and ll as single characters
+   that follow c and l, respectively, specify the utf8_spanish2_ci collation.
+
+   mysql> create table t (c CHAR(2) CHARACTER SET utf8);
+   mysql> select c from t order by c COLLATE utf8_spanish2_ci;
+
+-- The UPPER() and LOWER() functions convert the lettercase of a string:
+
+   mysql> select UPPER(thing) from limbs;
+   {thing is a column of the table limbs}
