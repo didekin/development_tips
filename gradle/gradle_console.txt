@@ -14,3 +14,36 @@ To see the libraries in the classpath:
 -- To run your tests with the Gradle Wrapper:
    $ ./gradlew build connectedCheck
 
+-- To build a debug version
+$ gradlew assembleDebug
+
+-- To build a release version:
+$ gradlew assembleRelease
+
+-- To install the application in a device
+$ adb install build/outputs/apk/users_cl_trash-debug.apk
+
+-- To get the high level tasks:
+$ gradle tasks
+
+-- To get all the tasks:
+$ gradle tasks --all
+
+-- To build a debug APK
+$ gradle assembleDebug
+
+-- To build a release APK
+$ gradle assembleRelease
+
+-- To build the test app independently:
+$ gradle assembleAndroidTest   o $ gradle assembleDebugAndroidTest
+
+-- To run the tests on a connected emulator or device:
+$ ./gradlew connectedAndroidTest
+
+-- To run your tests with the Gradle Wrapper in a connected device:
+$ ./gradlew build connectedCheck
+
+-- To run the unit test on your local host.
+$ ./gradlew test
+
