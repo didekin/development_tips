@@ -1,0 +1,17 @@
+-- To start the android adb shell:
+$ adb shell
+
+-- To use the sqlite3 command to connect to your database.
+# sqlite3 data/data/com.devdaily.fptracker/databases/fptracker.db
+
+-- To show the sqlite database tables:
+sqlite> .tables
+
+-- To get help
+sqlite> .help
+
+-- To exit the sqlite3 command line tool:
+sqlite> ^d    // Control+D
+
+-- To exit the adb shell command line tool:
+# ^d

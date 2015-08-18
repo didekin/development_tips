@@ -1,3 +1,13 @@
+-- To see the default character set and collation for a given database:
+
+   mysql> USE db_name;
+   mysql> SELECT @@character_set_database, @@collation_database;
+
+   Alternatively, to display the values without changing the default database:
+
+   mysql> SELECT DEFAULT_CHARACTER_SET_NAME, DEFAULT_COLLATION_NAME
+   		  FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'db_name';
+
 -- To use the traditional Spanish ordering that treats ch and ll as single characters
    that follow c and l, respectively, specify the utf8_spanish2_ci collation.
 
@@ -8,3 +18,22 @@
 
    mysql> select UPPER(thing) from limbs;
    {thing is a column of the table limbs}
+
+-- To make an identifier safer for insertion into a SQL statement, quote it by enclosing
+   it with backticks:
+
+   mysql> CREATE TABLE `mytable`(i INT);
+
+-- In contexts where identifiers are used as data values, handle them as such: for example,
+   to retrieve the column names for the profile_tb table en the cookbook_db database:
+
+   mysql> SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS
+   		  WHERE TABLE_SCHEMA = 'cookbook_db' AND TABLE_NAME = 'profile_tb';  // single quotes.
+
+-- To get the number of characters in a String:
+
+   mysql> select * from metal where char_length(name) > 4; // 'name' is a column of the table.
+
+-- To get the names which its last two positions equals a particular string ('ld'):
+
+   mysql> select name from metal where RIGHT(name,2) = 'ld';
