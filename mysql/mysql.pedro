@@ -7,7 +7,7 @@ $ launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
 $ mysql.server start
 $ mysql.server stop
 
-#To change root password:
+# To change root password:
 $ /usr/local/opt/mysql/bin/mysqladmin -u root password 'new-password'
 Or:
 $ /usr/local/opt/mysql/bin/mysqladmin -u root -h Pedros-iMac.local
@@ -16,11 +16,13 @@ $ /usr/local/opt/mysql/bin/mysqladmin -u root -h Pedros-iMac.local
 # To see the current user:
 $ SELECT USER();
 
-To enable load files from the client:
+# To enable load files from the client:
 $ mysql -h localhost -u pedro -p  --local-infile=1
 ..........................................................
+# To know the current engine of a table:
+$ select engine from information_schema.tables where table_schema = 'didekin' and table_name = 'usuario';
 
-To CANCEL a command not executed:
+# To CANCEL a command not executed:
 $ \c
 
 # To find out which database is currently selected:
@@ -71,5 +73,8 @@ $ SELECT * FROM tbl_name WHERE FIND_IN_SET('value',set_col)>0;
 # Similar, but for the first (1) value of the set:
 $ SELECT * FROM tbl_name WHERE set_col & 1;
 
-o determine all possible values for a SET column, set_col in this example:
+# To determine all possible values for a SET column, set_col in this example:
 $ SHOW COLUMNS FROM tbl_name LIKE set_col;
+
+# To know a foreign key error definition:
+mysql> SHOW ENGINE INNODB STATUS;
