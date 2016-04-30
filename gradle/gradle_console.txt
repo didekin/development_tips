@@ -11,6 +11,11 @@ To attach a debugger to your packaged application:
 To see the libraries in the classpath:
 > ./gradlew dependencies
 
+-- To run the unit test on your local host.
+$ ./gradlew test
+
+============= ANDROID =============
+
 -- To run your tests with the Gradle Wrapper:
    $ ./gradlew build connectedCheck
 
@@ -44,6 +49,5 @@ $ ./gradlew connectedAndroidTest
 -- To run your tests with the Gradle Wrapper in a connected device:
 $ ./gradlew build connectedCheck
 
--- To run the unit test on your local host.
-$ ./gradlew test
+
 

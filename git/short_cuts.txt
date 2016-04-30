@@ -1,20 +1,59 @@
-# To remove a tracked file:
-- delete.
-- 'git rm' to commit the physical deleting.
+-- To remove a tracked file:
+$ rm file
+$ git rm file
 
-If the file is modified after the delete instruction, and
-previus to 'git rm file', is necessary to use 'git rm -f file'.
+-- If the file is modified after the delete instruction, and
+   previus to 'git rm file', is necessary to use:
+$ git rm -f file
 
-If we do not want to remove physically a file, only not to have git
-track anymore:
+-- If we do not want to remove physically a file, only not to have git track anymore:
 $ git rm --cached file
 
 Example of removing multiple files:
-$ git rm log/\*.log    // removes all files that have the .log extension
- in the log directory.
+$ git rm log/\*.log    // removes all files that have the .log extension in the log directory.
 
-# To commit snapshots without previously adding them with 'git add':
-
+-- To commit snapshots without previously adding them with 'git add':
 $ git -a
 $ git -a -m 'text of the commit'
+
+-- To create a branch and switch to it at the same time
+$ git checkout -b newbranch
+
+-- To see the last commit on each branch:
+$ git branch -v
+
+-- To merge a branch into the master branch:
+$ git checkout master
+$ git merge branch
+
+-- To rebase the changes in master in otherbranch:
+$ git checkout otherbranch
+$ git rebase master
+At this point, you can go back to the master branch and do a fast-forward merge:
+$ git checkout master
+$ git merge experiment
+
+-- To get a list of remote branches:
+$ git remote show repositoryname
+
+-- To update the local repository:
+$ git fetch remoterepo remotebranch
+   While the git fetch command will fetch down all the changes on the server that you don’t have yet,
+   it will not modify your working directory at all. It will simply get the data for you and let you merge it yourself.
+
+-- To have a (new) local editable branch which replies the remote one:
+$ git checkout -b localbranch remoterepo/remotebranch
+$ git checkout --track remoterepo/remote branch       (the local branch is created with the name of the remote one).
+
+-- To push local code to the remote repository:
+$ git push remoterepo branch
+
+-- To see what tracking branches you have set up:
+$  git fetch --all; git branch -vv
+
+-- To have a fetch followed by a merge:
+$  git pull remoterepo remotebranch
+
+-- To delete a remote branch:
+$ git push remoterepo --delete remotebranch
 
