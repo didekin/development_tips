@@ -1,0 +1,8 @@
+-- To copy something from this machine to some other machine:
+$ scp /path/to/local/file username@hostname:/path/to/remote/file
+
+-- To copy something from another machine to this machine:
+$ scp username@hostname:/path/to/remote/file /path/to/local/file
+
+-- To copy from another machine to this machine, with a port number specified:
+$ scp -P 1234 username@hostname:/path/to/remote/file /path/to/local/file

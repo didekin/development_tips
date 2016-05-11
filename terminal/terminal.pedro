@@ -22,6 +22,18 @@ $ wc {nombre del fichero}
 $ printenv
 $ env
 
+-- To reference a variable, use prefix '$':
+$ echo $variable
+
+-- To set an environment variable, use the command 'export varname=value':
+$ export PATH=/usr/local/mysql/bin:$PATH   or $ export VAR1=myvalue
+
+-- To set an environment variable permanently, place an export command in your Bash shell startup script (~/.bashrc or ~/.bash_profile):
+export CLASSPATH=.:/usr/local/tomcat/lib/servlet-api.jar
+
+-- To refresh the bash shell, issue a "source" command (or re-start the bash shell):
+$ source ~/.bash_profile
+
 # HTTP Authentication
 $ curl  "https://$username:$password@myhost/resource"
 

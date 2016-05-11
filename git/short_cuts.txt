@@ -29,7 +29,9 @@ $ git merge branch
 -- To rebase the changes in master in otherbranch:
 $ git checkout otherbranch
 $ git rebase master
-At this point, you can go back to the master branch and do a fast-forward merge:
+
+  At this point, you can go back to the master branch and do a fast-forward merge:
+
 $ git checkout master
 $ git merge experiment
 
