@@ -1,0 +1,14 @@
+-- Creación de certificado digital:
+    $ keytool -genkey -alias tomcatEmbed -keyalg RSA -keystore services/src/main/resources/tomcat.keystore
+
+-- Default keystore type in my Imac jre 1.8:
+
+   keystore.type=jks
+
+-- # Controls compatibility mode for the JKS keystore type.
+   #
+   # When set to 'true', the JKS keystore type supports loading
+   # keystore files in either JKS or PKCS12 format. When set to 'false'
+   # it supports loading only JKS keystore files.
+   #
+   keystore.type.compat=true  // in iMac jre 1.8

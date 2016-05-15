@@ -33,3 +33,7 @@ Para los receivers registrados ESTÁTICAMENTE.
    will see them.
 
    $ adb shell pm list permissions -s
+
+-- To see system properties:
+
+   $  adb shell getprop

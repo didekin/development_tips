@@ -1,3 +1,5 @@
+BASICS
+======
 -- To remove a tracked file:
 $ rm file
 $ git rm file
@@ -16,6 +18,8 @@ $ git rm log/\*.log    // removes all files that have the .log extension in the 
 $ git -a
 $ git -a -m 'text of the commit'
 
+BRANCH
+======
 -- To create a branch and switch to it at the same time
 $ git checkout -b newbranch
 
@@ -59,3 +63,17 @@ $  git pull remoterepo remotebranch
 -- To delete a remote branch:
 $ git push remoterepo --delete remotebranch
 
+TAGS
+====
+
+-- To list tags:
+$ git tag
+
+-- To search for tags with a particular pattern
+$ git tag -l 'v1.8.5*'
+
+-- To create an annotated tag:
+$ git tag -a tagname -m 'descriptive text'
+
+-- To see a tag
+$ git show tagname
