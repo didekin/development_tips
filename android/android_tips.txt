@@ -9,14 +9,8 @@ In a theme attribute reference, you tell Android’s runtime resource manager,
 listSeparatorTextViewStyle. This attribute points to another style resource.
 Put the value of that resource here.”
 
-#   $./adb shell dumpsys activity b
-
-Permite ver los receivers registrados DINÁMICAMENTE. La información es ingente. La
-ayuda: ./adb shell dumpsys activity -h
-
-#   $./adb shell dumpsys package
-
-Para los receivers registrados ESTÁTICAMENTE.
+-- To know default theme:
+   search for '<style name="Base.V7.Theme.AppCompat.Light" parent="Platform.AppCompat.Light">'
 
 -- LOGOUT:
 
@@ -25,15 +19,3 @@ Para los receivers registrados ESTÁTICAMENTE.
    See answer Doraemon.
    La repuesta de xbakesk también parece buena.
 
--- To see permissions currently defined in a device:
-
-   $ adb shell pm list permissions
-
-   For developers, the adb '-s' option displays the permissions in a form similar to how the user
-   will see them.
-
-   $ adb shell pm list permissions -s
-
--- To see system properties:
-
-   $  adb shell getprop

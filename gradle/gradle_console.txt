@@ -1,6 +1,9 @@
 To create an executable jar:
 > ./gradlew build
 
+-- To see help about a task:
+$  gradle help --task someTask
+
 To see the libraries in the classpath:
 > ./gradlew dependencies
 

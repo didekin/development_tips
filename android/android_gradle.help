@@ -23,10 +23,13 @@ $ gradle assembleDebug
 $ gradle assembleRelease
 
 -- To build the test app independently:
-$ gradle assembleAndroidTest   o $ gradle assembleDebugAndroidTest
+$  gradle assembleDebugAndroidTest,  gradle assembleAndroidTest
 
 -- To run the tests on a connected emulator or device:
-$ ./gradlew connectedAndroidTest
+$  ./gradlew connectedDebugAndroidTest , ./gradlew connectedAndroidTest
 
 -- To run your tests with the Gradle Wrapper in a connected device:
 $ ./gradlew build connectedCheck
+
+-- From the root folder, the following command line will run all the tests and aggregate the reports:
+$ gradle deviceCheck mergeAndroidReports  --continue   // deviceCheck puede ser otra tarea.

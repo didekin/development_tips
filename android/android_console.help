@@ -1,0 +1,32 @@
+-- To install the application in a device
+   $ adb install build/outputs/apk/users_cl_trash-debug.apk
+
+-- To connect to data base in the emulator shell:
+   $ adb shell;
+   $ sqlite3 data/data/com.didekindroid/databases/didekindroid.db;
+
+-- To see the dynamically registered receivers:
+
+   $   ./adb shell dumpsys activity b
+   $   ./adb shell dumpsys activity -h
+
+-- To see the statically registered receivers:
+   $  ./adb shell dumpsys package
+
+-- To see permissions currently defined in a device:
+
+   $ adb shell pm list permissions
+
+   For developers, the adb '-s' option displays the permissions in a form similar to how the user
+   will see them.
+
+   $ adb shell pm list permissions -s
+
+-- To see system properties:
+
+   $  adb shell getprop
+
+-- To connect to data base in the emulator shell:
+
+   $ adb shell;
+   $ sqlite3 data/data/com.appname/databases/appname.db;

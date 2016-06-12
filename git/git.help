@@ -23,12 +23,26 @@ BRANCH
 -- To create a branch and switch to it at the same time
 $ git checkout -b newbranch
 
+-- To delete a branch:
+$ git branch -d branchToDelete
+
+-- To set up a local branch to track a remote branch:
+$ git checkout -b localbrach origin/remotebranch
+
+-- To set a localbrach to a remote branch, both already created:
+$  (after checkout to the local branch:) git branch -u origin/remotebranch
+
 -- To see the last commit on each branch:
 $ git branch -v
 
 -- To merge a branch into the master branch:
 $ git checkout master
 $ git merge branch
+
+-- To see which branches are already merged into the branch you’re on:
+$ git branch --merged
+-- To see all the branches that contain work you haven’t yet merged in
+$ git branch --no-merged
 
 -- To rebase the changes in master in otherbranch:
 $ git checkout otherbranch

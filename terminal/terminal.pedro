@@ -38,6 +38,7 @@ $ source ~/.bash_profile
 $ curl  "https://$username:$password@myhost/resource"
 
 # To see the local IP address in a WI-FI network:
+$ ifconfig -a
 $ ifconfig | grep inet | grep -v 127.0.0.1.
 
 -- In Mac shell, to copy the contents of a file to the clipboard:
