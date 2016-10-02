@@ -32,4 +32,74 @@ $  ./gradlew connectedDebugAndroidTest , ./gradlew connectedAndroidTest
 $ ./gradlew build connectedCheck
 
 -- From the root folder, the following command line will run all the tests and aggregate the reports:
-$ gradle deviceCheck mergeAndroidReports  --continue   // deviceCheck puede ser otra tarea.
+   $ gradle deviceCheck mergeAndroidReports  --continue   // deviceCheck puede ser otra tarea.
+
+   To do that we need a plugin in the build.gradle of the root project, at the end of it:
+   apply plugin: 'android-reporting'
+
+-- To generate useful information about the build, in HTML form to the build/reports/profile directory:
+   $ ./gradlew --profile assembleDebug
+
+DEPENDENCIES
+============
+
+-- To see the transitive dependencies in a project with the android plugin:
+   $ ./gradlew androidDependencies
+
+-- To add a set of files to a configuration without adding them to a repository:
+
+   dependencies {
+         compile files('libs/a.jar', 'libs/b.jar')
+         compile fileTree(dir: 'libs', include: '*.jar')
+   }
+
+-- If you have files on the local filesystem, you can use a directory as a repository with the flatDir syntax:
+
+   repositories {
+       flatDir {
+            dirs 'lib'
+       }
+   }
+
+-- To turn transitive inclusions off for a particular library (retrofit2), use the transitive flag:
+
+   dependencies {
+         runtime group: 'com.squareup.retrofit2', name: 'retrofit', version: '2.0.1', transitive: false
+    }
+
+-- You can also exclude an specific transitive dependency:
+
+   dependencies {
+      androidTestCompile('org.spockframework:spock-core:1.0-groovy-2.4') {
+            exclude group: 'org.codehaus.groovy'
+            exclude group: 'junit'
+      }
+   }
+
+-- If you only want a module jar, without any additional dependencies, you can specify that as well:
+
+   dependencies {
+       compile 'org.codehaus.groovy:groovy-all:2.4.4@jar'
+   }
+   Or:
+   dependencies {
+        compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.4', ext: 'jar'
+   }
+
+-- To force the resolution of a dependency to a particular version of a library, in the build.gradle of the
+   root project:
+
+   allprojects {
+       repositories {
+           jcenter()
+       }
+       configurations.all {
+           resolutionStrategy.force
+                'com.android.support:support-annotations:23.3.0'
+       }
+   }
+
+=============
+
+
+

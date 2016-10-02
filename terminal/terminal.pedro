@@ -1,64 +1,223 @@
-# The EOF is typed in the keyboard as Control-D, after a new line character:
-$ caracteres + ENTER + Control-D
-Otra:
-$ caracteres + Control-D + Control-D
+DOCUMENTATION
+=============
+-- To see all the man pages of a command
+   $ man -a command  // to navigate among them, press 'quit'.
+-- To search for a man page using a keyword (password, p.e.):
+   $ man -k password
+   $ apropos password
+-- To search for a man page using an exact match (ls, p.e.):
+   $ whatis passwd
+-- To get the help option (for GNU utilities):
+   $ command --help
+-- To get a list of some keywords for which to get information with the help command:
+   $ help
+-- To get extensive information:
+   $ info commandname   // 'space' to advance and 'fn+back' to go back. 'help' to get help.
+-- To know if a command is a builtin:
+   $ type echo
 
-# Terminal behavior by using:
-$ man 4 tty
+EDITION
+=======
 
-# You can learn more about the termios line discipline by using the command
-$ man termios
-
-#If you want to see what EOF is set as in your terminal:
-$ stty all
-
-# Tilde ~ se consigue con la combinación fn+alt + ñ, en mi caso:
-$ fn + bloqueo mayúscula + ñ.
-
-# Para contar las filas de un fichero tabulado:
-$ wc {nombre del fichero}
-
-# To know the environment variables:
-$ printenv
-$ env
-
--- To reference a variable, use prefix '$':
-$ echo $variable
-
--- To set an environment variable, use the command 'export varname=value':
-$ export PATH=/usr/local/mysql/bin:$PATH   or $ export VAR1=myvalue
-
--- To set an environment variable permanently, place an export command in your Bash shell startup script (~/.bashrc or ~/.bash_profile):
-export CLASSPATH=.:/usr/local/tomcat/lib/servlet-api.jar
-
--- To refresh the bash shell, issue a "source" command (or re-start the bash shell):
-$ source ~/.bash_profile
-
-# HTTP Authentication
-$ curl  "https://$username:$password@myhost/resource"
-
-# To see the local IP address in a WI-FI network:
-$ ifconfig -a
-$ ifconfig | grep inet | grep -v 127.0.0.1.
-
+-- The EOF is typed in the keyboard as Control-D, after a new line character:
+    $ <caracteres> + ENTER + Control-D
+    O:
+    $ <caracteres> + Control-D + Control-D
+-- If you want to see what EOF is set as in your terminal:
+   $ stty all
+-- You can learn more about the termios line discipline by using the command
+   $ man termios
+-- Tilde ~ se consigue con la combinación fn+alt + ñ, en mi caso:
+   $ fn + bloqueo mayúscula + ñ.
 -- In Mac shell, to copy the contents of a file to the clipboard:
-$ pbcopy < ~/directory/file
+    $ pbcopy < ~/directory/file
 
-# Shortcuts:
+-- Shortcuts:
 
-Ctrl + A	Go to the beginning of the line you are currently typing on
-Ctrl + E	Go to the end of the line you are currently typing on
-Ctrl + L              	Clears the Screen, similar to the clear command
-Ctrl + U	Clears the line before the cursor position. If you are at the end of the line, clears the entire line.
-Ctrl + H	Same as backspace
-Ctrl + R	Let’s you search through previously used commands
-Ctrl + C	Kill whatever you are running
-Ctrl + D	Exit the current shell
-Ctrl + Z	Puts whatever you are running into a suspended background process. fg restores it.
-Ctrl + W	Delete the word before the cursor
-Ctrl + K	Clear the line after the cursor
-Ctrl + T	Swap the last two characters before the cursor
-Esc + T	Swap the last two words before the cursor
-Alt + F	Move cursor forward one word on the current line
-Alt + B	Move cursor backward one word on the current line
-Tab	Auto-complete files and folder names
+    Ctrl + A	Go to the beginning of the line you are currently typing on
+    Ctrl + E	Go to the end of the line you are currently typing on
+    Ctrl + L              	Clears the Screen, similar to the clear command
+    Ctrl + U	Clears the line before the cursor position. If you are at the end of the line, clears the entire line.
+    Ctrl + H	Same as backspace
+    Ctrl + R	Let’s you search through previously used commands
+    Ctrl + C	Kill whatever you are running
+    Ctrl + D	Exit the current shell
+    Ctrl + Z	Puts whatever you are running into a suspended background process. fg restores it.
+    Ctrl + W	Delete the word before the cursor
+    Ctrl + K	Clear the line after the cursor
+    Ctrl + T	Swap the last two characters before the cursor
+    Esc + T	Swap the last two words before the cursor
+    Alt + F	Move cursor forward one word on the current line
+    Alt + B	Move cursor backward one word on the current line
+    Tab	Auto-complete files and folder names
+
+-- To repeat the previous comand:
+    $ !!
+-- To reuse the last token in a previous command in a new command:
+    $ newcommand !$
+
+ENVIRONMENT
+===========
+
+-- To see the name of the system we are working on:
+   $ hostname
+-- To know the environment variables:
+    $ printenv
+    $ env
+-- To reference a variable, use prefix '$':
+    $ echo $variable
+-- To set an environment variable, use the command 'export varname=value':
+    $ export PATH=/usr/local/mysql/bin:$PATH   or $ export VAR1=myvalue
+-- To set an environment variable permanently, place an export command in your Bash shell startup script (~/.bashrc or ~/.bash_profile):
+    $ export CLASSPATH=.:/usr/local/tomcat/lib/servlet-api.jar
+-- To refresh the bash shell, issue a "source" command (or re-start the bash shell):
+    $ source ~/.bash_profile
+-- Terminal behavior by using:
+   $ man 4 tty
+-- To display the current date and time
+   $ date
+
+EXECUTION, SCRIPTS AND PROCESSES
+================================
+
+-- A user needs read and execute permissions to execute an script.
+-- To run a command in the background type the ampersand sign:
+   $ ls -al | grep trash &
+-- To abort a background job:
+   $ kill pidNumber  // to get the pidNumber: $ ps -l
+   $ kill %jobnumber   // to get the jobNumber: $ jobs
+-- To put into effect changes made in startup files:
+   $ source ./bashrc   // or // $ . ./bashrc
+-- To tell the shell to look for an executable file in the working directory:
+   $ ./   // example: $ ./executableFile
+-- To execute a command in background:
+   $ command &  // after return, the shell shows the job number between brackets and the PID.
+-- To put a job in the background:
+   $ CONTROL-Z  // to suspende the foreground job and then:
+   $ bg
+-- To bring a background job to the foreground:
+   $ fg numberJob
+   $ %numberJob
+   $ fg  // it brings the last job submitted and yet in the background.
+-- To abort a background job:
+   $ kill pidNumber  // to get the pidNumber: $ ps -l
+   $ kill %jobnumber   // to get the jobNumber: $ jobs
+-- To see the exit status of a previous command:
+   $ cmd; echo $?
+-- '$1', '$2', '$3',... refer to the first, second, third ... argument used with a command.
+-- '\' is used to continue the text of a command in the next line.
+-- To pass an initialized variable to a script or command:
+   $ HOLA=valor ./myscript
+
+FILES
+=====
+
+-- '.' is synonimous with the working directory and '..' with the parent directory.
+-- '~pedro/' and '~/' both designate my home directory.
+-- '@' at the end of file permissions indicates that the file has extended attributes.
+-- To see options with file attributes use:
+   $ xattr -h
+-- To get file sizes in readable units, add -h option:
+   $ ls -lh   // ejemplo.
+
+-- '>' instructs the shell to redirect the output to a file:
+      $ cat > sample.txt  // redirect text entered with the keyboard to a file.
+      $ cat file1 file2 file3 > globalFile    // concatenate three files in one.
+-- '<' instructs the shell to redirect a command input to come from a file.
+      $ cat < suply.txt  // the same as 'cat suply.txt'
+-- '>>' causes the shell to add new information to the end of a file.
+      $ cat file2 >> file1
+-- To redirect standard output to a file:
+   $ cat file1 1> outFile  // similar to $ cat file1 > outFile
+-- To redirect standard error to a file:
+   $ cat file1 1> outFile 2> errorFile
+-- To redirect standard ouput and standard error to the same file:
+   $ cat file1 &> outFile // or // $ cat file1 1> outputFile 2>&1
+   $ cat file1 2>&1 | tr '[a-z]l' '[A-Z]'  // sends standard error and pipe result to standard input.
+   $ cat file1 |& //  tr '[a-z]l' '[A-Z]'    // the token '|&' is a shorthand for '2>&1 |'
+-- To redirect standard output to standard error:
+   $ cat file1 1>&2
+
+-- To make two or more dirs simultaneously, use the option -p:
+   $ mkdir -p padre/hijo
+-- To create an empty file:
+   $ touch filename
+-- To create a very simple file:
+   $ echo 'contents of the file' > filename
+-- To delete a file with previous confirmation:
+   $ rm -i filename
+-- To share files between Linux and Mac:
+   $ unix2mac filenameTochange
+   $ mac2unix filename
+-- To search for a file in the local system:
+   $ locate stringKeyWord
+
+-- To add execute permission to an user:
+   $ chmod u+x filename
+
+-- To search through one o more files for a particular string of characters:
+   $ grep 'string to search' filename1
+-- To display the beginning of a file:
+   $ head -numberOflines filename
+-- To display the end of a file:
+   $ tail -numberOflines filename
+-- To monitor the end of a growing file:
+   $ tail -f logfile
+-- To page a file:
+   $ less filename
+-- To compare two files:
+   $ diff -u filename1 filename2
+-- To identify the contents of a file:
+   $ file filename1 filename2 ....
+-- To expand a list of filenames in the directory:
+   $ echo *
+-- Para contar las filas de un fichero tabulado:
+   $ wc {nombre del fichero}
+
+NETWORK UTILITIES
+=================
+
+-- HTTP Authentication
+    $ curl  "https://$username:$password@myhost/resource"
+
+-- To see the local IP address in a WI-FI network:
+    $ ifconfig -a
+    $ ifconfig | grep inet | grep -v 127.0.0.1.
+
+-- Network utilities: 'ping', 'traceroute', 'dig':
+    $ dig -x 208.201.239.36 +short  // reverse dns lookup
+    $ dig dig www.didekin.es +short
+
+REGULAR EXPRESSIONS
+===================
+
+-- '?' matches any single character in the name of a existing file:
+      $ lpr memo?   // or // $ lpr memo?file
+-- '*' matches any number of characters, including zero, in the name of a a file:
+      $ lpr memo*file // or // $ lpr m*mo*fil*
+      - To see a list of hidden directories and their subdirectories: $ ls .*
+-- '[]' matches file names containing individual characters inside the brackets
+      $ less page[234].txt  // resolves to page2, page3, page4.
+      $ less page[2-46].txt // resolves to page2, page3, page4, page6.
+-- '^' at the beginning of a bracket matches any character NOT between the brackets:
+      $ ls *[^a-d] matches any filen name not ending in a, b, c, d.
+-- '!' is similar to '^'.
+
+SYSTEM UTILITIES
+================
+
+-- To check out Mac OS X HDD Input / Output statistics
+    $ sar -d -f ~/output.sar
+
+-- To check CPU load
+    $ sar -o ~/output.sar 10 10      // 10 sets of metrics at 10 second intervals
+
+-- To get Kernel / how many CPUs, available memory and load avarage
+    $ hostinfo
+
+-- Other tools: 'iostat', 'vm_stat' (vmstat on Linux), 'top' and 'system_profiler'.
+
+
+
+
+

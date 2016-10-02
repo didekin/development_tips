@@ -12,6 +12,3 @@ sqlite> .help
 
 -- To exit the sqlite3 command line tool:
 sqlite> ^d    // Control+D
-
--- To exit the adb shell command line tool:
-# ^d

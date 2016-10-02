@@ -9,7 +9,7 @@ $ git rm file
 $ git rm -f file
 
 -- If we do not want to remove physically a file, only not to have git track anymore:
-$ git rm --cached file
+$ <git rm --cached file>
 
 Example of removing multiple files:
 $ git rm log/\*.log    // removes all files that have the .log extension in the log directory.

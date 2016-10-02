@@ -1,4 +1,4 @@
-#  ?android:
+--  ?android:
 
 You can apply a style from the app’s theme to a widget using a theme attribute
 reference. This is what you are doing when you use the
@@ -9,13 +9,30 @@ In a theme attribute reference, you tell Android’s runtime resource manager,
 listSeparatorTextViewStyle. This attribute points to another style resource.
 Put the value of that resource here.”
 
+-- To test in a mobile phone connected to my iMAC a webservice:
+
+    Turn on Wifi Hotspot of your android phone and connect your Laptop with your phone.
+
+    Start your server at localhost (I am using wamp server)
+
+    Now open command prompt and enter ipconfig command you will get following things
+
+    Wireless LAN adapter Wireless Network Connection:
+      Connection-specific DNS Suffix  . :
+      Link-local IPv6 Address . . . . . : fe80::80bc:e378:19ab:e448%11
+      IPv4 Address. . . . . . . . . . . : 192.168.43.76
+      Subnet Mask . . . . . . . . . . . : 255.255.255.0
+      Default Gateway . . . . . . . . . : 192.168.43.1
+    Copy this 192.168.43.76 in your mobile browser.
+
+    Note : Please set you network as "Home Network".
+
+-- To connect from Genimotion to a web application:
+   - hosts: 10.0.3.2, 192.168.57.1 (vboxnet1) 192.168.56.1 (vboxnet0)
+
 -- To know default theme:
    search for '<style name="Base.V7.Theme.AppCompat.Light" parent="Platform.AppCompat.Light">'
 
--- LOGOUT:
-
-   http://stackoverflow.com/questions/3007998/on-logout-clear-activity-history-stack-preventing-back-button-from
--opening-l/9580057#9580057
-   See answer Doraemon.
-   La repuesta de xbakesk también parece buena.
-
+-- To see the default certificate used to sign debug versions (once in the home directory):
+   $ -list -keystore .android/debug.keystore
+   $ password: android
