@@ -1,93 +1,132 @@
 BASICS
 ======
--- To remove a tracked file:
-$ rm file
-$ git rm file
 
--- If the file is modified after the delete instruction, and
-   previus to 'git rm file', is necessary to use:
-$ git rm -f file
+-- To remove a tracked file:
+   $ rm file
+   $ git rm file
+
+-- If the file is modified after the delete instruction, and previus to 'git rm file', is necessary to use:
+   $ git rm -f file
 
 -- If we do not want to remove physically a file, only not to have git track anymore:
-$ <git rm --cached file>
+   $ git rm --cached file
 
-Example of removing multiple files:
-$ git rm log/\*.log    // removes all files that have the .log extension in the log directory.
+-- To remove multiple files:
+   $ git rm log/\*.log    // removes all files that have the .log extension in the log directory.
 
 -- To commit snapshots without previously adding them with 'git add':
-$ git -a
-$ git -a -m 'text of the commit'
+   $ git -a
+   $ git -a -m 'text of the commit'
 
-BRANCH
-======
--- To create a branch and switch to it at the same time
-$ git checkout -b newbranch
+-- To push local code to the remote repository:
+   $ git push remoterepo branch
 
--- To delete a branch:
-$ git branch -d branchToDelete
-
--- To set up a local branch to track a remote branch:
-$ git checkout -b localbrach origin/remotebranch
-
--- To set a localbrach to a remote branch, both already created:
-$  (after checkout to the local branch:) git branch -u origin/remotebranch
-
--- To see the last commit on each branch:
-$ git branch -v
-
--- To merge a branch into the master branch:
-$ git checkout master
-$ git merge branch
-
--- To see which branches are already merged into the branch you’re on:
-$ git branch --merged
--- To see all the branches that contain work you haven’t yet merged in
-$ git branch --no-merged
-
--- To rebase the changes in master in otherbranch:
-$ git checkout otherbranch
-$ git rebase master
-
-  At this point, you can go back to the master branch and do a fast-forward merge:
-
-$ git checkout master
-$ git merge experiment
-
--- To get a list of remote branches:
-$ git remote show repositoryname
+-- To revert everything from the HEAD (pointer to the present branch/commit) back to the commit hash:
+   $ git revert --no-commit 0766c053..HEAD
+   $ git commit
 
 -- To update the local repository:
-$ git fetch remoterepo remotebranch
+   $ git fetch remoterepo remotebranch
+
    While the git fetch command will fetch down all the changes on the server that you don’t have yet,
    it will not modify your working directory at all. It will simply get the data for you and let you merge it yourself.
 
--- To have a (new) local editable branch which replies the remote one:
-$ git checkout -b localbranch remoterepo/remotebranch
-$ git checkout --track remoterepo/remote branch       (the local branch is created with the name of the remote one).
+-- To have a fetch followed by a merge:
+   $  git pull remoterepo remotebranch
 
--- To push local code to the remote repository:
-$ git push remoterepo branch
+BRANCH
+======
+
+-- To create a branch:
+   $ git branch localdev
+-- To switch to a created local branch:
+   $ git checkout localbranch
+-- To create a branch and switch to it at the same time
+   $ git checkout -b newbranch
+
+-- To delete a branch:
+   $ git branch -d branchToDelete
+-- To delete a remote branch:
+   $ git push remoterepo --delete remotebranch
+
+-- To set up a local branch to track a remote branch:
+   $ git checkout -b localbrach origin/remotebranch
+
+-- To have a (new) local editable branch which replies the remote one:
+   $ git checkout -b localbranch remoterepo/remotebranch
+   Or:
+   $ git checkout --track remoterepo/remote branch       (the local branch is created with the name of the remote one).
+
+-- To create a remote branch based on a local one:
+   $  git push remoterepo branchname:branchname
+   Plus:
+-- To configure a local branch as the branch to pull from a remote one:
+   $ git checkout localbranch
+   $ git branch -u remoterepo/remotebranch
+
+-- To get a simple listing of your current branches:
+   $ git branch
+
+-- To get a list of remote branches:
+   $ git remote show repositoryname
 
 -- To see what tracking branches you have set up:
-$  git fetch --all; git branch -vv
+   $ git fetch --all
+   $ git branch -vv
+
+-- To see where the branch pointers are pointing:
+   $ git log --oneline --decorate
+
+-- To see the last commit on each branch:
+   $ git branch -v
+
+-- To print out the history of your commits, showing where your branch pointers are and how your history has diverged:
+   $ git log --oneline --decorate --graph --all
+
+-- To merge a branch into the master branch:
+   $ git checkout master
+   $ git merge branch
+
+-- To see which branches are already merged into the branch you’re on:
+   $ git branch --merged
+-- To see all the branches that contain work you haven’t yet merged in
+   $ git branch --no-merged
+
+-- To rebase the changes in master in otherbranch:
+   $ git checkout otherbranch
+   $ git rebase master
+
+  At this point, you can go back to the master branch and do a fast-forward merge:
+
+   $ git checkout master
+   $ git merge experiment
+
+-- To see which files are unmerged at any point a er a merge conflict:
+   $ git status
+
+-- To use a graphical tool to resolve these issues:
+   $ git mergetool
+
+-- To update the local repository:
+   $ git fetch remoterepo remotebranch
+
+   While the git fetch command will fetch down all the changes on the server that you don’t have yet,
+   it will not modify your working directory at all. It will simply get the data for you and let you merge it yourself.
 
 -- To have a fetch followed by a merge:
-$  git pull remoterepo remotebranch
-
--- To delete a remote branch:
-$ git push remoterepo --delete remotebranch
+   $  git pull remoterepo remotebranch
 
 TAGS
 ====
 
 -- To list tags:
-$ git tag
+   $ git tag
 
 -- To search for tags with a particular pattern
-$ git tag -l 'v1.8.5*'
+   $ git tag -l 'v1.8.5*'
 
 -- To create an annotated tag:
-$ git tag -a tagname -m 'descriptive text'
+   $ git tag -a tagname -m 'descriptive text'
 
 -- To see a tag
-$ git show tagname
+   $ git show tagname

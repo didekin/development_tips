@@ -13,8 +13,15 @@ Or:
 $ /usr/local/opt/mysql/bin/mysqladmin -u root -h Pedros-iMac.local
 		password 'new-password'
 
-# To see the current user:
-$ SELECT USER();
+-- To create a user without specifying a host:
+   $ create user 'userName'@'%' identified by 'password';
+   $ grant all on dataBase.* to 'userName'@'%';
+-- To see the users in the database:
+   $ select * from mysql.user;
+-- To delete a user:
+   $ DROP USER 'userName'@'host';
+-- To see the current user:
+   $ SELECT USER();
 
 # To enable load files from the client:
 $ mysql -h localhost -u pedro -p  --local-infile=1

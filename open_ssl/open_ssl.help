@@ -1,0 +1,2 @@
+-- To generate a file with the sha-256 hash of one file
+   $ openssl dgst -sha256 -out some-file.sha256 some-file

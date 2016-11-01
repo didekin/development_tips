@@ -1,8 +1,35 @@
+CONNECTION AWS
+==============
+-- (Inside ~/.ssh)
+   $ ssh -i privateKeyFileName instanceDNSname
+-- (Inside didekinspring project)
+   $ eb ssh environmentName   // It doesn't require ssh inbound rule in security group.
+-- To print in screen the fingerprint of host public key:
+   $ ssh-keyscan ipAddressNumbers >> tempFile
+   $ ssh-keygen -l -f tempFile
+   $ rm tempFile
+-- To obtain the public key form a private key file:
+   $ openssl rsa -in private.key -pubout -out public.key
+-- To display the finger print of a public key:
+   $ ssh-keygen -lf publicKeyFile
+-- To remove an entry from ~/.ssh/knownhosts:
+   $ ssh-keygen -R hostName
+
+EXECUTION
+=========
+-- To pass a command to a remote host without redirecting the output to the local host:
+   $ ssh remoteHost 'ls remoteDir > fileRemote.out'
+-- To redirect the output to localhost:
+   $ ssh remoteHost ls remoteDir > fileRemote.out
+
 -- To copy something from this machine to some other machine:
-$ scp /path/to/local/file username@hostname:/path/to/remote/file
+   $ scp /path/to/local/file username@hostname:/path/to/remote/file
 
 -- To copy something from another machine to this machine:
-$ scp username@hostname:/path/to/remote/file /path/to/local/file
+   $ scp username@hostname:/path/to/remote/file /path/to/local/file
 
 -- To copy from another machine to this machine, with a port number specified:
-$ scp -P 1234 username@hostname:/path/to/remote/file /path/to/local/file
+   $ scp -P 1234 username@hostname:/path/to/remote/file /path/to/local/file
+
+-- Forwarding to Mysql
+   $ $ ssh -N -L3306:127.0.0.1:3306 remotehost

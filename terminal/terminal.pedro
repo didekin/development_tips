@@ -14,7 +14,7 @@ DOCUMENTATION
 -- To get extensive information:
    $ info commandname   // 'space' to advance and 'fn+back' to go back. 'help' to get help.
 -- To know if a command is a builtin:
-   $ type echo
+   $ type commandName
 
 EDITION
 =======
@@ -52,7 +52,8 @@ EDITION
     Tab	Auto-complete files and folder names
 
 -- To repeat the previous comand:
-    $ !!
+   $ !!
+   $ fc -s
 -- To reuse the last token in a previous command in a new command:
     $ newcommand !$
 
@@ -64,10 +65,21 @@ ENVIRONMENT
 -- To know the environment variables:
     $ printenv
     $ env
+    $ set
+    $ declare
 -- To reference a variable, use prefix '$':
     $ echo $variable
--- To set an environment variable, use the command 'export varname=value':
-    $ export PATH=/usr/local/mysql/bin:$PATH   or $ export VAR1=myvalue
+    $ echo ${variable}
+-- To set a variable:
+    $ variable=value
+-- To unset a variable:
+    $ unset variable
+-- To set an environment variable:
+    $ export variable=myvalue
+    $ declare -x variable=value
+    $ export PATH=/usr/local/mysql/bin:$PATH
+-- To remove the exported quality of a variable:
+    $ declare +x variable
 -- To set an environment variable permanently, place an export command in your Bash shell startup script (~/.bashrc or ~/.bash_profile):
     $ export CLASSPATH=.:/usr/local/tomcat/lib/servlet-api.jar
 -- To refresh the bash shell, issue a "source" command (or re-start the bash shell):
@@ -76,6 +88,8 @@ ENVIRONMENT
    $ man 4 tty
 -- To display the current date and time
    $ date
+-- To specify the local time zone:
+   $ ln -sf /usr/share/zoneinfo/Europe/Madrid /etc/localtime  // put in the second directory etc a link ('localtime') to the first.
 
 EXECUTION, SCRIPTS AND PROCESSES
 ================================
@@ -102,12 +116,19 @@ EXECUTION, SCRIPTS AND PROCESSES
 -- To abort a background job:
    $ kill pidNumber  // to get the pidNumber: $ ps -l
    $ kill %jobnumber   // to get the jobNumber: $ jobs
--- To see the exit status of a previous command:
-   $ cmd; echo $?
 -- '$1', '$2', '$3',... refer to the first, second, third ... argument used with a command.
 -- '\' is used to continue the text of a command in the next line.
 -- To pass an initialized variable to a script or command:
    $ HOLA=valor ./myscript
+
+-- To see the exit status of a previous command:
+   $ echo $?
+-- To see the processes running within the shell:
+   $ ps -f
+-- To see all the processes:
+   $ pstree
+-- To see the hash table with the commands in session:
+   $ hash
 
 FILES
 =====
@@ -127,14 +148,16 @@ FILES
       $ cat < suply.txt  // the same as 'cat suply.txt'
 -- '>>' causes the shell to add new information to the end of a file.
       $ cat file2 >> file1
+-- '-' may designate standard input:
+      $ ssh remoteHost cat file.one | diff file.two -
 -- To redirect standard output to a file:
-   $ cat file1 1> outFile  // similar to $ cat file1 > outFile
+      $ cat file1 1> outFile  // similar to $ cat file1 > outFile
 -- To redirect standard error to a file:
-   $ cat file1 1> outFile 2> errorFile
+      $ cat file1 1> outFile 2> errorFile
 -- To redirect standard ouput and standard error to the same file:
-   $ cat file1 &> outFile // or // $ cat file1 1> outputFile 2>&1
-   $ cat file1 2>&1 | tr '[a-z]l' '[A-Z]'  // sends standard error and pipe result to standard input.
-   $ cat file1 |& //  tr '[a-z]l' '[A-Z]'    // the token '|&' is a shorthand for '2>&1 |'
+      $ cat file1 &> outFile // or // $ cat file1 1> outputFile 2>&1
+      $ cat file1 2>&1 | tr '[a-z]l' '[A-Z]'  // sends standard error and pipe result to standard input.
+      $ cat file1 |& //  tr '[a-z]l' '[A-Z]'    // the token '|&' is a shorthand for '2>&1 |'
 -- To redirect standard output to standard error:
    $ cat file1 1>&2
 
@@ -216,6 +239,9 @@ SYSTEM UTILITIES
     $ hostinfo
 
 -- Other tools: 'iostat', 'vm_stat' (vmstat on Linux), 'top' and 'system_profiler'.
+
+-- To see if Xcode has installed CLT and install them:
+   $ xcode-select --install
 
 
 
