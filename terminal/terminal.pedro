@@ -21,7 +21,7 @@ EDITION
 
 -- The EOF is typed in the keyboard as Control-D, after a new line character:
     $ <caracteres> + ENTER + Control-D
-    O:
+    Or:
     $ <caracteres> + Control-D + Control-D
 -- If you want to see what EOF is set as in your terminal:
    $ stty all
@@ -46,16 +46,18 @@ EDITION
     Ctrl + W	Delete the word before the cursor
     Ctrl + K	Clear the line after the cursor
     Ctrl + T	Swap the last two characters before the cursor
-    Esc + T	Swap the last two words before the cursor
-    Alt + F	Move cursor forward one word on the current line
-    Alt + B	Move cursor backward one word on the current line
+    Esc + T	    Swap the last two words before the cursor
+    Alt + F	    Move cursor forward one word on the current line
+    Alt + B	    Move cursor backward one word on the current line
     Tab	Auto-complete files and folder names
 
+-- To view recent commands:
+   $ fc -l
 -- To repeat the previous comand:
    $ !!
    $ fc -s
 -- To reuse the last token in a previous command in a new command:
-    $ newcommand !$
+   $ newcommand !$
 
 ENVIRONMENT
 ===========
@@ -84,6 +86,8 @@ ENVIRONMENT
     $ export CLASSPATH=.:/usr/local/tomcat/lib/servlet-api.jar
 -- To refresh the bash shell, issue a "source" command (or re-start the bash shell):
     $ source ~/.bash_profile
+    Or
+    $ .  ~/.bash_profile
 -- Terminal behavior by using:
    $ man 4 tty
 -- To display the current date and time
@@ -91,7 +95,7 @@ ENVIRONMENT
 -- To specify the local time zone:
    $ ln -sf /usr/share/zoneinfo/Europe/Madrid /etc/localtime  // put in the second directory etc a link ('localtime') to the first.
 
-EXECUTION, SCRIPTS AND PROCESSES
+EXECUTION AND PROCESSES
 ================================
 
 -- A user needs read and execute permissions to execute an script.
@@ -100,8 +104,6 @@ EXECUTION, SCRIPTS AND PROCESSES
 -- To abort a background job:
    $ kill pidNumber  // to get the pidNumber: $ ps -l
    $ kill %jobnumber   // to get the jobNumber: $ jobs
--- To put into effect changes made in startup files:
-   $ source ./bashrc   // or // $ . ./bashrc
 -- To tell the shell to look for an executable file in the working directory:
    $ ./   // example: $ ./executableFile
 -- To execute a command in background:
@@ -116,11 +118,11 @@ EXECUTION, SCRIPTS AND PROCESSES
 -- To abort a background job:
    $ kill pidNumber  // to get the pidNumber: $ ps -l
    $ kill %jobnumber   // to get the jobNumber: $ jobs
--- '$1', '$2', '$3',... refer to the first, second, third ... argument used with a command.
+
 -- '\' is used to continue the text of a command in the next line.
 -- To pass an initialized variable to a script or command:
    $ HOLA=valor ./myscript
-
+-- '$1', '$2', '$3',... refer to the first, second, third ... argument used with a command.
 -- To see the exit status of a previous command:
    $ echo $?
 -- To see the processes running within the shell:
@@ -157,7 +159,6 @@ FILES
 -- To redirect standard ouput and standard error to the same file:
       $ cat file1 &> outFile // or // $ cat file1 1> outputFile 2>&1
       $ cat file1 2>&1 | tr '[a-z]l' '[A-Z]'  // sends standard error and pipe result to standard input.
-      $ cat file1 |& //  tr '[a-z]l' '[A-Z]'    // the token '|&' is a shorthand for '2>&1 |'
 -- To redirect standard output to standard error:
    $ cat file1 1>&2
 
@@ -196,6 +197,16 @@ FILES
    $ echo *
 -- Para contar las filas de un fichero tabulado:
    $ wc {nombre del fichero}
+
+FUNCTIONS AND SCRIPTS
+=====================
+
+-- '$1', '$2', '$3',... refer to the first, second, third ... argument used with a command.
+-- To pass an initialized variable to a script or command:
+   $ HOLA=valor ./myscript
+-- '$#' is a special parameter that takes on the number of parameterers passed to the command.
+-- To test if a file exists:
+   $ if [ -f file.txt ]
 
 NETWORK UTILITIES
 =================
