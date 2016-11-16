@@ -1,23 +1,23 @@
 -- To start
-$ nginx
--- To stopr
-$ nginx -s quit
+   $ nginx
+-- To stop
+   $ nginx -s quit
 -- To reload configuration
-$ nginx -s reload
+   $ nginx -s reload
 -- For getting the list of all running nginx processes
-$ ps -ax | grep nginx
+   $ ps -ax | grep nginx
 
 -- Logs location
-/usr/local/var/log/nginx/access.log
-/usr/local/var/log/nginx/error.log
+   /usr/local/var/log/nginx/access.log
+   /usr/local/var/log/nginx/error.log
 
 -- Nginx will load all files in: /usr/local/etc/nginx/servers/
 
 -- Configuration
-/usr/local/etc/nginx/nginx.conf
+   /usr/local/etc/nginx/nginx.conf
 
 -- Root directory
-/usr/local/var/www
+   /usr/local/var/www
 
 -- HTML directory
-/usr/local/var/www/html
+   /usr/local/var/www/html

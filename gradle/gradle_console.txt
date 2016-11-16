@@ -23,6 +23,16 @@ $ ./gradlew test
          compile fileTree(dir: 'libs', include: '*.jar')
    }
 
+-- To write a logging message with debug level:
+   In the build file we write < logger.debug("Hola pedro nevado") >    // sin <>
+   To see the message:
+   $ gradle -d app_prov:build | grep 'Hola pedro nevado'
+
+-- To see the compide dependencies of a project:
+
+       task printDependencies << {
+             configurations.compile.each { println it.name }
+       }
 
 
 

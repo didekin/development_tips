@@ -30,13 +30,13 @@ EDITION
 -- Tilde ~ se consigue con la combinación fn+alt + ñ, en mi caso:
    $ fn + bloqueo mayúscula + ñ.
 -- In Mac shell, to copy the contents of a file to the clipboard:
-    $ pbcopy < ~/directory/file
+   $ pbcopy < ~/directory/file
 
 -- Shortcuts:
 
     Ctrl + A	Go to the beginning of the line you are currently typing on
     Ctrl + E	Go to the end of the line you are currently typing on
-    Ctrl + L              	Clears the Screen, similar to the clear command
+    Ctrl + L    Clears the Screen, similar to the clear command
     Ctrl + U	Clears the line before the cursor position. If you are at the end of the line, clears the entire line.
     Ctrl + H	Same as backspace
     Ctrl + R	Let’s you search through previously used commands
@@ -49,7 +49,7 @@ EDITION
     Esc + T	    Swap the last two words before the cursor
     Alt + F	    Move cursor forward one word on the current line
     Alt + B	    Move cursor backward one word on the current line
-    Tab	Auto-complete files and folder names
+    Tab	        Auto-complete files and folder names
 
 -- To view recent commands:
    $ fc -l
@@ -58,6 +58,13 @@ EDITION
    $ fc -s
 -- To reuse the last token in a previous command in a new command:
    $ newcommand !$
+-- To print out the first character of variable 'foo' to upper case:
+   $ echo ${foo:0:1} | tr '[:lower:]' '[:upper:]'
+-- To print out the all the characters, except the first one, of variable 'foo' to upper case:
+   $ echo ${foo:1} | tr '[:lower:]' '[:upper:]'
+-- The `command` construct makes available the output of command for assignment to a variable. Character: ''
+-- To transform the first character of the string variable 'foo' to upper case: we use the ` ` command.
+   $ foo=`echo ${foo:0:1} | tr  '[a-z]' '[A-Z]'`${foo:1}
 
 ENVIRONMENT
 ===========
@@ -158,7 +165,7 @@ FILES
       $ cat file1 1> outFile 2> errorFile
 -- To redirect standard ouput and standard error to the same file:
       $ cat file1 &> outFile // or // $ cat file1 1> outputFile 2>&1
-      $ cat file1 2>&1 | tr '[a-z]l' '[A-Z]'  // sends standard error and pipe result to standard input.
+      $ cat file1 2>&1 | tr '[a-z]l' '[A-Z]'  // sends standard error and pipe result to standard input, cambiando minúscualas por mayúsculas.
 -- To redirect standard output to standard error:
    $ cat file1 1>&2
 
