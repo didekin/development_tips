@@ -1,0 +1,11 @@
+-- serialize()
+   This operator ensures that events are serialized and sequenced. It also enforces that no more
+   events are sent after completion or error.
+
+-- flatMap()
+   Use this operator in the following situations:
+   1. The result of transformation in map() must be an Observable. For example, performing long-running,
+      asynchronous operation on each element of the stream without blocking.
+   2. You need a one-to-many transformation, a single event is expanded into multiple sub-events.
+      For example, a stream of customers is translated into streams of their orders, for which each
+      customer can have an arbitrary number of orders.
