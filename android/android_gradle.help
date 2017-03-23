@@ -1,35 +1,35 @@
 -- To run your tests with the Gradle Wrapper:
-$ ./gradlew build connectedCheck
+   $ ./gradlew build connectedCheck
 
 -- To build a debug version
-$ gradlew assembleDebug
+   $ gradlew assembleDebug
 
 -- To build a release version:
-$ gradlew assembleRelease
+   $ gradlew assembleRelease
 
 -- To install the application in a device
-$ adb install build/outputs/apk/users_cl_trash-debug.apk
+   $ adb install build/outputs/apk/users_cl_trash-debug.apk
 
 -- To get the high level tasks:
-$ gradle tasks
+   $ gradle tasks
 
 -- To get all the tasks:
-$ gradle tasks --all
+   $ gradle tasks --all
 
 -- To build a debug APK
-$ gradle assembleDebug
+   $ gradle assembleDebug
 
 -- To build a release APK
-$ gradle assembleRelease
+   $ gradle assembleRelease
 
 -- To build the test app independently:
-$  gradle assembleDebugAndroidTest,  gradle assembleAndroidTest
+   $  gradle assembleDebugAndroidTest,  gradle assembleAndroidTest
 
 -- To run the tests on a connected emulator or device:
-$  ./gradlew connectedDebugAndroidTest , ./gradlew connectedAndroidTest
+   $  ./gradlew connectedDebugAndroidTest , ./gradlew connectedAndroidTest
 
 -- To run your tests with the Gradle Wrapper in a connected device:
-$ ./gradlew build connectedCheck
+   $ ./gradlew build connectedCheck
 
 -- From the root folder, the following command line will run all the tests and aggregate the reports:
    $ gradle deviceCheck mergeAndroidReports  --continue   // deviceCheck puede ser otra tarea.
@@ -99,7 +99,31 @@ DEPENDENCIES
        }
    }
 
-=============
+BUILD
+=====
+
+-- A module’s main/ source set includes the code and resources used by all its build variants.
+
+-- By default, the library module publishes and exposes only the "release" build variant to other Android projects and modules.
+   To tell Gradle to build all variants of the library module:
+
+   android {
+     publishNonDefault true
+   }
+
+-- If different source sets contain different versions of the same file, Gradle uses the following priority order
+   when deciding which file to use :
+   1. build variant > 2. build type > 3. product flavor > 4. main source set > 5. library dependencies
+
+-- The instrumented tests in src/androidTest/ source set are shared by all build variants.
+
+-- By default, all tests run against the debug build type. You can change this to another build type by using
+   the testBuildType property in your module-level build.gradle file:
+
+   android {
+       ...
+       testBuildType "staging"     // staging buildType instead of debug.
+   }
 
 
 

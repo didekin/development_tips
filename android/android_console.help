@@ -30,3 +30,10 @@
 
    $ adb shell;
    $ sqlite3 data/data/com.appname/databases/appname.db;
+
+-- To filter logcat messages in console:
+   $ adb logcat ActivityManager:I DidekinApp:D \
+        OkHttp:D \
+        ComuDataAc:D  \
+        ComuSearchAc:D \
+        *:S

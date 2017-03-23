@@ -1,0 +1,19 @@
+-- To decide wether to use a permission:
+
+   @Before
+   public void grantPhonePermission() {
+       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+           getInstrumentation().getUiAutomation().executeShellCommand(
+               "pm grant " + getTargetContext().getPackageName()
+               + " android.permission.CALL_PHONE");
+       }
+   }
+
+--  To use OkHttp3IdlingResource:
+
+   @Before
+   public void setUp() {
+       OkHttpClient client = new OkHttpClient();
+       IdlingResource resource = OkHttp3IdlingResource.create("OkHttp", client);
+       Espresso.registerIdlingResources(resource);
+   }

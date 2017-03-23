@@ -2,11 +2,11 @@ DOCUMENTATION
 =============
 -- To see all the man pages of a command
    $ man -a command  // to navigate among them, press 'quit'.
--- To search for a man page using a keyword (password, p.e.):
-   $ man -k password
-   $ apropos password
+-- To search for a man page using a keyword:
+   $ man -k keyword
+   $ apropos keyword
 -- To search for a man page using an exact match (ls, p.e.):
-   $ whatis passwd
+   $ whatis keyword
 -- To get the help option (for GNU utilities):
    $ command --help
 -- To get a list of some keywords for which to get information with the help command:
@@ -19,6 +19,11 @@ DOCUMENTATION
 EDITION
 =======
 
+-- Special characters:  & ; | * ? ' " [ ] ( ) $ < > { } # / \ ! ~
+-- To quote a character, precede it with a backslash:
+   $ \*\*
+-- To quote more than one character, enclose them by a single quotation:
+   $ '**'
 -- The EOF is typed in the keyboard as Control-D, after a new line character:
     $ <caracteres> + ENTER + Control-D
     Or:
@@ -183,18 +188,17 @@ FILES
 -- To search for a file in the local system:
    $ locate stringKeyWord
 
--- To add execute permission to an user:
-   $ chmod u+x filename
-
 -- To search through one o more files for a particular string of characters:
-   $ grep 'string to search' filename1
+   $ grep 'string to search' filename1   // It returns lines containing the set of characters.
+-- To match only whole words:
+   $ grep -w 'string to search' filename1
 -- To display the beginning of a file:
    $ head -numberOflines filename
 -- To display the end of a file:
    $ tail -numberOflines filename
 -- To monitor the end of a growing file:
    $ tail -f logfile
--- To page a file:
+-- To page a file (SPACE to display the next screen of text):
    $ less filename
 -- To compare two files:
    $ diff -u filename1 filename2
@@ -228,6 +232,18 @@ NETWORK UTILITIES
 -- Network utilities: 'ping', 'traceroute', 'dig':
     $ dig -x 208.201.239.36 +short  // reverse dns lookup
     $ dig dig www.didekin.es +short
+
+PERMISSIONS
+===========
+
+-- To change password (it dosen't change it in keychain):
+   $ passwd
+-- To spawn a new shell with root privileges:
+   $ sudo -s
+-- To close the shell with root privileges:
+   $ exit
+-- To add execute permission to an user:
+   $ chmod u+x filename
 
 REGULAR EXPRESSIONS
 ===================
