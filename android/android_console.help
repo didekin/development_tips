@@ -1,9 +1,7 @@
+ADB
+===
 -- To install the application in a device
    $ adb install build/outputs/apk/users_cl_trash-debug.apk
-
--- To connect to data base in the emulator shell:
-   $ adb shell;
-   $ sqlite3 data/data/com.didekindroid/databases/didekindroid.db;
 
 -- To see the dynamically registered receivers:
 
@@ -37,3 +35,18 @@
         ComuDataAc:D  \
         ComuSearchAc:D \
         *:S
+
+-- To see third party installed packages:
+   $ adb shell pm list packages -f -3
+
+JDK
+===
+-- Tp specify the JRE version to use:
+   $ export STUDIO_JDK=/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk
+   $ open /Applications/Android\ Studio.app
+
+AAPT
+====
+$ aapt
+$ aapt dump badging build/outputs/apk/app-debug-androidTest.apk
+$ aapt dump xmltree build/outputs/apk/app-debug-androidTest.apk AndroidManifest.xml

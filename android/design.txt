@@ -1,3 +1,0 @@
-1. Decide for the person. Guess based on his previous decisions.
-2. Preserve settings of the application (in a remote database, i.e.) and other
-things done with the application.
