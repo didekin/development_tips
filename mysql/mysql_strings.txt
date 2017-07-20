@@ -1,3 +1,5 @@
+COLLATION determines the sort order of characters in the character set.
+
 -- To see the default character set and collation for a given database:
 
    mysql> USE db_name;
@@ -5,14 +7,22 @@
 
    Alternatively, to display the values without changing the default database:
 
-   mysql> SELECT DEFAULT_CHARACTER_SET_NAME, DEFAULT_COLLATION_NAME
-   		  FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'db_name';
+   $ mysql> SELECT DEFAULT_CHARACTER_SET_NAME, DEFAULT_COLLATION_NAME \
+   		    FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'dbname';
 
 -- To use the traditional Spanish ordering that treats ch and ll as single characters
    that follow c and l, respectively, specify the utf8_spanish2_ci collation.
 
-   mysql> create table t (c CHAR(2) CHARACTER SET utf8);
-   mysql> select c from t order by c COLLATE utf8_spanish2_ci;
+   - PER DATABASE
+     $ mysql > CREATE DATABASE new_db  \
+                    DEFAULT CHARACTER SET utf8 \
+                    DEFAULT COLLATE utf8_general_ci;
+
+     $ mysql > ALTER DATABASE dbname CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+   - PER TABLE
+     $ mysql> create table t (c CHAR(2) CHARACTER SET utf8);
+     $ mysql> select c from t order by c COLLATE utf8_spanish2_ci;
 
 -- The UPPER() and LOWER() functions convert the lettercase of a string:
 

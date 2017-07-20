@@ -44,6 +44,14 @@ BASICS
 -- To have a fetch followed by a merge:
    $  git pull remoterepo remotebranch
 
+UNDO
+====
+
+-- To undo all unstaged changes on current working directory:
+    $ git checkout -- .
+-- To undo changes to a file:
+    $ git checkout -- path/to/file
+
 BRANCH
 ======
 
@@ -89,14 +97,8 @@ BRANCH
    $ git fetch --all
    $ git branch -vv
 
--- To see where the branch pointers are pointing:
-   $ git log --oneline --decorate
-
 -- To see the last commit on each branch:
    $ git branch -v
-
--- To print out the history of your commits, showing where your branch pointers are and how your history has diverged:
-   $ git log --oneline --decorate --graph --all
 
 -- To merge a branch into the master branch:
    $ git checkout master
@@ -106,6 +108,8 @@ BRANCH
    $ git branch --merged
 -- To see all the branches that contain work you haven’t yet merged in
    $ git branch --no-merged
+
+With the REBASE command, you can take all the changes that were committed on one branch and replay them on another one.
 
 -- To rebase the changes in master in otherbranch:
    $ git checkout otherbranch
@@ -130,6 +134,15 @@ BRANCH
 
 -- To have a fetch followed by a merge:
    $  git pull remoterepo remotebranch
+
+LOGS
+====
+
+-- To see where the branch pointers are pointing:
+   $ git log --oneline --decorate
+
+-- To print out the history of your commits, showing where your branch pointers are and how your history has diverged:
+   $ git log --oneline --decorate --graph --all
 
 TAGS
 ====

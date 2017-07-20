@@ -1,0 +1,8 @@
+-- To use non-default aws credentials, it is possible to associate eb credentials to a profile:
+   $ eb init --profile profileName
+-- To deploy the last build artifact:
+   $ eb deploy --staged
+-- To see the health data of an environment:
+   $ eb health environmentName
+-- To change configuration of an environment:
+   $ eb config envName

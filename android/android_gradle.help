@@ -1,3 +1,6 @@
+COMMANDS
+========
+
 -- To run your tests with the Gradle Wrapper:
    $ ./gradlew build connectedCheck
 
@@ -99,23 +102,27 @@ DEPENDENCIES
        }
    }
 
-BUILD
-=====
+BUILD VARIANTS
+==============
 
--- A module’s main/ source set includes the code and resources used by all its build variants.
-
--- By default, the library module publishes and exposes only the "release" build variant to other Android projects and modules.
-   To tell Gradle to build all variants of the library module:
-
-   android {
-     publishNonDefault true
-   }
-
--- If different source sets contain different versions of the same file, Gradle uses the following priority order
+-- If different source sets contain different versions of the same FILE, Gradle uses the following priority order
    when deciding which file to use :
    1. build variant > 2. build type > 3. product flavor > 4. main source set > 5. library dependencies
 
--- The instrumented tests in src/androidTest/ source set are shared by all build variants.
+BUILDCONFIG
+
+-- To use an URL in a string buildconfig variable:
+   - buildConfigField "String", "SERVER_URL", "\"http://dev.myserver.com\""
+   Or:
+   - buildConfigField "String", 'SERVER_URL', '"http://dev.myserver.com"'
+   - buildConfigField "String", 'APP_VERSION', '"0.0.1"'
+
+MAIN (source set)
+
+-- A module’s main/ source set includes the code and resources used by all its build variants.
+
+
+DEBUG (build variant)
 
 -- By default, all tests run against the debug build type. You can change this to another build type by using
    the testBuildType property in your module-level build.gradle file:
@@ -124,6 +131,26 @@ BUILD
        ...
        testBuildType "staging"     // staging buildType instead of debug.
    }
+
+-- The debug build is automatically signed with a debug key provided by the SDK tools. You can also define a custom
+   build type in your build.gradle file and configure it to be signed as a debug build by including 'debuggable true'.
+
+ANDROID TEST (source set)
+
+-- The instrumented tests in src/androidTest/ source set are shared by all build variants.
+
+TEST (source set)
+
+
+RELEASE (build variant)
+
+-- By default, the library module publishes and exposes only the "release" build variant to other Android projects and modules.
+   To tell Gradle to build all variants of the library module:
+
+   android {
+     publishNonDefault true
+   }
+
 
 
 

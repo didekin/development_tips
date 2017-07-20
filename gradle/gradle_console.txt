@@ -5,7 +5,8 @@ To create an executable jar:
 $  gradle help --task someTask
 
 To see the libraries in the classpath:
-> ./gradlew dependencies
+> ./gradlew dependencies         // for root project.
+$ ./gradlew dependencies:module
 
 -- To run the unit test on your local host.
 $ ./gradlew test

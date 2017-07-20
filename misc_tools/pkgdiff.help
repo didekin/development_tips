@@ -1,0 +1,4 @@
+-- WEB: https://lvc.github.io/pkgdiff/
+-- Installed with homebrew
+-- To see differences between two jars:
+   $ pkgdiff didekin_web-a-0.4.8.jar didekinspring-a-0.4.6.jar

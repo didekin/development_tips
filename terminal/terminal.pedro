@@ -74,6 +74,16 @@ EDITION
 ENVIRONMENT
 ===========
 
+-- Your prompt is set by the environment variable PS1. This is set by the system in /private/etc/bashrc but is
+   usually modified by the user in your dotfiles within your home directory. Default value: PS1='\h:\W \u\$
+
+-- To set visibility for hidden files in Mac:
+   $ defaults write com.apple.finder AppleShowAllFiles TRUE
+   ($ killall Finder)  // to close Finder.
+
+-- To see hidden files in Open/Save dialog in Mac:
+   - Press ⌘CMD + ⇧SHIFT + .
+
 -- To see the name of the system we are working on:
    $ hostname
 -- To know the environment variables:
@@ -113,9 +123,6 @@ EXECUTION AND PROCESSES
 -- A user needs read and execute permissions to execute an script.
 -- To run a command in the background type the ampersand sign:
    $ ls -al | grep trash &
--- To abort a background job:
-   $ kill pidNumber  // to get the pidNumber: $ ps -l
-   $ kill %jobnumber   // to get the jobNumber: $ jobs
 -- To tell the shell to look for an executable file in the working directory:
    $ ./   // example: $ ./executableFile
 -- To execute a command in background:
@@ -143,6 +150,9 @@ EXECUTION AND PROCESSES
    $ pstree
 -- To see the hash table with the commands in session:
    $ hash
+
+-- To see listening ports and processes:
+   $ sudo lsof -i -n -P | grep TCP
 
 FILES
 =====

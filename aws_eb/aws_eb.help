@@ -1,4 +1,0 @@
--- To deploy the last build artifact:
-   $ eb deploy --staged
--- To see the health data of an environment:
-   $ eb health environmentName

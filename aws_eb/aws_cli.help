@@ -1,0 +1,5 @@
+-- To configure a user with a different credentials:
+   $ aws configure --profile  profileName
+
+-- To use a named profile:
+   $ aws command subcommand --profile profileName

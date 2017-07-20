@@ -1,19 +1,30 @@
-CONNECTION AWS
-==============
--- (Inside ~/.ssh)
-   $ ssh -i privateKeyFileName instanceDNSname
--- (Inside didekinspring project)
-   $ eb ssh environmentName   // It doesn't require ssh inbound rule in security group.
+CONNECTION TO A HOST  (generic utilities)
+====================
+
 -- To print in screen the fingerprint of host public key:
    $ ssh-keyscan ipAddressNumbers >> tempFile
    $ ssh-keygen -l -f tempFile
-   $ rm tempFile
--- To obtain the public key form a private key file:
+   ($ rm tempFile)
+-- To obtain the public key from a private key file:
    $ openssl rsa -in private.key -pubout -out public.key
 -- To display the finger print of a public key:
    $ ssh-keygen -lf publicKeyFile
 -- To remove an entry from ~/.ssh/knownhosts:
    $ ssh-keygen -R hostName
+
+CONNECTION AWS
+==============
+-- To connect to the EC2 instance
+   $ ssh -i path_to_private_key user@instanceDNSname
+   Example: $ ssh -i aws_ssh_keypair1 ec2-user@ec2-52-57-231-58.eu-central-1.compute.amazonaws.com
+
+-- (Inside didekinspring project)
+   $ eb ssh didekin-web-pre   // It doesn't require ssh inbound rule in security group.
+
+-- To verify that the private key you have on your local machine matches the public key that's stored in AWS,
+   generate a fingerprint from the private key and check with that shown in AWS EC2 console:
+   $ openssl rsa -in path_to_private_key -pubout -outform DER | openssl md5 -c
+   // The fingerprint is calculated using an MD5 hash function.
 
 EXECUTION
 =========
