@@ -158,3 +158,9 @@ TAGS
 
 -- To see a tag
    $ git show tagname
+
+SSH
+===
+
+-- To add passphrases in the keychain and to avoid to enter it with every 'push':
+   $ /usr/bin/ssh-add -K

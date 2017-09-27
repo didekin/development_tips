@@ -40,14 +40,8 @@ CONFIGURATION
 -- To find out which database is currently selected:
    $ select database();
 
--- To see the create statement of a table:
-   $ show create table <table>
-
 -- To view the properties of InnoDB tables:
    $ show table status from didekin like 'table_name' \G;
-
--- To view the tables of a database:
-   $ show tables;
 
 -- To know a foreign key error definition:
    $ mysql> SHOW ENGINE INNODB STATUS;
@@ -58,7 +52,14 @@ STATEMENTS
 -- To CANCEL a command not executed:
    $ \c
 
-$ UPDATE <table> SET <column-name> = '1989-08-31' WHERE <unique-col-name> = 'Bowser';
+-- To view the tables of a database:
+   $ show tables;
+
+-- To see the create statement of a table:
+   $ show create table <table>
+
+-- To update the value in column in the register with a certain value in a column with UNIQUE values.
+   $ UPDATE <table> SET <column-name> = '1989-08-31' WHERE <unique-col-name> = 'Bowser';
 
 $ SELECT * FROM pet WHERE (species = 'cat' AND sex = 'm')
       OR (species = 'dog' AND sex = 'f');

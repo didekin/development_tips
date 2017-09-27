@@ -11,6 +11,11 @@ ADB
 -- To see the statically registered receivers:
    $  ./adb shell dumpsys package
 
+-- To see statistics about graphics in a screen:
+   $ adb shell dumpsys gfxinfo packageName  // package is optional
+-- Similar to the one before:
+   $ adb shell dumpsys meminfo packageName
+
 -- To see permissions currently defined in a device:
 
    $ adb shell pm list permissions

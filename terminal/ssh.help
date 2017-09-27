@@ -4,13 +4,17 @@ CONNECTION TO A HOST  (generic utilities)
 -- To print in screen the fingerprint of host public key:
    $ ssh-keyscan ipAddressNumbers >> tempFile
    $ ssh-keygen -l -f tempFile
-   ($ rm tempFile)
+   $ rm tempFile
 -- To obtain the public key from a private key file:
    $ openssl rsa -in private.key -pubout -out public.key
 -- To display the finger print of a public key:
    $ ssh-keygen -lf publicKeyFile
 -- To remove an entry from ~/.ssh/knownhosts:
    $ ssh-keygen -R hostName
+
+-- (Useful with remote git repositories) to add passphrases in the keychain and to avoid to enter
+   it with every 'push':
+   $ /usr/bin/ssh-add -K   // Identity added: /path_to_.ssh/id_rsa
 
 CONNECTION AWS
 ==============
