@@ -16,6 +16,9 @@ USERS
    $ /usr/local/opt/mysql/bin/mysqladmin -u root -h Pedros-iMac.local
 		password 'new-password'
 
+-- To create a database:
+   $ create database databasename
+
 -- To create a user without specifying a host:
    $ create user 'userName'@'%' identified by 'password';
    $ grant all on dataBase.* to 'userName'@'%';
@@ -45,6 +48,12 @@ CONFIGURATION
 
 -- To know a foreign key error definition:
    $ mysql> SHOW ENGINE INNODB STATUS;
+
+-- To see de structure of a table:
+   $ describe table_name;
+
+-- To see the sql create of a table:
+   $ SHOW CREATE TABLE table_name;
 
 STATEMENTS
 ==========

@@ -1,15 +1,18 @@
-To create an executable jar:
-> ./gradlew build
+--  To upgrade by running the wrapper task, specifying the desired Gradle version:
+    $ ./gradlew wrapper --gradle-version=4.4 --distribution-type=bin
 
--- To see help about a task:
-$  gradle help --task someTask
+--  To create an executable jar:
+    $ ./gradlew build
 
-To see the libraries in the classpath:
-> ./gradlew dependencies         // for root project.
-$ ./gradlew dependencies:module
+--  To see help about a task:
+    $  gradle help --task someTask
 
--- To run the unit test on your local host.
-$ ./gradlew test
+--  To see the libraries in the classpath:
+    $ ./gradlew dependencies         // for root project.
+    $ ./gradlew dependencies:module
+
+--  To run the unit test on your local host.
+    $ ./gradlew test
 
 -- To execute more than one task
    $ ./gradlew lint assembleDebug

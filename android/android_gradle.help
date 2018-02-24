@@ -102,6 +102,19 @@ DEPENDENCIES
        }
    }
 
+BUILD TIPS
+==========
+--  Define an optimized product flavour for the development version:
+
+    productFlavors {
+        development{
+            minSdkVersion 21  // To avoid legacy multidex.
+            resConfigs ("es", "xxhdpi")  // To avoid all the resources needed in production.
+            ...
+        }
+    }
+
+
 BUILD VARIANTS
 ==============
 

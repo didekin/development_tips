@@ -17,3 +17,23 @@
        IdlingResource resource = OkHttp3IdlingResource.create("OkHttp", client);
        Espresso.registerIdlingResources(resource);
    }
+
+AndroidJUnitRunner
+==================
+
+--  To pass test options Gradle's build scripts:
+
+    android {
+      defaultConfig {
+        testInstrumentationRunnerArguments ['size': 'medium', 'class': 'com.didekin.MyAndroidTest']
+      }
+    }
+
+--  With command line:
+
+    $ ./gradlew connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.package=com.didekin
+    $ ./gradlew connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.didekin.MyAndroidTest
+
+    Running all tests except a particular package or class:
+    $ ./gradlew connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.notPackage=com.didekin
+    $ ./gradlew connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.notClass=com.didekin.MyTest

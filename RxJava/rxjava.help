@@ -9,3 +9,5 @@
    2. You need a one-to-many transformation, a single event is expanded into multiple sub-events.
       For example, a stream of customers is translated into streams of their orders, for which each
       customer can have an arbitrary number of orders.
+
+-- For autocomplete texts: Debounce and SwitchMap.

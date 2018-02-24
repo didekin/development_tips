@@ -21,3 +21,7 @@
 
 -- HTML directory
    /usr/local/var/www/html
+
+-- To run in any port (80, 443, ...):
+   $ sudo chown root:wheel /usr/local/opt/nginx-full/bin/nginx
+   $ sudo chmod u+s /usr/local/opt/nginx-full/bin/nginx
