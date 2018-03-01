@@ -32,7 +32,7 @@
    To see the message:
    $ gradle -d app_prov:build | grep 'Hola pedro nevado'
 
--- To see the compide dependencies of a project:
+-- To see the compile dependencies of a project:
 
        task printDependencies << {
              configurations.compile.each { println it.name }

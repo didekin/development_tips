@@ -134,7 +134,6 @@ MAIN (source set)
 
 -- A module’s main/ source set includes the code and resources used by all its build variants.
 
-
 DEBUG (build variant)
 
 -- By default, all tests run against the debug build type. You can change this to another build type by using
@@ -151,9 +150,6 @@ DEBUG (build variant)
 ANDROID TEST (source set)
 
 -- The instrumented tests in src/androidTest/ source set are shared by all build variants.
-
-TEST (source set)
-
 
 RELEASE (build variant)
 
