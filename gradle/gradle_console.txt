@@ -34,8 +34,8 @@
 
 -- To see the compile dependencies of a project:
 
-       task printDependencies << {
-             configurations.compile.each { println it.name }
+       task printConfigurations << {
+             configurations.each { println it.name }
        }
 
 

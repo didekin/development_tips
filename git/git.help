@@ -147,17 +147,20 @@ LOGS
 TAGS
 ====
 
--- To list tags:
-   $ git tag
+--  To list tags:
+    $ git tag
 
--- To search for tags with a particular pattern
-   $ git tag -l 'v1.8.5*'
+--  To search for tags with a particular pattern
+    $ git tag -l 'v1.8.5*'
 
--- To create an annotated tag:
-   $ git tag -a tagname -m 'descriptive text'
+--  To create an annotated tag:
+    $ git tag -a tagname -m 'descriptive text'
 
--- To see a tag
-   $ git show tagname
+--  To see a tag
+    $ git show tagname
+
+--  To reset the current branch to specific tag:
+    $ git reset --hard tagname
 
 SSH
 ===

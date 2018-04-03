@@ -18,6 +18,38 @@
        Espresso.registerIdlingResources(resource);
    }
 
+--  Para acceder desde un móvil al servidor Jetty en local:
+    - Incluir el móvil en la red WI-FI local.
+    - Habilitar System Preferences/Sharing/Remote management para el servidor local.
+
+-- To connect from Genimotion to a web application:
+   - hosts: 10.0.3.2, 192.168.57.1 (vboxnet1) 192.168.56.1 (vboxnet0)
+
+-- To see the default certificate used to sign debug versions (once in the home directory):
+   $ -list -keystore .android/debug.keystore
+   $ password: android
+
+--  To set up a separate, minified debug build, besides the debug buildType:
+
+    buildTypes {
+      debugMini {
+        initWith debug
+        minifyEnabled true
+        shrinkResources true
+        proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                      'proguard-rules.pro'
+        matchingFallbacks = ['debug']
+      }
+    }
+
+--  By default, all tests run against the debug build type. You can change this to another build type by using
+    the testBuildType property in your module-level build.gradle file:
+
+       android {
+           ...
+           testBuildType "staging"     // staging buildType instead of debug.
+       }
+
 AndroidJUnitRunner
 ==================
 
@@ -37,3 +69,4 @@ AndroidJUnitRunner
     Running all tests except a particular package or class:
     $ ./gradlew connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.notPackage=com.didekin
     $ ./gradlew connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.notClass=com.didekin.MyTest
+

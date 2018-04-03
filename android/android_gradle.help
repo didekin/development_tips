@@ -160,6 +160,16 @@ RELEASE (build variant)
      publishNonDefault true
    }
 
+PROGUARD
+========
+
+--  Build warnings will tell you which '-dontwarn' rules to add
+--  ClassNotFoundException, MethodNotFoundException and FieldNotFoundException will tell you which '-keep' rules to add
+
+--  To retain source file names and line numbers for stack traces to make debugging easier:
+    -keepattributes SourceFile, LineNumberTable
+--  To retain some debug information about local variables (you only need this line in your debug build type):
+    -keepattributes LocalVariableTable, LocalVariableTypeTable
 
 
 

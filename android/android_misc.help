@@ -55,3 +55,20 @@ AAPT
 $ aapt
 $ aapt dump badging build/outputs/apk/app-debug-androidTest.apk
 $ aapt dump xmltree build/outputs/apk/app-debug-androidTest.apk AndroidManifest.xml
+
+THEMES
+======
+
+--  ?android:
+
+    You can apply a style from the app’s theme to a widget using a theme attribute
+    reference. This is what you are doing when you use the
+    value ?android:listSeparatorTextViewStyle.
+
+    In a theme attribute reference, you tell Android’s runtime resource manager,
+    “Go to the app’s theme and find the attribute named
+    listSeparatorTextViewStyle. This attribute points to another style resource.
+    Put the value of that resource here.”
+
+-- To know default theme:
+   search for '<style name="Base.V7.Theme.AppCompat.Light" parent="Platform.AppCompat.Light">'
