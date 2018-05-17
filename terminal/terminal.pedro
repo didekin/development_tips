@@ -219,6 +219,10 @@ FILES
 -- Para contar las filas de un fichero tabulado:
    $ wc {nombre del fichero}
 
+--  To create a symbolic link (use absolute path names)
+    $ ln --s  /path/subpath1/fileToLinked   /path/subpath2/linkToFile
+    $ ln --s  /path/subpath1/fileToLinked   /path/subpath2/
+
 FUNCTIONS AND SCRIPTS
 =====================
 

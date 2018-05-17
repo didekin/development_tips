@@ -114,6 +114,10 @@ BUILD TIPS
         }
     }
 
+--  BouncyCastle version conflict: see .jar in
+    - android-sdk-macosx/tools/lib/
+    - /Library/Java/Extensions/
+
 
 BUILD VARIANTS
 ==============
@@ -162,7 +166,6 @@ RELEASE (build variant)
 
 PROGUARD
 ========
-
 --  Build warnings will tell you which '-dontwarn' rules to add
 --  ClassNotFoundException, MethodNotFoundException and FieldNotFoundException will tell you which '-keep' rules to add
 
