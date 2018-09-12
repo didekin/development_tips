@@ -1,0 +1,6 @@
+
+--  Changeset is identified by 3 elements, id + author + change log filename(with path).  When run liquibase first time, it will create
+    2 extra tables in your database: databasechangelog and databasechangeloglock.
+
+--  To unlock DATABASECHANGELOGLOCK:
+    $ UPDATE DATABASECHANGELOGLOCK SET LOCKED=FALSE, LOCKGRANTED=null, LOCKEDBY=null where ID=1;

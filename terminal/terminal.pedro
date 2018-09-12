@@ -139,6 +139,7 @@ EXECUTION AND PROCESSES
    $ kill %jobnumber   // to get the jobNumber: $ jobs
 
 -- '\' is used to continue the text of a command in the next line.
+
 -- To pass an initialized variable to a script or command:
    $ HOLA=valor ./myscript
 -- '$1', '$2', '$3',... refer to the first, second, third ... argument used with a command.
@@ -220,18 +221,29 @@ FILES
    $ wc {nombre del fichero}
 
 --  To create a symbolic link (use absolute path names)
-    $ ln --s  /path/subpath1/fileToLinked   /path/subpath2/linkToFile
-    $ ln --s  /path/subpath1/fileToLinked   /path/subpath2/
+    $ ln -s  /path/subpath1/fileToLinked   /path/subpath2/linkToFile
+    $ ln -s  /path/subpath1/fileToLinked   /path/subpath2/
+
+--  To test if a file exists:
+    $ if [ -f file.txt ]
+
+--  To compress a file without keeping the original source:
+    $ gzip filename
+--  To compress a file keeping the original source:
+    $ gzip -k filename
+--  To decompress it:
+    $ gzip -d filename.gz
 
 FUNCTIONS AND SCRIPTS
 =====================
 
--- '$1', '$2', '$3',... refer to the first, second, third ... argument used with a command.
--- To pass an initialized variable to a script or command:
-   $ HOLA=valor ./myscript
--- '$#' is a special parameter that takes on the number of parameterers passed to the command.
--- To test if a file exists:
-   $ if [ -f file.txt ]
+--  '$1', '$2', '$3',... refer to the first, second, third ... argument used with a command.
+--  To pass an initialized variable to a script or command:
+    $ HOLA=valor ./myscript
+--  '$#' is a special parameter that takes on the number of parameterers passed to the command.
+--  'test' utility evaluates the expression and, if it evaluates to true, returns a zero (true) exit status.
+    $ test -f /etc/tomcat7/oracle-jdk7-installed.txt    //check that the file exists.
+
 
 NETWORK UTILITIES
 =================

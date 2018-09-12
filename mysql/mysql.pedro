@@ -7,32 +7,21 @@
    $ mysql.server start
    $ mysql.server stop
 
-USERS
-=====
-
--- To change root password:
-   $ /usr/local/opt/mysql/bin/mysqladmin -u root password 'new-password'
-   Or:
-   $ /usr/local/opt/mysql/bin/mysqladmin -u root -h Pedros-iMac.local
-		password 'new-password'
-
--- To create a database:
-   $ create database databasename
-
--- To create a user without specifying a host:
-   $ create user 'userName'@'%' identified by 'password';
-   $ grant all on dataBase.* to 'userName'@'%';
--- To see the users in the database:
-   $ select * from mysql.user;
--- To delete a user:
-   $ DROP USER 'userName'@'host';
--- To see the current user:
-   $ SELECT USER();
 
 CONFIGURATION
 =============
 
 -- Location of my.cnf file with a Homebrew installation: /usr/local/etc/my.cnf
+
+--  To display system variable names and values:
+    $ mysql> SHOW VARIABLES;
+    $ mysql> SHOW VARIABLES LIKE '%size%';
+
+--  To change a global variable in the server:
+    $ mysql> set @@global.wait_timeout=57600;
+
+--  To change character set and collation in a database:
+    $ mysql > ALTER DATABASE didekin CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 -- To enable load files from the client:
    $ mysql -h localhost -u pedro -p  --local-infile=1
@@ -55,14 +44,27 @@ CONFIGURATION
 -- To see the sql create of a table:
    $ SHOW CREATE TABLE table_name;
 
-STATEMENTS
-==========
+--  To see the sql create of all the tables in a database, without data and definers for views:
+    $  mysqlpump --skip-dump-rows --skip-definer -uroot -pspivak didekin;
+
+COMMANDS
+========
+
+--  To execute a .sql file from the console
+    $ mysql -h hostname -uuser -ppassword database < path/to/test.sql
+
+
+STATEMENTS in mysql client
+==========================
 
 -- To CANCEL a command not executed:
    $ \c
 
 -- To view the tables of a database:
    $ show tables;
+
+--  To delete the data in a set of tables:
+    $ delete a, b from table_name_1 as a, table_name_2 as b;
 
 -- To see the create statement of a table:
    $ show create table <table>
@@ -101,4 +103,32 @@ $ SELECT name, birth FROM pet ORDER BY birth DESC;
 
 -- To determine all possible values for a SET column, set_col in this example:
    $ SHOW COLUMNS FROM tbl_name LIKE set_col;
+
+USERS
+=====
+
+-- To change root password:
+   $ /usr/local/opt/mysql/bin/mysqladmin -u root password 'new-password'
+
+--  To create a database:
+    $ create database databasename
+--  To delete a database
+    $ mysql> drop database nameDatabase
+
+--  To create a user with a host:
+    $ create user 'userName'@'host' identified by 'password';
+    $ grant all on dataBase.* to 'userName'@'localhost';
+--  To create a user without specifying a host:
+    $ create user 'userName'@'%' identified by 'password';
+    $ grant all on dataBase.* to 'userName'@'%';
+
+--  To see the privileges for an account:
+    $ SHOW GRANTS FOR 'username'@'%';
+--  To see the users in the database:
+    $ select user, host from mysql.user;
+--  To see the current user:
+    $ SELECT USER();
+
+--  To delete a user:
+    $ DROP USER 'userName'@'host';
 
