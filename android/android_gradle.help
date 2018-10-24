@@ -104,27 +104,26 @@ DEPENDENCIES
 
 BUILD TIPS
 ==========
---  Define an optimized product flavour for the development version:
-
-    productFlavors {
-        development{
-            minSdkVersion 21  // To avoid legacy multidex.
-            resConfigs ("es", "xxhdpi")  // To avoid all the resources needed in production.
-            ...
-        }
-    }
 
 --  BouncyCastle version conflict: see .jar in
     - android-sdk-macosx/tools/lib/
     - /Library/Java/Extensions/
 
+BUILD TYPES
+===========
 
-BUILD VARIANTS
-==============
+--  To set up a separate, minified debug build, besides the debug buildType:
 
--- If different source sets contain different versions of the same FILE, Gradle uses the following priority order
-   when deciding which file to use :
-   1. build variant > 2. build type > 3. product flavor > 4. main source set > 5. library dependencies
+    buildTypes {
+      debugMini {
+        initWith debug
+        minifyEnabled true
+        shrinkResources true
+        proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                      'proguard-rules.pro'
+        matchingFallbacks = ['debug']
+      }
+    }
 
 BUILDCONFIG
 
@@ -138,7 +137,7 @@ MAIN (source set)
 
 -- A module’s main/ source set includes the code and resources used by all its build variants.
 
-DEBUG (build variant)
+DEBUG
 
 -- By default, all tests run against the debug build type. You can change this to another build type by using
    the testBuildType property in your module-level build.gradle file:
@@ -155,7 +154,7 @@ ANDROID TEST (source set)
 
 -- The instrumented tests in src/androidTest/ source set are shared by all build variants.
 
-RELEASE (build variant)
+RELEASE
 
 -- By default, the library module publishes and exposes only the "release" build variant to other Android projects and modules.
    To tell Gradle to build all variants of the library module:
@@ -164,15 +163,36 @@ RELEASE (build variant)
      publishNonDefault true
    }
 
+
+BUILD VARIANTS
+==============
+
+-- If different source sets contain different versions of the same FILE, Gradle uses the following priority order
+   when deciding which file to use :
+   1. build variant > 2. build type > 3. product flavor > 4. main source set > 5. library dependencies
+
 PROGUARD
 ========
+
 --  Build warnings will tell you which '-dontwarn' rules to add
 --  ClassNotFoundException, MethodNotFoundException and FieldNotFoundException will tell you which '-keep' rules to add
 
 --  To retain source file names and line numbers for stack traces to make debugging easier:
     -keepattributes SourceFile, LineNumberTable
+
 --  To retain some debug information about local variables (you only need this line in your debug build type):
     -keepattributes LocalVariableTable, LocalVariableTypeTable
+
+--  To convert an obfuscated stack trace to a readable one yourself, use the retrace script (retrace.sh on Mac/Linux).
+    It is located in the <sdk-root>/tools/proguard/ directory. The script takes the mapping.txt file and your stack trace,
+    producing a new, readable stack trace. The syntax for using the retrace tool is:
+
+    $ retrace.sh [-verbose] mapping.txt [<stacktrace_file>]
+
+    For example:
+
+    $ ./retrace.sh -verbose mapping.txt obfuscated_trace.txt
+
 
 
 

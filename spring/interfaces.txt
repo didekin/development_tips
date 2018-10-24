@@ -28,7 +28,6 @@ BACK-END
     	public static void main(String[] args) throws Exception {
     		SpringApplication.run(SampleSecureApplication.class, "--debug");
     	}
-
     }
 
 

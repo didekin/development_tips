@@ -1,8 +1,16 @@
--- To use non-default aws credentials, it is possible to associate eb credentials to a profile:
-   $ eb init --profile profileName
--- To deploy the last build artifact:
-   $ eb deploy --staged
--- To see the health data of an environment:
-   $ eb health environmentName
--- To change configuration of an environment:
-   $ eb config envName
+--  The default application name is the name of the folder in which you run eb init.
+
+--  To use non-default aws credentials, it is possible to associate eb credentials to a profile:
+    $ eb init --profile profileName
+
+--  To deploy the last build artifact:
+    $ eb deploy --staged
+
+    {Note: If you have configured the EB CLI to deploy an artifact, and you don't commit the artifact to your git repository,
+    use the --staged option to deploy the latest build.}
+
+--  To see the health data of an environment:
+    $ eb health environmentName
+
+--  To change configuration of an environment:
+    $ eb config envName

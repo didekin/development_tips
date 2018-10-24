@@ -1,0 +1,42 @@
+--  Place all of your configuration files in a single folder, named .ebextensions, in the root of your source bundle.
+
+--  Sections in a configuration file:
+    -   option_settings
+    -   Resources
+    -   packages
+    -   sources
+    -   files
+    -   users
+    -   groups
+    -   commands
+    -   container_commands
+    -   services
+
+--  You can use the 'option_settings' key to modify the Elastic Beanstalk configuration and define variables that can be retrieved from your
+    application using environment variables:
+
+--  The namespace key is optional. If you do not specify a namespace, the default used is aws:elasticbeanstalk:application:environment
+
+    {
+      "option_settings": [
+        {
+          "namespace": "aws:elasticbeanstalk:container:tomcat:jvmoptions",
+          "option_name": "Xmx",
+          "value": "256m"
+        },
+        {  // With implicit namespace.
+          "option_name": "MYPARAMETER",
+          "value": "parametervalue"
+        }
+      ]
+    }
+
+--  Saved configurations are stored in the Elastic Beanstalk S3 bucket in a folder named after your application.
+    For example, configurations for an application named my-app in the us-west-2 region for account number 123456789012 can be found at
+    s3://elasticbeanstalk-us-west-2-123456789012/resources/templates/my-app/.
+
+--  To create a saved configuration and modify it locally:
+    -   Save the environment's current configuration locally.
+        $ ~/project$ eb config save --cfg fileNameToSaveConfiguration
+    -   Upload the modified configuration to S3
+        $ ~/project$ eb config put fileNameWithNewConfiguration

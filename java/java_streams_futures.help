@@ -1,0 +1,35 @@
+--  Fork/Join:
+    -   One idiom is to put I/O into one subtask and computation into another, thereby overlapping computation with I/O.
+
+--  Streams:
+    -   Automatic boxing and unboxing operations can dramatically hurt performance. Java 8 includes primitive streams (IntStream,
+        LongStream, and DoubleStream) to avoid such operations, so use them when possible.
+    -   Operations such as limit and findFirst that rely on the order of the elements are expensive in a parallel stream. For example,
+        findAny will perform better than findFirst because it isn’t constrained to operate in the encounter order.
+    -   An ArrayList can be split much more efficiently than a LinkedList, because the first can be evenly divided without traversing it,
+        as it’s necessary to do with the second. Also, the primitive streams created with the range factory method can be decomposed quickly.
+        TreeSet and HashSet have good decomposability.
+    -   Most stream operations require that the lambdas passed to them be non-interfering and stateless. Non-interfering means
+        that they won't modify the stream source; stateless means that they won't access (read or write) any state that might
+        change during the lifetime of the stream operation.
+    -   It's best if the lambdas passed to stream operations are entirely side effect free— that is, that they don't mutate any heap-based state
+        or perform any I/O during their execution. If they do have side effects, it's their responsibility to provide any required coordination
+        to ensure that such side effects are thread safe.
+    -   Identity in reductions:
+        -   The identity value must satisfy the constraints that for all x:
+            identity * x = x
+            x * identity = x
+
+--  Spliterator:
+    -   Java 8 provides a default Spliterator implementation for all the data structures included in its Collections Framework.
+    -   How to get a stream of characters from a String:
+        Stream<Character> stream = IntStream.range(0, SENTENCE.length())
+                                            .mapToObj(SENTENCE::charAt);
+
+-   CompletableFuture:
+    -   If you’re doing computation-heavy operations with no I/O, then the Stream interface gives the simplest implementation and one
+        likely to be the most efficient (if all threads are compute-bound, then there’s no point in having more threads than processor cores).
+        On the other hand, if your parallel units of work involve waiting for I/O (including network connections), then CompletableFutures
+        give more flexibility and the ability to match the number of threads to the wait/computer. Another reason to avoid using parallel
+        streams when I/O waits are involved in the stream-processing pipeline is that the laziness of streams
+        can make it harder to parallelize tasks.

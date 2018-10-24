@@ -1,7 +1,11 @@
 ADB
 ===
--- To install the application in a device
-   $ adb install build/outputs/apk/users_cl_trash-debug.apk
+
+--  To see attached devices:
+    $ adb devices
+
+--  To install the application in a device
+    $ adb install build/outputs/apk/users_cl_trash-debug.apk
 
 -- To see the dynamically registered receivers:
 
@@ -46,7 +50,7 @@ ADB
 
 JDK
 ===
--- Tp specify the JRE version to use:
+-- To specify the JRE version to use:
    $ export STUDIO_JDK=/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk
    $ open /Applications/Android\ Studio.app
 

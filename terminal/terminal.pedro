@@ -77,13 +77,6 @@ ENVIRONMENT
 -- Your prompt is set by the environment variable PS1. This is set by the system in /private/etc/bashrc but is
    usually modified by the user in your dotfiles within your home directory. Default value: PS1='\h:\W \u\$
 
--- To set visibility for hidden files in Mac:
-   $ defaults write com.apple.finder AppleShowAllFiles TRUE
-   ($ killall Finder)  // to close Finder.
-
--- To see hidden files in Open/Save dialog in Mac:
-   - Press ⌘CMD + ⇧SHIFT + .
-
 -- To see the name of the system we are working on:
    $ hostname
 -- To know the environment variables:
@@ -158,6 +151,13 @@ EXECUTION AND PROCESSES
 FILES
 =====
 
+-- To set visibility for hidden files in Mac:
+   $ defaults write com.apple.finder AppleShowAllFiles TRUE
+   ($ killall Finder)  // to close Finder.
+
+-- To see hidden files in Open/Save dialog in Mac:
+   - Press ⌘CMD + ⇧SHIFT + .
+
 -- '.' is synonimous with the working directory and '..' with the parent directory.
 -- '~pedro/' and '~/' both designate my home directory.
 -- '@' at the end of file permissions indicates that the file has extended attributes.
@@ -185,6 +185,17 @@ FILES
 -- To redirect standard output to standard error:
    $ cat file1 1>&2
 
+COMPRESSION
+
+--  To compress a file without keeping the original source:
+    $ gzip filename
+--  To compress a file keeping the original source:
+    $ gzip -k filename
+--  To decompress it:
+    $ gzip -d filename.gz
+
+LIFE CYCLE
+
 -- To make two or more dirs simultaneously, use the option -p:
    $ mkdir -p padre/hijo
 -- To create an empty file:
@@ -196,8 +207,16 @@ FILES
 -- To share files between Linux and Mac:
    $ unix2mac filenameTochange
    $ mac2unix filename
--- To search for a file in the local system:
-   $ locate stringKeyWord
+--  To test if a file exists:
+    $ if [ -f file.txt ]
+
+LINKS
+
+--  To create a symbolic link (use absolute path names)
+    $ ln -s  /path/subpath1/fileToLinked   /path/subpath2/linkToFile
+    $ ln -s  /path/subpath1/fileToLinked   /path/subpath2/
+
+LOOK INTO files
 
 -- To search through one o more files for a particular string of characters:
    $ grep 'string to search' filename1   // It returns lines containing the set of characters.
@@ -219,20 +238,17 @@ FILES
    $ echo *
 -- Para contar las filas de un fichero tabulado:
    $ wc {nombre del fichero}
+--  To see the differences between two jar files:
+    $ pkgdiff OLD.jar NEW.jar
 
---  To create a symbolic link (use absolute path names)
-    $ ln -s  /path/subpath1/fileToLinked   /path/subpath2/linkToFile
-    $ ln -s  /path/subpath1/fileToLinked   /path/subpath2/
+SEARCH FOR a file
 
+--  To search for a file in the local system:
+    $ locate stringKeyWord
 --  To test if a file exists:
     $ if [ -f file.txt ]
-
---  To compress a file without keeping the original source:
-    $ gzip filename
---  To compress a file keeping the original source:
-    $ gzip -k filename
---  To decompress it:
-    $ gzip -d filename.gz
+--  To search for a file by name:
+    $ find / -name fileName
 
 FUNCTIONS AND SCRIPTS
 =====================
@@ -250,6 +266,9 @@ NETWORK UTILITIES
 
 -- HTTP Authentication
     $ curl  "https://$username:$password@myhost/resource"
+
+--  To access an endpoint with information about certificate configuration:
+    $ curl -vI https://didekin-web-pre.eu-west-1.elasticbeanstalk.com:443
 
 -- To see the local IP address in a WI-FI network:
     $ ifconfig -a

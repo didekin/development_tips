@@ -14,6 +14,9 @@ CONFIGURATION
 -- Location of my.cnf file with a Homebrew installation: /usr/local/etc/my.cnf
 
 --  To display system variable names and values:
+    $ mysqld --verbose --help
+    $ mysqladmin -u root  -p variables
+    Or inside the mysql console:
     $ mysql> SHOW VARIABLES;
     $ mysql> SHOW VARIABLES LIKE '%size%';
 

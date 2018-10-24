@@ -18,6 +18,7 @@ CONNECTION TO A HOST  (generic utilities)
 
 CONNECTION AWS
 ==============
+
 -- To connect to the EC2 instance
    $ ssh -i path_to_private_key user@instanceDNSname
    Example: $ ssh -i /Users/pedro/.ssh/aws_ssh_keypair1 ec2-user@ec2-52-57-231-58.eu-central-1.compute.amazonaws.com

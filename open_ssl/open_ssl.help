@@ -1,2 +1,23 @@
+Note: OPENSSLDIR: "/private/etc/ssl"
+
+--  To create your private key:
+    $ openssl genrsa 2048 > privatekeyFile.pem
+
+--  To create a CSR:
+    $ openssl req -new -key privatekeyFile.pem -out csr_file_name.pem
+--  To print a CSR:
+    $ openssl req -noout -text -in csr_file_name.pem
+
+--  To sign the certificate, use the openssl x509 command:
+    $ openssl x509 -req -days 365 -in csr_file_name.pem -signkey privatekeyFile.pem -out server_certificate_name.crt
+--  To print the content of a certificate, use the -text switch and -noout:
+    $ openssl x509 -text -in server_certificate_name.crt -noout
+
 -- To generate a file with the sha-256 hash of one file
    $ openssl dgst -sha256 -out some-file.sha256 some-file
+
+--  To test an SSL configuration:
+    $ openssl s_client -connect  didekin-web-pre.eu-west-1.elasticbeanstalk.com:443
+
+--  To access an endpoint with information about certificate configuration:
+    $ curl -vIk https://didekin-web-pre.eu-west-1.elasticbeanstalk.com:443

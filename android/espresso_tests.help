@@ -29,19 +29,6 @@
    $ -list -keystore .android/debug.keystore
    $ password: android
 
---  To set up a separate, minified debug build, besides the debug buildType:
-
-    buildTypes {
-      debugMini {
-        initWith debug
-        minifyEnabled true
-        shrinkResources true
-        proguardFiles getDefaultProguardFile('proguard-android.txt'),
-                      'proguard-rules.pro'
-        matchingFallbacks = ['debug']
-      }
-    }
-
 --  By default, all tests run against the debug build type. You can change this to another build type by using
     the testBuildType property in your module-level build.gradle file:
 

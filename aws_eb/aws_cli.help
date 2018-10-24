@@ -1,5 +1,38 @@
--- To configure a user with a different credentials:
-   $ aws configure --profile  profileName
+-- Location: /usr/local/aws
 
--- To use a named profile:
-   $ aws command subcommand --profile profileName
+-- To configure different users with different credentials:
+   $ aws configure --profile  userProfile
+
+--  To use a named profile, add the --profile option to your command.:
+    $ aws ec2 describe-instances --profile userProfile
+
+--  To update any of your settings, again:
+    $ aws configure --profile userProfile
+
+--  To avoid specifying the profile in every command, set the AWS_PROFILE environment variable at the command line:
+    $ export AWS_PROFILE=userProfile
+
+--  To enable shell completion, add to ~/.bashrc:
+    -   complete -C '/usr/local/aws/bin/aws_completer' aws
+
+--  To override the default configuration settings for a single command, use line options to specify:
+    --profile    // The name of a named profile to use.
+    --region     // The AWS Region to call.
+    --output     // The output format.
+    --endpoint-url  // The URL to make the call against. For most commands, the AWS CLI automatically determines the URL based on the service and AWS Region.
+
+IAM
+===
+
+--  To list server certificates
+    $ aws iam list-server-certificates --profile profileName
+--  To retrieve a certificate:
+    $ aws iam get-server-certificate --server-certificate-name certificateName --profile profileName
+--  To delete a server certificate:
+    $ aws iam delete-server-certificate --server-certificate-name certificateName --profile profileName
+--  To delete a server certificate:
+    $ aws iam delete-server-certificate --server-certificate-name certificateName --profile profileName
+
+--  To convert a certificate bundle from PKCS#12 (PFX) to PEM
+    $  openssl pkcs12 -in keystoreNameFile.pkcs12 -out newKeystoreNameFile.pem -nodes
+
