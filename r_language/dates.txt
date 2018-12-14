@@ -1,5 +1,0 @@
-To convert from the format month/day/year hh:mm:
->dateConvert <- as.Date(strptime(mvt$Date,"%m/%d/%y %H:%M"))
-To extract month and weekday:
->months(dateConvert)
->weekdays(dateConvert)

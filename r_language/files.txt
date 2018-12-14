@@ -1,117 +1,113 @@
-FILES
-=====
+MANIPULATE FILES
+----------------
 
-To read a file or a connection object:
->readLines(connection,..)
+--  To  read a file or a connection object:
+    > readLines(connection,..)
 
-To count the number of character in a line:
->nchar(line)
+--  To  count the number of character in a line:
+    > nchar(line)
 
->file.exists("directoryName")  #will check to see if the directory exists.
->dir.create("directoryName")   #will create a directory if it doesn't exist.
+--  Files utilities:
+    > dir()
+    > list.files()
+    > list.dirs
+    > file.exists(name_file)
+    > dir.create(....)
 
-To see files in a directory:
->list.files("./directory").
+--  To  delete files or directories:
+    > unlink(..)
 
-To delete files or directories:
->unlink(..)
+--  To save and retrieve data in files:
+    > dump(c("humidity", "temp","rain"), "weather.R")
+    > dump("usefuldata", "useful.R")  // Archiva la definición del objeto usefuldata en el archivo useful.R.
+    > source("useful.R")   // Recupera el contenido del archivo useful.R y crea el objeto usefuldata.
 
-- To download a file:
->fileUrl <- "https://...."
->download.file(fileUrl, destfile = "./data/f.csv", method = "curl")
 
-To load a "flat" file already downloading, or local:
->read.table("path")
+LOAD FILES
+----------
 
-To load an Excel file:
->library(xlsx)
->read.xlsx("path",sheetIndex=1,header=TRUE)
-More about Excel files in: XLConnect.
+--  Para cargar los datos que vienen en la distribución estándar de R:
+    > library(datasets)
+    > data(iris)
 
-To parse a remote XML file:
->library(XML)
->fileUrl <- "http://www.w3schools.com/xml/simple.xml"
->doc <- xmlTreeParse(fileUrl,useInternal=TRUE)
->rootNode <- xmlRoot(doc)
+--  To download a file:
+    > fileUrl <- "https://...."
+    > download.file(fileUrl, destfile = "./data/f.csv", method = "curl")
 
-Xpath:
- /node Top level node
- //node Node at any level
- node[@attr-name] Node with an attribute name
- node[@attr-name='bob'] Node with attribute name attr-name='bob'
+--  To load a CSV file
+    > library(readr)
+    > titular_old <- read_csv(
+        "~/Documents/clientes/leben/demo_dic_2018/data/titular_old.csv",
+        col_names = c("titular_id","acumula_num_tx","acumula_ptos","pedido_num_tx","pedido_ptos","fraccion_disp","avg_redencion"),
+        col_types = cols(
+        titular_id = col_integer(),
+        acumula_num_tx = col_integer(),
+        acumula_ptos = col_integer(),
+        pedido_num_tx = col_integer(),
+        pedido_ptos = col_integer(),
+        fraccion_disp = col_double(),
+        avg_redencion = col_integer()
+        )
+      )
 
->xpathSApply(rootNode,"//name",xmlValue)
->scores <- xpathSApply(doc,"//li[@class='score']",xmlValue)
+--  To check the variable names of the loaded file:
+    > names(variable)
+--  To make the variables in this data frame available by name
+    > attach(dataSet)
+    OR we must type the data set and the variable name joined with a $ symbol
 
-To parse a remote JSON file:
->library(jsonlite)
->jsonData <- fromJSON("https://api.github.com/users/jtleek/repos")
+--  To convert quantitative variables into qualitative variables:
+    > newFactoVar = as.factor(oldVar)
 
-To write a data.frame to a JSON file:
->myjson <- toJSON(iris, pretty=TRUE)
-To convert back to JSON:
->iris2 <- fromJSON(myjson)
+--  To load a "flat" file local:
+    > read.table("path")
+
+--  To  load an Excel file:
+    > library(xlsx)
+    > read.xlsx("path",sheetIndex=1,header=TRUE)
+
+--  To  parse a remote XML file:
+    > library(XML)
+    > fileUrl <- "http://www.w3schools.com/xml/simple.xml"
+    > doc <- xmlTreeParse(fileUrl,useInternal=TRUE)
+    > rootNode <- xmlRoot(doc)
+
+--  To  parse a remote JSON file:
+    > library(jsonlite)
+    > jsonData <- fromJSON("https://api.github.com/users/jtleek/repos")
+
+--  To  write a data.frame to a JSON file:
+    > myjson <- toJSON(iris, pretty=TRUE)
+--  To  convert back to JSON:
+    > iris2 <- fromJSON(myjson)
 
 MYSQL
+-----
 
-To install package on Mac:
->install.packages("RMySQL")
+--  To  install package on Mac:
+    > install.packages("RMySQL")
+--  To  connect to a server and database:
+    > conn <- dbConnect(MySQL(), user="pedro", password="pedro", dbname="leben", host="localhost", client.flag=CLIENT_MULTI_RESULTS)
+--  To execute a query:
+    > sqlQuery <- dbGetQuery(conn, queryTx1Str)
+--  To close the connection:
+    > dbDisconnect(conn)
 
-To connect to a server:
->ucsDb <- dbConnect(MySQL(), user="genome",host="genome-mysql")
->result <- dbGetQuery(ucsDB,"show databases;");dbDisconnect(ucsDB)
-To connect to a particular database:
->hg19 <- dbConnect(MySQL(),user="genome",db="hg19",host="genome")
->allTables <- dbListTables(hg19)
+--  To see data in a spreadsheet window:
+    > View(sqlQuery)
+    Or:
+    > fix(sqlQuery)
+--  To inspect the data:
+    > dim(sqlQuery)
+    > names(sqlQuery)
+    > str(sqlQuery)
 
-To inspect and query a table:
->dbListFields(hg19,"table1")
->dbGetQuery(hg19,"select count(*) from table1")
->count(*)
+--  Pour désigner un objet dans un data frame, ligne x colonne:
+    > sqlQuery[2,3]
+    > sqlQuery["2", "num_titulares"]
 
->query <- dbSendQuery(hg19, "select * from table1 where misMatches between 1 and 3")
->misMatch <- fetch(query); quantile(misMatch$misMatches)
->misMatchSmall <- fetch(query,n=10); dbClearResult(query);
->dbDisconnect(hg19)
-
-To read from a table:
->table1Data <- dbReadTable(hg19,"table1")
->head(table1Data)
-
-HDF5 (http://www.hdfgroup.org)
-
-To install (http://bioconductor.org/packages/release/bioc/html/rhdf5.html):
->source("http://bioconductor.org/biocLite.R")
->biocLite("rhdf5")
-
-To create a hdf5 file:
->library(rhdf5)
->created = h5createFile("example.h5")
-created
-
-WEB PAGES
-
->con = url("http://...")
->htmlCode = readLines(con)
->close(con)
-
->library(XML)
->url <- "http://.."
->html <- htmlTreeParse(url, useInternalNodes=T)
->xpathSApply(html, "//title", xmlValue)
-
-With the httr package:
->library(httr); html2 = GET(url)
->content2 = content(html2,as="text")
->parsedHtml = htmlParse(content2,asText=TRUE)
->xpathSApply(parsedHtml, "//title", xmlValue)
-
-To authenticate:
-pg2 = GET("http://httpbin.org/basic-auth/user/passwd",
-    authenticate("user","passwd"))
-
-RDS FILES
->readRDS("path to the file")
+--  To select subsets of rows and columns:
+    > sqlQuery[sqlQuery$tx_year == 2010, 2:5]
 
 
 

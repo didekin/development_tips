@@ -1,65 +1,66 @@
-He pegado la siguiente línea en el terminal bash, para evitar los warnings iniciales en R console:
-$ defaults write org.R-project.R force.LANG en_US.UTF-8
-.............................................
->str(object)  # to see the description of an object.
+--  Para conocer el directorio actual.
+    > getwd()
+--  Para cambiar el directorio de trabajo.
+    > setwd(mydir)
 
-Para cargar los datos que vienen en la distribución estándar de R:
-> library(datasets)
-> data(iris)
+--  To see the description of an object.
+    > str(object)
 
-Para ver los argumentos de una función:
->args(function)
+--  Para ver los argumentos de una función:
+    > args(function)
 
-Variables predefinidas:
-LETTERS, letters, month.name, month.abb
+--  To see the variables in the workspace:
+    > ls()
+--  To clean an object:
+    > ls(objectToClean)
+--  Para borrar todas las variables del workspace:
+    > rm(list = ls())
 
-Para definir un índice negativo, se define un vector -c(..) con las posiciones a excluir.
+--  To see previous commands
+    > Ctrl + Up
 
-Para borrar todas las variables del workspace:
->rm(list = ls())
+--  To leave R console.
+    > quit()
+    > q()
 
->getwd()   			//para conoer el directorio actual.
->setwd(mydir) 		//para cambiar el directorio de trabajo.
+--  To measure the execution time of a function or expression:
+    > system.time(function)
+    > system.time({ code })
 
->help.search(word)		//para búsquedas más amplias.
->RSiteSearch("keywords")  // will do a search in the R-help mailing list and other web resources.
+DATES
+=====
 
-To install a new package:
->install.packages("xlsx")
+--  To convert from the format month/day/year hh:mm:
+    > dateConvert <- as.Date(strptime(mvt$Date,"%m/%d/%y %H:%M"))
 
-To detach a package from the current session:
->detach("package:packagename")
+--  To extract month and weekday:
+    > months(dateConvert)
+    > weekdays(dateConvert)
 
-Ejemplo de cálculo de nuevas columnas de un data.frame con within:
->thue4 <- within(thuenesen, {
-	log.gluc <- log(blood.glucose)
-	m <- mean(log.gluc)
-	centered.log.gluc <- log.gluc - m
-	rm(m)
-})
+HELP
+====
 
-Para localizar un directorio dentro de un paquete:
->system.file("rawdata","thuesen.txt", package="ISWR") // file "thuesen.txt",
-                                                    //del directorio "rawdata"
+--  To obtain help:
+    > ?wordTolookFor
+    > help.search(word)
+    > RSiteSearch("keywords")
 
-Type quit() or q() to leave R console.
+--  Para ver un ejemplo de utilización de una función:
+    > example(function)
 
-Para ver un ejemplo de utilización de una función:
->example(function)
+PACKAGES
+========
 
->dump("usefuldata", "useful.R")  // Archiva la definición del objeto usefuldata en el archivo useful.R.
->source("useful.R")   // Recupera el contenido del archivo useful.R y crea el objeto usefuldata.
->dump(list=objects(), "all.R")
->source("all.R")
->dump(c("humidity", "temp","rain"), "weather.R")
+--  To install a new package:
+    > install.packages("xlsx")
 
-To measure the execution time of a function or expression:
->system.time(function)
->system.time({ code })
+--  To detach a package from the current session:
+    > detach("package:packagename")
 
-To list the files in a dir:
->dir()    or   > list.files()
-Similar: >list.dirs,  >file.exists(),  >dir.create()
+--  To see packages in a session:
+    > sesioninfo()
+
+
 
 
 

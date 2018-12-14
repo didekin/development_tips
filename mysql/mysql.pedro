@@ -7,6 +7,14 @@
    $ mysql.server start
    $ mysql.server stop
 
+COMMANDS
+========
+
+--  To execute a .sql file from the console
+    $ mysql -h hostname -uuser -ppassword database < path/to/test.sql
+
+--  To CANCEL a command not executed:
+    mysql> \c
 
 CONFIGURATION
 =============
@@ -17,95 +25,125 @@ CONFIGURATION
     $ mysqld --verbose --help
     $ mysqladmin -u root  -p variables
     Or inside the mysql console:
-    $ mysql> SHOW VARIABLES;
-    $ mysql> SHOW VARIABLES LIKE '%size%';
+    mysql> SHOW VARIABLES;
+    mysql> SHOW VARIABLES LIKE '%size%';
 
 --  To change a global variable in the server:
-    $ mysql> set @@global.wait_timeout=57600;
+    mysql> set @@global.wait_timeout=57600;
+
+--  To see value of the option --secure-file-priv
+    mysql> SELECT @@GLOBAL.secure_file_priv;
 
 --  To change character set and collation in a database:
-    $ mysql > ALTER DATABASE didekin CHARACTER SET utf8 COLLATE utf8_general_ci;
+    mysql> ALTER DATABASE didekin CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 -- To enable load files from the client:
    $ mysql -h localhost -u pedro -p  --local-infile=1
 
 -- To know the current engine of a table:
-   $ select engine from information_schema.tables where table_schema = 'didekin' and table_name = 'usuario';
-
--- To find out which database is currently selected:
-   $ select database();
-
--- To view the properties of InnoDB tables:
-   $ show table status from didekin like 'table_name' \G;
+   mysql> select engine from information_schema.tables where table_schema = 'didekin' and table_name = 'usuario';
 
 -- To know a foreign key error definition:
-   $ mysql> SHOW ENGINE INNODB STATUS;
+   mysql> SHOW ENGINE INNODB STATUS;
 
--- To see de structure of a table:
-   $ describe table_name;
+DATABASE
+========
 
--- To see the sql create of a table:
-   $ SHOW CREATE TABLE table_name;
+--  To create a database:
+    mysql> create database databasename
+--  To delete a database
+    $ mysql> drop database nameDatabase
+
+--  To find out which database is currently selected:
+    mysql> select database();
 
 --  To see the sql create of all the tables in a database, without data and definers for views:
     $  mysqlpump --skip-dump-rows --skip-definer -uroot -pspivak didekin;
 
-COMMANDS
-========
+--  To view the tables of a database:
+    mysql> show tables;
 
---  To execute a .sql file from the console
-    $ mysql -h hostname -uuser -ppassword database < path/to/test.sql
+FILES
+=====
 
+--  To export a file in CSV format:
+    mysql> SELECT tx_tipo, tx_fecha, tx_puntos
+           FROM tx_schindler INTO OUTFILE '/Users/pedro/Documents/clientes/leben/demo_dic_2018/data/tx_schindler.csv'
+           FIELDS TERMINATED BY ','
+           LINES TERMINATED BY '\r\n';
 
-STATEMENTS in mysql client
-==========================
+TABLES
+======
 
--- To CANCEL a command not executed:
-   $ \c
+--  To view the properties of InnoDB tables:
+    mysql> show table status from didekin like 'table_name' \G;
 
--- To view the tables of a database:
-   $ show tables;
+--  To see de structure of a table:
+    mysql> describe table_name;
 
---  To delete the data in a set of tables:
-    $ delete a, b from table_name_1 as a, table_name_2 as b;
+--  To see the sql create of a table:
+    mysql> SHOW CREATE TABLE table_name;
 
--- To see the create statement of a table:
-   $ show create table <table>
+--  To see the indexes of a table
+    mysql> show index from tableName;
 
--- To update the value in column in the register with a certain value in a column with UNIQUE values.
-   $ UPDATE <table> SET <column-name> = '1989-08-31' WHERE <unique-col-name> = 'Bowser';
-
-$ SELECT * FROM pet WHERE (species = 'cat' AND sex = 'm')
-      OR (species = 'dog' AND sex = 'f');
-
-$ SELECT name, birth FROM pet;
-
-$ SELECT DISTINCT owner FROM pet;
-
-$ SELECT name, birth FROM pet ORDER BY birth;
-
-$ SELECT name, birth FROM pet ORDER BY birth DESC;
-
--- To sort by type of animal in ascending order, then by birth date within animal type in descending order (youngest animals first):
-   $ SELECT name, species, birth FROM pet
-     ORDER BY species, birth DESC;
-
--- To test for a boolean condition:
-   $ select (0 is not null);
-
--- To join a table with itself:
-   $ SELECT p1.name, p1.sex, p2.name, p2.sex, p1.species
-     FROM pet AS p1 INNER JOIN pet AS p2
-     	ON p1.species = p2.species AND p1.sex = 'f' AND p2.sex = 'm';
-
--- To select records with the 'value' in the SET colum set_col:
-   $ SELECT * FROM tbl_name WHERE FIND_IN_SET('value',set_col)>0;
-
--- Similar, but for the first (1) value of the set:
-   $ SELECT * FROM tbl_name WHERE set_col & 1;
+--  To see the foreign_key in a table:
+    mysql> SELECT * FROM information_schema.TABLE_CONSTRAINTS where CONSTRAINT_SCHEMA='didekin' and TABLE_NAME='incidencia_comment';
 
 -- To determine all possible values for a SET column, set_col in this example:
-   $ SHOW COLUMNS FROM tbl_name LIKE set_col;
+   mysql> SHOW COLUMNS FROM tbl_name LIKE set_col;
+
+--  To delete the data in a set of tables:
+    mysql> delete a, b from table_name_1 as a, table_name_2 as b;
+
+--  To count rows in a table without a full scan of the table:
+    mysql> select table_rows from information_schema.tables where table_schema = 'leben' and table_name = 'tx_schindler';
+
+QUERIES
+=======
+
+mysql> SELECT * FROM pet WHERE (species = 'cat' AND sex = 'm')
+                OR (species = 'dog' AND sex = 'f');
+
+mysql> SELECT name, birth FROM pet;
+
+mysql> SELECT DISTINCT owner FROM pet;
+
+mysql> SELECT name, birth FROM pet ORDER BY birth;
+
+mysql> SELECT name, birth FROM pet ORDER BY birth DESC;
+
+mysql> SELECT COUNT(DISTINCT titular_id, tx_fecha) from tx_schindler;
+
+mysql> SELECT COUNT(IF(tx_tipo='amazon',1,NULL)) as 'AMAZON', \
+            COUNT(IF(tx_tipo='atrapalo',1,NULL)) as 'ATRAPALO', \
+            COUNT(IF(tx_tipo='rusticae',1,NULL)) as 'RUSTICAE' from tx_schindler;
+
+mysql> SELECT COUNT(distinct titular_id) from tx_schindler where tx_fecha <= '2017-08-31';
+
+--  To sort by type of animal in ascending order, then by birth date within animal type in descending order (youngest animals first):
+    mysql> SELECT name, species, birth FROM pet
+            ORDER BY species, birth DESC;
+
+-- To test for a boolean condition:
+   mysql> select (0 is not null);
+
+-- To select records with the 'value' in the SET colum set_col:
+   mysql> SELECT * FROM tbl_name WHERE FIND_IN_SET('value',set_col) > 0;
+
+-- Similar, but for the first (1) value of the set:
+   mysql> SELECT * FROM tbl_name WHERE set_col & 1;
+
+-- To join a table with itself:
+   mysql> SELECT p1.name, p1.sex, p2.name, p2.sex, p1.species
+            FROM pet AS p1 INNER JOIN pet AS p2
+     	    ON p1.species = p2.species AND p1.sex = 'f' AND p2.sex = 'm';
+
+UPDATES
+=======
+
+--  To update the value in column in the register with a certain value in a column with UNIQUE values.
+    mysql> UPDATE <table> SET <column-name> = '1989-08-31' WHERE <unique-col-name> = 'Bowser';
 
 USERS
 =====
@@ -113,25 +151,23 @@ USERS
 -- To change root password:
    $ /usr/local/opt/mysql/bin/mysqladmin -u root password 'new-password'
 
---  To create a database:
-    $ create database databasename
---  To delete a database
-    $ mysql> drop database nameDatabase
-
 --  To create a user with a host:
-    $ create user 'userName'@'host' identified by 'password';
-    $ grant all on dataBase.* to 'userName'@'localhost';
+    mysql> create user 'userName'@'host' identified by 'password';
+    mysql> grant all on dataBase.* to 'userName'@'localhost';
 --  To create a user without specifying a host:
-    $ create user 'userName'@'%' identified by 'password';
-    $ grant all on dataBase.* to 'userName'@'%';
+    mysql> create user 'userName'@'%' identified by 'password';
+    mysql> grant all on dataBase.* to 'userName'@'%';
+
+--  To grant privilege to write a file:
+    mysql> GRANT FILE ON *.* TO 'john'@'%';
 
 --  To see the privileges for an account:
-    $ SHOW GRANTS FOR 'username'@'%';
+    mysql> SHOW GRANTS FOR 'username'@'%';
 --  To see the users in the database:
-    $ select user, host from mysql.user;
+    mysql> select user, host from mysql.user;
 --  To see the current user:
-    $ SELECT USER();
+    mysql> SELECT USER();
 
 --  To delete a user:
-    $ DROP USER 'userName'@'host';
+    mysql> DROP USER 'userName'@'host';
 
