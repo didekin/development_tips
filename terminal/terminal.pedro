@@ -185,7 +185,7 @@ FILES
 -- To redirect standard output to standard error:
    $ cat file1 1>&2
 
-COMPRESSION
+COMPRESSION AND CONVERSION
 
 --  To compress a file without keeping the original source:
     $ gzip filename
@@ -193,6 +193,9 @@ COMPRESSION
     $ gzip -k filename
 --  To decompress it:
     $ gzip -d filename.gz
+
+--  To change the encoding of a text file:
+    $ iconv -f utf-16 -t utf-8 datos/marzo2018 > output_file
 
 LIFE CYCLE
 
@@ -232,8 +235,10 @@ LOOK INTO files
    $ less filename
 -- To compare two files:
    $ diff -u filename1 filename2
--- To identify the contents of a file:
+
+-- To identify the contents of a file or its encoding:
    $ file filename1 filename2 ....
+
 -- To expand a list of filenames in the directory:
    $ echo *
 -- Para contar las filas de un fichero tabulado:
@@ -304,6 +309,16 @@ REGULAR EXPRESSIONS
 -- '^' at the beginning of a bracket matches any character NOT between the brackets:
       $ ls *[^a-d] matches any filen name not ending in a, b, c, d.
 -- '!' is similar to '^'.
+
+STORE PROCEDURES
+================
+
+--  To see the definition of all store procedures:
+    > mysql SHOW PROCEDURE STATUS;
+--  To see the definition of a particular procedure:
+    > mysql show create procedure myProcedure;
+--  To see the definition of all functions:
+    > mysql SHOW FUNCTION STATUS;
 
 SYSTEM UTILITIES
 ================

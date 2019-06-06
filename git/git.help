@@ -1,11 +1,17 @@
 BASICS
 ======
 
+--  To initialize a repository from the source directory:
+    $ git init
+
 -- To add a new remote Git repository as a shortname:
    $ git remote add [shortname] [url]
 
 -- To see which remote servers you have configured:
    $ git remote -v
+
+--  To change the URL of a remote repository
+    $ git remote set-url vodafone https://github.com/didekin/vodafone.git
 
 -- To make the first commit:
    $ git push -u repository_name master
@@ -160,6 +166,9 @@ TAGS
 
 --  To reset the current branch to specific tag:
     $ git reset --hard tagname
+
+--  To push a single tag to the remote repository:
+    $ git push remoterepositoryname tagname
 
 SSH
 ===

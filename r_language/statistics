@@ -1,0 +1,49 @@
+CONTINGENCY TABLES
+
+--  To crosstabs two variables, dropping empty categories:
+    > table(droplevels(clusters_regr1_data$k3), droplevels(clusters_regr1_data$subcanal)) # absolute values
+    > prop.table(mytable)       # cell percentages
+    > prop.table(mytable, 1)    # row percentages
+    > prop.table(mytable, 2)    # column percentages
+    Variantes: ftable, xtabs.
+
+DISTRIBUTIONS
+
+--  To create 50 standard normal random observations with a mean of value1 and a standard deviation of value2:
+    > rnorm(50,mean=value1,sd=value2)
+--  To reproduce the exact same set of random numbers:
+    > set.seed(numValue)
+    > rnorm(50,mean=value1,sd=value2)
+    
+REGRESSION
+
+--  To fit a model:
+    > regressionObj <- lm(paginas_mes ~ visitas_mes, data = dataFrameName)
+--  To see the coefficients:
+    > coeff(regressionObj)
+--  To see the statistics estimated:
+    > names(regressionObj)
+--  To know the coding R uses for the dummy variables:
+    > contrasts(regr1_final$subcanal)
+--  To avoid an intercept in the model, drop it with -1:
+    >  y ~ x1 - 1
+--  To include an interaction term between var1 and var2: var1:var2  # var1:var2 = var1 X var2
+--  To incluce var1, var2 and var1:var2:
+    > lm(response∼var1*var2,data=dataFrameName)
+--  To add a square term:
+    > lm(response∼var1+I(var1^2)
+--  To use a fith-order polynomial:
+    > lm(response∼poly(var1 ,5)
+
+SAMPLE STATISTICS
+
+> mean(--)
+> var(--)
+> sd(--)  # standard deviation
+> median(--)
+> quantile(--)
+
+SAMPLING
+
+--  To obtain 10 samples of 5 observations each from a normal distribution with means 1, 2, ...., 10:
+    > map(1:10, rnorm, n=5)

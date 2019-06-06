@@ -19,7 +19,9 @@ COMMANDS
 CONFIGURATION
 =============
 
--- Location of my.cnf file with a Homebrew installation: /usr/local/etc/my.cnf
+--  Location of my.cnf file with a Homebrew installation: /usr/local/etc/my.cnf
+
+--  Databases data directory: /usr/local/var/mysql/databaseName
 
 --  To display system variable names and values:
     $ mysqld --verbose --help
@@ -27,6 +29,12 @@ CONFIGURATION
     Or inside the mysql console:
     mysql> SHOW VARIABLES;
     mysql> SHOW VARIABLES LIKE '%size%';
+
+--  To run a session with a specific value in a server variable:
+    $ mysqld --max_allowed_packet=64M
+
+--  To run a session with a specific value in a client variable:
+    $ mysql --max_allowed_packet=64M -uuser -ppassword databaseName
 
 --  To change a global variable in the server:
     mysql> set @@global.wait_timeout=57600;
@@ -40,11 +48,11 @@ CONFIGURATION
 -- To enable load files from the client:
    $ mysql -h localhost -u pedro -p  --local-infile=1
 
--- To know the current engine of a table:
-   mysql> select engine from information_schema.tables where table_schema = 'didekin' and table_name = 'usuario';
+--  To know the current engine of a table:
+    mysql> select engine from information_schema.tables where table_schema = 'didekin' and table_name = 'usuario';
 
--- To know a foreign key error definition:
-   mysql> SHOW ENGINE INNODB STATUS;
+--  To know a foreign key error definition:
+    mysql> SHOW ENGINE INNODB STATUS;
 
 DATABASE
 ========
@@ -63,6 +71,9 @@ DATABASE
 --  To view the tables of a database:
     mysql> show tables;
 
+--  To see the disk storage used by a database:
+    $ sudo du -sh /usr/local/var/mysql/databaseName
+
 FILES
 =====
 
@@ -80,6 +91,9 @@ TABLES
 
 --  To see de structure of a table:
     mysql> describe table_name;
+
+--  To count the columns of a table:
+    mysql > SELECT count(*) FROM information_schema.columns WHERE table_name = 'myTable';
 
 --  To see the sql create of a table:
     mysql> SHOW CREATE TABLE table_name;
