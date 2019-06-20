@@ -1,0 +1,211 @@
+DATES
+====================================
+
+--  To convert from the format month/day/year hh:mm:
+    > dateConvert <- as.Date(strptime(mvt$Date,"%m/%d/%y %H:%M"))
+
+--  To extract month and weekday:
+    > months(dateConvert)
+    > weekdays(dateConvert)
+
+--  To generate a sequence of date from an initial one summing months:
+    > seq(init_date, by = "1 month", len = numMeses)
+    > seq_months <- (init_date  %m+% months(0:numMeses))    # with lubridate
+
+FACTORS
+====================================
+
+--  To convert quantitative variables into qualitative variables:
+    > newFactoVar = as.factor(oldVarNumeric)
+--  To assign level names to a factor variable:
+    > levels(factorName) <- c("name1","name2","name3","name4")
+
+--  To discretise continuous variables:
+    > cut(..)
+
+FUNCTIONS
+====================================
+
+varFunctionIn <- function(x) {
+  do something
+}
+
+--  Para ver un ejemplo de utilización de una función:
+    > example(functionName)
+--  To see the formal arguments of a function:
+    > args(functionName)
+--  To see the code of a function:
+    > functionName  # without parenthesis.
+--  To express arguments with an arbitrary number of inputs use the triple-dot '...' argument:
+    function(...)  # You can then send those ... on to another function.
+--  To capture the values of the ..., use functionName(...).
+
+--  ANONYMUS functions:
+    > integrate(function(x) sin(x) ^ 2, 0, pi)      # anonymus function:  function(x) sin(x) ^ 2
+--  DPLYR FUNCTIONS LIST in certain methods:
+    funs() provides a flexible way to generate a named list of functions for input to other functions.
+    >  mutate_all(funs(replace(., is.na(.), 0)))   # the list only contains the function 'replace'.
+
+--  Vectorised comparison operators: '==', '|', '&'.
+--  Single operators: '||', '&&', any(), all(), identical()
+
+--  To compare floating point numbers:
+    > near(---)
+--  To check for special values of doubles:
+    > is.finite()
+    > is.infinite()
+    > is.nan()
+
+--  To check invariants and stop the execution with an error message:
+    > stop("`x` and `w` must be the same length", call. = FALSE)
+    > stopifnot(---)
+
+--  Side-effects functions should “invisibly” return the first argument so that they can be piped:
+    - use  %T>% instead of %>% after the data frame to be used afterwards and before the 'invisible' instruction.
+
+--  Generic functions acts differently depending on the type of the argument.
+    To see the methods available to a function:
+    > methods(func_name)
+
+ITERATIONS
+----------
+
+--  To create new vectors:
+    output <- vector("double", ncol(df))  # 1. output
+    for (i in seq_along(df)) {            # 2. sequence
+      output[[i]] <- median(df[[i]])      # 3. body
+    }
+    Or:
+    out <- vector("numeric", length(x))
+    for (i in 1:length(x)) {
+      name <- names(x)[[i]]  # to extract the name
+      value <- x[[i]]   # to extract the value
+      names(out) <- names(x)  # to reuse the names of the original df
+      ...
+    }
+--  To transform a dataframe df:
+    for (i in seq_along(df)) {
+        df[[i]] <- rescale01(df[[i]])
+    }
+
+--  When the number of iterations is not known in advance:
+    while (condition) {
+       # body
+    }
+--  Similar to while but evaluating the logical expression at the end:
+    > repeat{
+            ...
+            if (logical_expr) break
+      }
+
+
+NA
+====================================
+
+--  To filter rows with NA values:
+    > dataset[complete.cases(dataset),]
+    > summarise(mean = mean(columnName, na.rm = TRUE))
+
+--  To select rows with a logical conditions and to avoid NA values:
+    > x[which(x$var2 >=9),]
+--  To filter rows with NA values in certain columns:
+    > dataset[complete.cases(dataset[,i:j]),]
+    > filter(!is.na(columName1), !is.na(columnName2))
+
+--  To know the NA values in a column:
+    > sum(is.na(columnName))
+    > (sum(!is.na(columName)))
+    Or to know if there is NA values in a column:
+    > any(is.na(columName))
+--  To know the number of NA occurrences in each column of a data set:
+    > colSums(is.na(dataSetName))
+--  To validate the existence of NA values in the data set.
+    > all(colSums(is.na(dataSetName)) ==0)
+
+    More on calculating NA values in a column, in tabular form:
+    > pid$isNaJWMNP <- ifelse(is.na(pid$JWMNP),TRUE,FALSE)
+    > table(pid$isNaJWMNP,is.na(pid$JWMNP))
+
+--  To validate the full set of values of a column:
+    > all(pid$WKHP > 0)
+
+--  To sort puttind NA values at the end of the vector:
+    > sort(x$var2,na.last=T)
+
+--  To replace NA values in whole dataset:
+
+    > mutate_all(funs(replace(., is.na(.), 0)))
+
+    Locationally:
+    > mutate_at(c(5:10), funs(replace(., is.na(.), 0)))
+    > mutate_at(vars(var5:var10), funs(replace(., is.na(.), 0)))
+
+    Conditionally (change just numeric columns):
+    > mutate_if(is.integer, funs(replace(., is.na(.), 0)))
+    > mutate_if(is.numeric, funs(replace(., is.na(.), 0)))
+
+--  To complete all the combinations of a set of categorical variables, with NA for non existent combination-values:
+    complete(variableName1, variableName2)
+
+OBJECTS - VARIABLES
+====================================
+
+--  To see the description of an object.
+    > str(object)
+--  To know the storage mode of any object:
+    typeof(objectName)
+--  Similar in an object oriented context:
+    class(objectName)
+--  To get the memory footprint of several objects:
+    pryr::object_size(objName1, objName2, ...)
+--  To see the attributes of an object:
+    > attributes(objectName)
+--  To 'unclass' an object:
+    > unclass(objectName)
+--  To check if two objects are exactly equal:
+    > identical(obj1, obj2)
+
+STRINGS
+====================================
+
+--  To see what characters to escape:
+    > ?'"'  or > ?"'"
+
+--  To get the length of a text string (i.e. the number of characters in the string):
+    > nchar()
+    > str_length(vectorStringsName or stringName)
+--  To see the raw contents of a string:
+    > writeLines(stringName)
+
+--  To combine two or more strings:
+    > str_c("x", "y", sep = ", ")
+--  To concatenate all the strings in a vector in a single string:
+    > str_c(c("x", "y", "z"), collapse = ", ")
+--  To extrat a substring:
+    > str_sub(vectorStrings, init, end)  # str_sub(c("Apple", "Banana", "Pear"), 1, 3) or str_sub("Pear", 1, 3)
+--  To transform strings or string vectors:
+    > str_to_upper(c("i", "q"), locale = "es")
+    > str_to_lower(c("i", "q"), locale = "es")
+    > str_to_title("hola pedro", locale= "es")
+    > str_sort(vector, locale = "en")
+    > str_order(vector, locale = "en")
+    > str_trim() removes whitespace from start and end of string.
+    > str_squish() also reduces repeated whitespace inside a string.
+
+grep
+----
+
+--  To get the elements in a vector that matches a regular expression:
+    > grep(pattern, x, ignore.case = FALSE, perl = FALSE, value = TRUE)
+--  To get a logical vector with matches in a vector to a regular expression:
+    > grepl(pattern, vectorName, ignore.case = FALSE, perl = FALSE)
+    > str_detect(xVector, "menu$")
+--  To get the position of a regular expression match(es) in a text string x:
+    > pos = regexpr('pattern', x) # Returns position of 1st match in a string
+    > pos = gregexpr('pattern', x) # Returns positions of every match in a string
+--  To extract part of a text string based on position in the text string, where first and last are the locations in the text string,
+    usually found by the regexpr() function:
+    > keep = substr(x, first, last)
+--  To replace part of a text string with some other text:
+    > sub('pattern', replacement, input) # Changes only the 1st pattern match per string
+    > gsub('pattern', replacement, input) # Changes every occurrence of a pattern match

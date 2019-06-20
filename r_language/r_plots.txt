@@ -1,0 +1,35 @@
+BASE
+====================================
+
+--  Three dimensional plots:
+    > contour(x,y,f,nlevels=45,add=T)
+    > persp(x,y,fa,theta=30,phi=20)
+
+--  To produce scatterplots for just a subset of the variables in a dataframe (mtcars, p.e.):
+    > pairs(∼ mpg + displacement + horsepower + weight + acceleration , mtcars)
+--  For all the variables:
+    > pairs(mtcars)
+
+GGPLOT2
+====================================
+
+--  When creating ggplot2 graphics,  put the + at the end of the line, not the start
+
+--  Help about aestetics:
+    > ?geom_name      //  ?geom_point,?geom_smooth, ..
+    > vignette("ggplot2-specs")
+
+--  To set an aesthetic manually, set the aesthetic by name as an argument of your geom function:
+    geom_point(mapping = aes(x = displ, y = hwy), color = "blue")  # color is out aes()
+--  To define the scale width of a variable:
+    count(cut_width(variableName, 0.5))  # 0.5 es la separación entre valores de la escala. 'Count' es la función que la utiliza.
+--  To set the width of the intervals in a histogram (¿y en otros tipos de gráfico?):
+    geom_histogram(binwidth = 0.1)
+--  To zoom to small values of the y-axis:
+    geom_histogram(mapping = aes(x = y), binwidth = 0.5) +
+    coord_cartesian(ylim = c(0, 50))
+--  To reorder the scale values of an axis:
+    geom_boxplot(mapping = aes(x = reorder(class, hwy, FUN = median), y = hwy)) # reorder of class after hwy median values.
+--  To rotate axis, when having long labels in x axis:
+    geom_boxplot(mapping = aes(x = reorder(class, hwy, FUN = median), y = hwy)) +
+    coord_flip()

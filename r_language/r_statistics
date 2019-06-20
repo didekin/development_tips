@@ -1,0 +1,85 @@
+CONTINGENCY TABLES
+====================================
+
+--  To crosstabs two variables, dropping empty categories:
+    > table(droplevels(clusters_regr1_data$k3), droplevels(clusters_regr1_data$subcanal)) # absolute values
+    > prop.table(mytable)       # cell percentages
+    > prop.table(mytable, 1)    # row percentages
+    > prop.table(mytable, 2)    # column percentages
+    Variantes: ftable, xtabs.
+
+SIMULATIONS
+====================================
+
+--  To create 50 standard normal random observations with a mean of value1 and a standard deviation of value2:
+    > rnorm(50,mean=value1,sd=value2)
+--  To reproduce the exact same set of random numbers:
+    > set.seed(numValue)
+    > rnorm(50,mean=value1,sd=value2)
+--  To simulate the distribution of the mean of 20 random numbers from the exponential distribution by repeating the operation 10 times:
+    > replicate(10,mean(rexp(20)))
+    > sapply(1:10, function(x) mean(rexp(20)))
+
+PROBABILITIES
+====================================
+
+--  To calculate a binomial coefficient:
+    > choose(40,5)
+--  To draw a normal curve with equally distributed values in [-4,4]:
+    > curve(dnorm(x), from=-4, to=4)
+--  To draw a binomial distribution in a histogram:
+    > plot(x <- 0:50,dbinom(x,size=100,prob=.33),type="h")
+
+REGRESSION
+====================================
+
+--  To fit a model:
+    > regressionObj <- lm(paginas_mes ~ visitas_mes, data = df_name)
+--  To see the coefficients:
+    > coeff(regressionObj)
+--  To see the statistics estimated:
+    > names(regressionObj)
+--  To know the coding R uses for the dummy variables:
+    > contrasts(regr1_final$subcanal)
+--  To avoid an intercept in the model, drop it with -1:
+    >  y ~ x1 - 1
+--  To include an interaction term between var1 and var2: var1:var2  # var1:var2 = var1 X var2
+--  To incluce var1, var2 and var1:var2:
+    > lm(response∼var1*var2,data=dataFrameName)
+--  To add a square term:
+    > lm(response∼var1+I(var1^2)
+--  To use a fith-order polynomial:
+    > lm(response∼poly(var1 ,5)
+
+--  To add 'model' residuals to a data frame:
+    %>%
+    modelr::add_residuals(mod) %>%
+--  To compute the residuals or the studentized residuals from a linear regression fit:
+    > residuals(regress_obj)
+    > rstudent(regress_obj)
+    > plot(predict(lm.fit), residuals(lm.fit))
+    > plot(predict(lm.fit), rstudent(lm.fit))
+--  To obtain a confidence interval for the coefficient estimates:
+    > confint(regressionObj)
+--  To produce confidence intervals and prediction intervals for the prediction of y for a given value of x:
+    > predict(regressionObj,data.frame(x = c(5,10,15)), interval ="confidence")
+    > predict(regressionObj,data.frame(x = c(5,10,15)), interval ="prediction")
+
+SAMPLE STATISTICS
+====================================
+
+> mean(--)
+> var(--)
+> sd(--)  # standard deviation
+> median(--)
+> quantile(--)
+
+SAMPLING
+====================================
+
+--  To obtain 10 samples of 5 observations each from a normal distribution with means 1, 2, ...., 10:
+    > map(1:10, rnorm, n=5)
+--  To sample uniformly from a vector:
+    > sample(23,5)  # sample five values among the integers 1 - 23.
+    > sample(1:5, 5, replace = F)
+    > sample(c("H","T"), 10, replace=T, prob=c(0.9, 0.1))   # Coin tossing with an unfair coin.
