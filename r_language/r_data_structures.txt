@@ -31,6 +31,8 @@ DATA FRAMES
                  File=character(),
                  User=character(),
                  stringsAsFactors=FALSE)
+--  To create a data frame from a matrix:
+    > data.frame(matrixName)
 
 --  To create a dataFrame from a selection of values of an old one:
     # Selecciona, para las filas que cumplen los criterios, todas las columnas.
@@ -173,6 +175,8 @@ MANIPULATE
 LIST
 ====================================
 
+--  To create an empty list:
+    >  emptyList <- vector("list", length = 0)
 --  To combine individual vectors into a listl:
     > mylist <- list(listElement1=vector1,listElement2=vector2)
 
@@ -193,6 +197,9 @@ MATRIX
     > x=matrix(c(1,2,3,4),2,2)   // a 2x2 matrix.
     1   3
     2   4
+--  To create a matrix from a list filling by rows with a specified number of columns:
+    > matrix(unlist(listName), ncol = numColumns, byrow = T)
+
 --  To reorder the elements of a matrix in a different number of columns and rows:
     > dim(matrixName) <- c(numRows, numColumns)
 --  To get the number of rows or columns:
@@ -287,6 +294,10 @@ OPERATIONS
     > all(v1, v2, v3)
 --  To calculate the product of a vector of numbers:
     > prod(40:36)
+--  To divide a vector in an unknown number of chunks of size S:
+    > split(vector, ceiling(seq_along(vector)/S))
+--  To divide a vector in N chunks of unknown size:
+    > split(vector, sort(vector%%N))
 
 
 

@@ -1,3 +1,11 @@
+ARITHMETIC
+====================================
+
+--  To get the decimal part of a number:
+    > decimals <- number%%1
+    > decimals <- number - floor(number)
+
+
 DATES
 ====================================
 
@@ -66,6 +74,9 @@ varFunctionIn <- function(x) {
 --  Generic functions acts differently depending on the type of the argument.
     To see the methods available to a function:
     > methods(func_name)
+
+--  To check that a (parent package) function has been loaded:
+    > exists( "functionName")
 
 ITERATIONS
 ----------
