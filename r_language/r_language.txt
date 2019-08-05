@@ -28,6 +28,11 @@ FACTORS
 --  To assign level names to a factor variable:
     > levels(factorName) <- c("name1","name2","name3","name4")
 
+--  To modify factor levels:
+    > fct_recode(partyid,"A" = "C","B" = "D"))
+--  To drop levels not used:
+    > droplevels(dfName$factorName)
+
 --  To discretise continuous variables:
     > cut(..)
 
@@ -78,8 +83,15 @@ varFunctionIn <- function(x) {
 --  To check that a (parent package) function has been loaded:
     > exists( "functionName")
 
+IF
+====================================
+
+--  To get help:
+    > ?`if`
+
+
 ITERATIONS
-----------
+====================================
 
 --  To create new vectors:
     output <- vector("double", ncol(df))  # 1. output
@@ -132,10 +144,6 @@ NA
     > colSums(is.na(dataSetName))
 --  To validate the existence of NA values in the data set.
     > all(colSums(is.na(dataSetName)) ==0)
-
-    More on calculating NA values in a column, in tabular form:
-    > pid$isNaJWMNP <- ifelse(is.na(pid$JWMNP),TRUE,FALSE)
-    > table(pid$isNaJWMNP,is.na(pid$JWMNP))
 
 --  To validate the full set of values of a column:
     > all(pid$WKHP > 0)

@@ -8,18 +8,6 @@ CONTINGENCY TABLES
     > prop.table(mytable, 2)    # column percentages
     Variantes: ftable, xtabs.
 
-SIMULATIONS
-====================================
-
---  To create 50 standard normal random observations with a mean of value1 and a standard deviation of value2:
-    > rnorm(50,mean=value1,sd=value2)
---  To reproduce the exact same set of random numbers:
-    > set.seed(numValue)
-    > rnorm(50,mean=value1,sd=value2)
---  To simulate the distribution of the mean of 20 random numbers from the exponential distribution by repeating the operation 10 times:
-    > replicate(10,mean(rexp(20)))
-    > sapply(1:10, function(x) mean(rexp(20)))
-
 PROBABILITIES
 ====================================
 
@@ -43,8 +31,7 @@ REGRESSION
     > contrasts(regr1_final$subcanal)
 --  To avoid an intercept in the model, drop it with -1:
     >  y ~ x1 - 1
---  To include an interaction term between var1 and var2: var1:var2  # var1:var2 = var1 X var2
---  To incluce var1, var2 and var1:var2:
+--  To include an interaction term between var1 and var2
     > lm(response∼var1*var2,data=dataFrameName)
 --  To add a square term:
     > lm(response∼var1+I(var1^2)
@@ -52,8 +39,7 @@ REGRESSION
     > lm(response∼poly(var1 ,5)
 
 --  To add 'model' residuals to a data frame:
-    %>%
-    modelr::add_residuals(mod) %>%
+    > modelr::add_residuals(mod) %>%
 --  To compute the residuals or the studentized residuals from a linear regression fit:
     > residuals(regress_obj)
     > rstudent(regress_obj)
@@ -73,6 +59,8 @@ SAMPLE STATISTICS
 > sd(--)  # standard deviation
 > median(--)
 > quantile(--)
+> cor(dfName)  # correlation among columns of a data frame.
+> cor(dfName[,-5]) # exclude column 5 (non-numeric values).
 
 SAMPLING
 ====================================
@@ -83,3 +71,15 @@ SAMPLING
     > sample(23,5)  # sample five values among the integers 1 - 23.
     > sample(1:5, 5, replace = F)
     > sample(c("H","T"), 10, replace=T, prob=c(0.9, 0.1))   # Coin tossing with an unfair coin.
+
+SIMULATIONS
+====================================
+
+--  To create 50 standard normal random observations with a mean of value1 and a standard deviation of value2:
+    > rnorm(50,mean=value1,sd=value2)
+--  To reproduce the exact same set of random numbers:
+    > set.seed(numValue)
+    > rnorm(50,mean=value1,sd=value2)
+--  To simulate the distribution of the mean of 20 random numbers from the exponential distribution by repeating the operation 10 times:
+    > replicate(10,mean(rexp(20)))
+    > sapply(1:10, function(x) mean(rexp(20)))

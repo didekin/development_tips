@@ -97,11 +97,6 @@ R-MARKDOWN
 --  To produce a complete report containing all text, code, and results:
     > Cmd + Shift + K
 
-website
--------
-
---  To render all of the pages in the website:
-    > rmarkdown::render_site()
 
 
 

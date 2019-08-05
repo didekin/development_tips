@@ -44,15 +44,19 @@ DATA FRAMES
 --  To combine data frames:
     > bind_rows(...), bind_cols(...), combine(...)
 
---  To add a primery key to a dataframe:
-    mutate(
-        pk = row_number()
-    )
+--  To attach the variables names in a dataframe to the search path:
+    > attach(dataframeName)
+--  To remove a data frame from the search path:
+    > detach(df_name)
+--  To specify that a data frame should be searched (similar to attach):
+    >  with(df_name, plot(var1, var2))
 
 --  To get a simple table with a label and frequency count of occurrences in a column:
     > count(df_name, columnName)
 --  To count the occurrences into equally spaced bins:
     > count(cut_width(variableName, 0.5))   # 0.5 is the space interval.
+--  To count distinct occurrences in a column:
+    > count(distinct(dfName, columnName))
 --  To produce a numerical summary of each variable in a particular data set.
     > summary(mtcars)
 
@@ -86,12 +90,14 @@ DATA FRAMES
 --  To filter rows of a dataframe basedo on the values of one column/variable:
     > df_name_bis <- subset(df_name,var1 < 7)
 
---  To attach the variables names in a dataframe to the search path:
-    > attach(dataframeName)
---  To remove a data frame from the search path:
-    > detach(df_name)
---  To specify that a data frame should be searched (similar to attach):
-    >  with(df_name, plot(var1, var2))
+-- To refer to non-standard column names, surround the name with backticks
+    > provincia_taller_vdor = `Provincia Soldto`
+
+
+--  To add a primery key to a dataframe:
+    mutate(
+        pk = row_number()
+    )
 
 --  To recode the value of a variable:
     > df_name$varName[df_name$varName == 99] <- NA
