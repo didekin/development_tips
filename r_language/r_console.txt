@@ -45,6 +45,12 @@ FILES - WORKSPACE
     > getwd()
 --  Para cambiar el directorio de trabajo.
     > setwd(mydir)
+--  To see all variables listed in the current environment:
+    > Sys.getenv()
+--  To access one particular variable:
+    > Sys.getenv("name_variable")
+--  To set a variable in the R environment:
+    Add to the file ~/.Renviron la línea: name_variable = "path"
 --  Files utilities:
     > dir()
     > list.files()

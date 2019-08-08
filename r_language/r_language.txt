@@ -197,6 +197,7 @@ STRINGS
     > writeLines(stringName)
 
 --  To combine two or more strings:
+    > paste(Sys.getenv("bridgestone_home"),"/src/r_code/libraries.R", sep = "")
     > str_c("x", "y", sep = ", ")
 --  To concatenate all the strings in a vector in a single string:
     > str_c(c("x", "y", "z"), collapse = ", ")
