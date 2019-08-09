@@ -8,6 +8,12 @@ CONTINGENCY TABLES
     > prop.table(mytable, 2)    # column percentages
     Variantes: ftable, xtabs.
 
+DATA PREPARATION
+================
+
+--  To standardize the data so that all variables are given a mean of zero and a standard deviation of one:
+    > scale(dataSetName)
+
 PROBABILITIES
 ====================================
 
