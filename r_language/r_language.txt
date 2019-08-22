@@ -33,6 +33,8 @@ FACTORS
 --  To drop levels not used:
     > droplevels(dfName$factorName)
 
+--  (For plots specially) To reorder the levels of a factor:
+    > fct_reorder, fct_reorder2, fct_relevel, fct_infreq, fct_rev
 --  To discretise continuous variables:
     > cut(..)
 
@@ -120,7 +122,7 @@ ITERATIONS
             ...
             if (logical_expr) break
       }
-
+--  To terminate a for loop early: "next" exits the current iteration; "break" exits the entire for loop.
 
 NA
 ====================================
@@ -166,6 +168,11 @@ NA
 --  To complete all the combinations of a set of categorical variables, with NA for non existent combination-values:
     complete(variableName1, variableName2)
 
+NaN
+====================================
+-- To transform NaN values to NA values:
+    > df <- data.frame(sapply(df, function(x) ifelse(is.nan(x), NA, x)))
+
 OBJECTS - VARIABLES
 ====================================
 
@@ -197,7 +204,6 @@ STRINGS
     > writeLines(stringName)
 
 --  To combine two or more strings:
-    > paste(Sys.getenv("bridgestone_home"),"/src/r_code/libraries.R", sep = "")
     > str_c("x", "y", sep = ", ")
 --  To concatenate all the strings in a vector in a single string:
     > str_c(c("x", "y", "z"), collapse = ", ")
