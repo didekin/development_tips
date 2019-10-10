@@ -16,6 +16,9 @@ DATES
     > months(dateConvert)
     > weekdays(dateConvert)
 
+--  To round dates: lubridate::floor_date, round_date, ceiling_date.
+--  To add or substract months to date objects: %m+%, %m-%
+
 --  To generate a sequence of date from an initial one summing months:
     > seq(init_date, by = "1 month", len = numMeses)
     > seq_months <- (init_date  %m+% months(0:numMeses))    # with lubridate
@@ -235,3 +238,4 @@ grep
 --  To replace part of a text string with some other text:
     > sub('pattern', replacement, input) # Changes only the 1st pattern match per string
     > gsub('pattern', replacement, input) # Changes every occurrence of a pattern match
+    > str_replace(as.character(concepto), "Outros", "Otros")

@@ -26,6 +26,15 @@ MYSQL
 DATA FRAMES
 ====================================
 
+--  To attach the variables names in a dataframe to the search path:
+    > attach(dataframeName)
+--  To remove a data frame from the search path:
+    > detach(df_name)
+--  To specify that a data frame should be searched (similar to attach):
+    >  with(df_name, plot(var1, var2))
+
+--  To create a data frame with the structure of another one:
+    > empty_df = old_df[FALSE,]
 --  To create an empty data frame just initialize it with empty vectors:
     > df <- data.frame(Date=as.Date(character()),
                  File=character(),
@@ -34,7 +43,9 @@ DATA FRAMES
 --  To create a data frame from a matrix:
     > data.frame(matrixName)
 
---  To create a dataFrame from a selection of values of an old one:
+--  To get a dataframe with a column of another:
+    new_df <- old_df[columnNumber]
+--  To create a dataFrame from a selection of rows of an old one:
     # Selecciona, para las filas que cumplen los criterios, todas las columnas.
     > newDataFrameName <- df_name[which(df_name$var1Name=="M" & df_name$var2Name > 30),]
 
@@ -43,13 +54,16 @@ DATA FRAMES
 
 --  To combine data frames:
     > bind_rows(...), bind_cols(...), combine(...)
+--  To make the cartesian product of two data frames:
+    > merge(., pg1_df, all.x = TRUE)
 
---  To attach the variables names in a dataframe to the search path:
-    > attach(dataframeName)
---  To remove a data frame from the search path:
-    > detach(df_name)
---  To specify that a data frame should be searched (similar to attach):
-    >  with(df_name, plot(var1, var2))
+--  To delete columns from a data frame:
+    > df[2] <- NULL
+    > df[[2]] <- NULL
+    > df <- df[,-2]
+    > df <- df[-2]
+    > df[1:2] <- list(NULL)
+    > df[1:2] <- NULL
 
 --  To get a simple table with a label and frequency count of occurrences in a column:
     > count(df_name, columnName)
@@ -65,8 +79,7 @@ DATA FRAMES
     > pull(dataFrame, var = ?)      # var may be a literal name, a positive or a negative integer.
     Inside a pipe, dataframe uses a placeholder '.':
     > .[["variableName"]] or .[[position]]
---  To get a dataframe with a column of another:
-    new_df <- old_df[columnNumber]
+
 
 --  To get values of one column conditional on values on another:
     > mydataFrame <- data.frame(name = c(LETTERS[1:5]), values = c(6,7,8,9,2))
@@ -86,13 +99,18 @@ DATA FRAMES
     > head(mydataFrame)
 --  To get last rows:
     > tail(mydataFrame)
+--  To get the index of the last column:
+    > df[,ncol(df)]  // ncol(data)
 
 --  To filter rows of a dataframe basedo on the values of one column/variable:
     > df_name_bis <- subset(df_name,var1 < 7)
 
+--  To identify rows with EQUAL VALUES:
+    > idx <- duplicated(df) | duplicated(df, fromLast = TRUE)
+      df[idx, ]
+
 -- To refer to non-standard column names, surround the name with backticks
     > provincia_taller_vdor = `Provincia Soldto`
-
 
 --  To add a primery key to a dataframe:
     mutate(
@@ -119,6 +137,27 @@ DATA FRAMES
                                      newVarNameoldVarName < 55] <- "Young"
                                      }
                                  )
+
+--  To sum the values of a columns with a name condition:
+    > rowSums(.[, str_detect(names(.), "pg1_.")])
+
+--  To apply different summarizing functions to the variables in df:
+    > promo_taller2_df <- list(
+            # Lista1: variables para resumir.
+            lst(
+              grep("^pg1_",names(taller2_df),ignore.case = FALSE,perl = FALSE,value = TRUE),
+              c("quarter_promo", "duracionDia", "tipo_incentivo")
+            ),
+            # Lista2: funciones para utilizar en el resumen. 'max' para el primer elemento de la Lista1, y 'first', para el segundo.
+            lst(max, first)
+      )%>%
+      pmap(
+        # Selecciono variables de campaña, no de taller.
+        ~ taller2_df[, c(4:24)] %>%
+          group_by(init_mes_envio, mercado) %>%
+          # Pasamos Lista1 de variables como .x y Lista2 de funciones como .y.
+          summarise_at(.x, .y)) %>%
+          reduce(inner_join, by = c("init_mes_envio", "mercado"))
 
 FILES
 ====================================
@@ -276,6 +315,9 @@ VECTOR
     # rep(c("a","b"), c(2,5))  is "a" "a" "b" "b" "b" "b" "b"
     > rep(x, each = 5) or rep(x, c(5,5)
 
+--  To concatenate all the values of a vector, separated by comma:
+    > paste(vector, collapse = ",")
+
 --  To glue vectors together, columnwise or rowwise:
     > cbind(v1Name,v2Name,v3Name)  or rbind(..
 --  To add values to a vector at a certain position:
@@ -304,6 +346,9 @@ OPERATIONS
     > split(vector, ceiling(seq_along(vector)/S))
 --  To divide a vector in N chunks of unknown size:
     > split(vector, sort(vector%%N))
+
+--  To sort the values of a vector:
+    > sort(x, decreasing = FALSE, ...)
 
 
 
