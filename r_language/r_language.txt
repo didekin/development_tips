@@ -212,6 +212,7 @@ STRINGS
     > str_c(c("x", "y", "z"), collapse = ", ")
 --  To extrat a substring:
     > str_sub(vectorStrings, init, end)  # str_sub(c("Apple", "Banana", "Pear"), 1, 3) or str_sub("Pear", 1, 3)
+    > str_extract(pg1, "[^0-9\\.\\s+]+") # to extract all but numbers, spaces and . character.
 --  To transform strings or string vectors:
     > str_to_upper(c("i", "q"), locale = "es")
     > str_to_lower(c("i", "q"), locale = "es")

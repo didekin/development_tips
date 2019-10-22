@@ -157,6 +157,7 @@ DATA FRAMES
           group_by(init_mes_envio, mercado) %>%
           # Pasamos Lista1 de variables como .x y Lista2 de funciones como .y.
           summarise_at(.x, .y)) %>%
+          # Devuelve una lista de dataframes que fundo con la operación inner_join.
           reduce(inner_join, by = c("init_mes_envio", "mercado"))
 
 FILES

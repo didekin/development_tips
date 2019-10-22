@@ -1,0 +1,51 @@
+--  To check the state of iptables:
+    > sudo iptables -L -v -n --line-numbers
+    > sudo iptables -L | grep policy
+    > sudo cat /etc/sysconfig/iptables-config
+
+--  To accept connections by default:
+    > iptables --policy INPUT ACCEPT
+    > iptables --policy OUTPUT ACCEPT
+    > iptables --policy FORWARD ACCEPT
+
+--  To deny all connections by default:
+    > iptables --policy INPUT DROP
+    > iptables --policy OUTPUT DROP
+    > iptables --policy FORWARD DROP
+
+--  To insert a rule above another:
+    > iptables -I [chain] [number]
+    > iptables -I INPUT 5    // insert the rule into the INPUT chain and make it the 5th rule in the list.
+
+--  To save changes
+    > sudo /sbin/iptables-save
+
+--  To clear all the currently configured rules:
+    > iptables -F
+
+UFW
+===
+
+--  To start UFW service and enable it to start on boot time:
+    > ufw enable
+--  To check the status of UFW:
+    > ufw status verbose
+--  To disable UFW firewal:
+    > ufw disable
+
+--  To view UFW’s defaults:
+    > grep 'DEFAULT_' /etc/default/ufw
+
+Initial configuration in amazon:
+Status: activeLogging: on (low)Default: deny (incoming), allow (outgoing), disabled (routed)
+New profiles: skip
+To                         Action      From
+--                         ------      ----
+22/tcp (SSH)               ALLOW IN    Anywhere
+224.0.0.251 5353/udp (mDNS) ALLOW IN    Anywhere
+22/tcp (SSH (v6))          ALLOW IN    Anywhere (v6)
+ff02::fb 5353/udp (mDNS)   ALLOW IN    Anywhere (v6)
+
+
+sudo ufw allow 22/tcp
+sudo ufw allow proto tcp from any to any port 80

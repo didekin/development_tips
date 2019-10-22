@@ -154,7 +154,7 @@ FILES
 -- To set visibility for hidden files in Mac:
    $ defaults write com.apple.finder AppleShowAllFiles TRUE
    ($ killall Finder)  // to close Finder.
--- To see hidden files in Open/Save dialog in Mac:
+-- To see hidden files in Open/Save dialog in Mac and applications like Intellij:
    - Press ⌘CMD + ⇧SHIFT + .
 
 -- '.' is synonimous with the working directory and '..' with the parent directory.
@@ -269,11 +269,17 @@ FUNCTIONS AND SCRIPTS
 NETWORK UTILITIES
 =================
 
+--  Testing a URL:
+    > curl http://localhost:8080/hello
+
 -- HTTP Authentication
     $ curl  "https://$username:$password@myhost/resource"
 
 --  To access an endpoint with information about certificate configuration:
     $ curl -vI https://didekin-web-pre.eu-west-1.elasticbeanstalk.com:443
+
+-- To see listening ports and processes:
+   $ sudo lsof -i -n -P | grep TCP
 
 -- To see the local IP address in a WI-FI network:
     $ ifconfig -a
@@ -310,15 +316,6 @@ REGULAR EXPRESSIONS
       $ ls *[^a-d] matches any filen name not ending in a, b, c, d.
 -- '!' is similar to '^'.
 
-STORE PROCEDURES
-================
-
---  To see the definition of all store procedures:
-    > mysql SHOW PROCEDURE STATUS;
---  To see the definition of a particular procedure:
-    > mysql show create procedure myProcedure;
---  To see the definition of all functions:
-    > mysql SHOW FUNCTION STATUS;
 
 SYSTEM UTILITIES
 ================

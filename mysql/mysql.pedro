@@ -153,6 +153,16 @@ mysql> SELECT COUNT(distinct titular_id) from tx_schindler where tx_fecha <= '20
             FROM pet AS p1 INNER JOIN pet AS p2
      	    ON p1.species = p2.species AND p1.sex = 'f' AND p2.sex = 'm';
 
+STORED PROCEDURES
+================
+
+--  To see the definition of all store procedures:
+    > mysql SHOW PROCEDURE STATUS;
+--  To see the definition of a particular procedure:
+    > mysql show create procedure myProcedure;
+--  To see the definition of all functions:
+    > mysql SHOW FUNCTION STATUS;
+
 UPDATES
 =======
 
