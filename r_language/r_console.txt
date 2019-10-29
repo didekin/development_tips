@@ -20,21 +20,33 @@ EDITION
 
 Shorcuts
 --------
---  RStudio’s completion facility: press TAB
+
 --  To see shorcuts:
     > Alt + Shift + K
+
+--  RStudio’s completion facility: press TAB
+--  To get auto-completion suggestions for file paths:
+    >  (write "" and Ctrl+Space)
+
+
 --  To write <- :
     > Alt + -
 --  Shortcut for pipe symbol:
     > CMD + SHIFT + M
+--  To create a comment header:
+    > Cmd+Shift+R
+
 --  Shortcut to run an entire script file
     > Ctrl + shif + R
 --  Shortcut new script file:
     > Ctrl + Enter
---  To create a comment header:
-    > Cmd+Shift+R
 --  To run a piece of code:
     > Cmd + Enter
+--  To run a line of code without moving the cursor to the next line:
+    > Alt+Enter
+
+--  To fix lines indentation:
+    > Ctrl+i
 
 FILES - WORKSPACE
 =================
@@ -66,7 +78,7 @@ FILES - WORKSPACE
 --  To remove one variable from the workspace:
     > rm(variableName)
 --  Para borrar todas las variables del workspace:
-    > rm(list = ls())
+    > ˇ
 
 --  To view the search path:
     > search()

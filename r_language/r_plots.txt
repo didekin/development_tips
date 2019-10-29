@@ -33,3 +33,15 @@ GGPLOT2
 --  To rotate axis, when having long labels in x axis:
     geom_boxplot(mapping = aes(x = reorder(class, hwy, FUN = median), y = hwy)) +
     coord_flip()
+
+--  EJEMPLOS
+
+    BAR PLOT
+
+    ggplot() +
+      geom_bar(  mapping = aes(x = num_usuarios, y =  porcentaje_paginas), stat = "identity", fill = "brown4") +
+      geom_vline(xintercept = stats_all_paginas[["mediana_usuarios"]], colour = "brown2")+
+      ylab("Porcentaje de páginas") +
+      xlab("Número de usuarios únicos que han consultado la página en el mes") +
+      scale_x_continuous(breaks = seq(0, 5000, by = 2)) +
+      scale_y_continuous(breaks = seq(0, 100, by = 2))

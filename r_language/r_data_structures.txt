@@ -37,17 +37,31 @@ DATA FRAMES
     > empty_df = old_df[FALSE,]
 --  To create an empty data frame just initialize it with empty vectors:
     > df <- data.frame(Date=as.Date(character()),
-                 File=character(),
-                 User=character(),
-                 stringsAsFactors=FALSE)
+                       File=character(),
+                       User=character(),
+                       stringsAsFactors = FALSE)
 --  To create a data frame from a matrix:
     > data.frame(matrixName)
 
---  To get a dataframe with a column of another:
+--  To create a dataframe with a column of another:
     new_df <- old_df[columnNumber]
 --  To create a dataFrame from a selection of rows of an old one:
-    # Selecciona, para las filas que cumplen los criterios, todas las columnas.
     > newDataFrameName <- df_name[which(df_name$var1Name=="M" & df_name$var2Name > 30),]
+
+--  To add values to an empty data frame:
+    > data_out[1,1] <- first(participTaller$cif)
+--  To add a primery key to a dataframe:
+    mutate(
+        pk = row_number()
+    )
+
+--  To delete columns from a data frame:
+    > df[2] <- NULL
+    > df[[2]] <- NULL
+    > df <- df[,-2]
+    > df <- df[-2]
+    > df[1:2] <- NULL
+    > df –> df[setdiff(names(df), "z")]     // delete column 'z'
 
 --  To coerce a tibble to a data frame:
     as.data.frame(tibbleName)
@@ -56,14 +70,6 @@ DATA FRAMES
     > bind_rows(...), bind_cols(...), combine(...)
 --  To make the cartesian product of two data frames:
     > merge(., pg1_df, all.x = TRUE)
-
---  To delete columns from a data frame:
-    > df[2] <- NULL
-    > df[[2]] <- NULL
-    > df <- df[,-2]
-    > df <- df[-2]
-    > df[1:2] <- list(NULL)
-    > df[1:2] <- NULL
 
 --  To get a simple table with a label and frequency count of occurrences in a column:
     > count(df_name, columnName)
@@ -111,11 +117,6 @@ DATA FRAMES
 
 -- To refer to non-standard column names, surround the name with backticks
     > provincia_taller_vdor = `Provincia Soldto`
-
---  To add a primery key to a dataframe:
-    mutate(
-        pk = row_number()
-    )
 
 --  To recode the value of a variable:
     > df_name$varName[df_name$varName == 99] <- NA
@@ -234,6 +235,15 @@ LIST
     > purrr::flatten(x)
     > unlist(x)
 
+--  To remove a component from a list:
+    > myList[[i]] <- NULL
+--  To add a literal NULL:
+    > myList[i] <- list(NULL)
+
+--  Subsetting with nothing, in assignments, preserves the structure of the original object:
+    > mtcars[] <- lapply(mtcars, as.integer)   // is a data frame.
+    > mtcars <- lapply(mtcars, as.integer)   // is a list.
+
 MATRIX
 ====================================
 
@@ -315,6 +325,7 @@ VECTOR
     > rep(x, c(3,5))  # the number of components in x must be the number of components in the second vector.
     # rep(c("a","b"), c(2,5))  is "a" "a" "b" "b" "b" "b" "b"
     > rep(x, each = 5) or rep(x, c(5,5)
+    > rep_len(x, length.out)
 
 --  To concatenate all the values of a vector, separated by comma:
     > paste(vector, collapse = ",")

@@ -179,6 +179,13 @@ NaN
 OBJECTS - VARIABLES
 ====================================
 
+--  To see the complete list of R reserved words:
+    > ?Reserved
+--  To override syntactic rules for names (when importing files, p.e.) and use any name, surroung the name with backticks:
+    > `_abc` <- 1
+--  To get the object associated to a variable name:
+    > get("varName")
+
 --  To see the description of an object.
     > str(object)
 --  To know the storage mode of any object:
@@ -186,13 +193,28 @@ OBJECTS - VARIABLES
 --  Similar in an object oriented context:
     class(objectName)
 --  To get the memory footprint of several objects:
-    pryr::object_size(objName1, objName2, ...)
+    lobstr::obj_size(objName)
 --  To see the attributes of an object:
     > attributes(objectName)
 --  To 'unclass' an object:
     > unclass(objectName)
 --  To check if two objects are exactly equal:
     > identical(obj1, obj2)
+
+SERIALIZATION
+====================================
+
+--  saveRDS(), readRDS()
+
+    > saveRDS(lin.model, "lin.model.rds")
+    > predict(readRDS("lin.model.rds"), newdata)
+
+    The ascii=TRUE makes a text hex representation of the object that can be stored in places where binary blobs can't:
+    > saveRDS(lin.model, file="lin.model.txt", ascii=TRUE)
+    > predict(readRDS("lin.model.txt"), newdata)
+
+--  save(), load()
+
 
 STRINGS
 ====================================
