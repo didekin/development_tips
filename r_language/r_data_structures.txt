@@ -327,6 +327,15 @@ VECTOR
     > rep(x, each = 5) or rep(x, c(5,5)
     > rep_len(x, length.out)
 
+--  To convert a Boolean representation to an integer representation:
+    > which(logicVectorName)  // returns a vector with the positionns of TRUE.
+--  To unwhich an integer vector into a (longer) logical vector:
+    unwhich –> function(whichedVector, lengthOriginalLogicalVector){
+      out <- rep_len(whichedVector, lengthOriginalLogicalVector)
+      out[whichedVector] <- TRUE
+      out
+    }
+
 --  To concatenate all the values of a vector, separated by comma:
     > paste(vector, collapse = ",")
 

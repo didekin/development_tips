@@ -148,6 +148,10 @@ EXECUTION AND PROCESSES
 -- To see listening ports and processes:
    $ sudo lsof -i -n -P | grep TCP
 
+--  To see messages from linux kernel to help identify a killed process:
+    > dmesg -T| grep -E -i -B100 'killed process'
+    > dmesg | grep -E -i -B100 'killed process'   // in Mac.
+
 FILES
 =====
 
@@ -216,8 +220,8 @@ LIFE CYCLE
 LINKS
 
 --  To create a symbolic link (use absolute path names)
-    $ ln -s  /path/subpath1/fileToLinked   /path/subpath2/linkToFile
-    $ ln -s  /path/subpath1/fileToLinked   /path/subpath2/
+    $ ln -s  /path/subpath1/fileToBeLinked   /path/subpath2/linkToFile
+    $ ln -s  /path/subpath1/fileToBeLinked   /path/subpath2/
 
 LOOK INTO files
 

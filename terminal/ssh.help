@@ -51,18 +51,17 @@ EXECUTION
     $ ssh -N -L3306:127.0.0.1:3306 remotehost
 
 --  To keep processes running after ending ssh session:
-
-    OPCIÓN 1:
     > nohup java -cp taller_bosch/jars/bosch_aws-1.0-SNAPSHOT.jar com.lebendata.taller.bosch.TallerBoschApp &
     > exit (sesión SSH)
     To check what's going on when you're back:
     > (nuevo login ssh)
     > tail -f nohup.out
+    > cat -f nohup.out
     To kill the process:
     > sudo lsof -i -n -P | grep TCP
     > kill (process ID)
 
-    OPCIÓN 2:
+    Otra posibilidad:
     > ssh -i .ssh/lightsail/Lightsasin ssilDefaultKey-eu-west-3.pem  ec2-user@35.181.121.37
     > screen
     > java -cp taller_bosch/jars/bosch_aws-1.0-SNAPSHOT.jar com.lebendata.taller.bosch.TallerBoschApp

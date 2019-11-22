@@ -26,6 +26,8 @@ DATES
 FACTORS
 ====================================
 
+--  To define a factor:
+    > factorVar <- factor(vectorValues, levels = vectorFactor_levels)
 --  To convert quantitative variables into qualitative variables:
     > newFactoVar = as.factor(oldVarNumeric)
 --  To assign level names to a factor variable:

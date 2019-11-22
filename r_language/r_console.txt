@@ -1,3 +1,14 @@
+--  To check the integrity of a downloaded package:
+    > pkgutil --check-signature R-3.6.1.pkg
+
+--  To know the versions installed:
+    >  ls -l /Library/Frameworks/R.framework/Versions/
+--  To change the current version of R.Framework:
+    > (Update the R.framework/Versions/Current directory alias directly using ln -s)
+--  Useful locations:
+    > /Library/Frameworks/R.framework/Versions
+    > /usr/local/bin/R
+
 --  To leave R console.
     > quit()
     > q()
@@ -27,7 +38,6 @@ Shorcuts
 --  RStudio’s completion facility: press TAB
 --  To get auto-completion suggestions for file paths:
     >  (write "" and Ctrl+Space)
-
 
 --  To write <- :
     > Alt + -
@@ -78,7 +88,7 @@ FILES - WORKSPACE
 --  To remove one variable from the workspace:
     > rm(variableName)
 --  Para borrar todas las variables del workspace:
-    > ˇ
+    > rm(ls())
 
 --  To view the search path:
     > search()
