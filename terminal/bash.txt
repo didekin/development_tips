@@ -338,6 +338,9 @@ SYSTEM UTILITIES
 -- To see if Xcode has installed CLT and install them:
    $ xcode-select --install
 
+--  To eject DVD in Mac:
+    $ drutil eject
+
 
 
 
