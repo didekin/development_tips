@@ -147,7 +147,8 @@ EXECUTION AND PROCESSES
 
 -- To see listening ports and processes:
    $ sudo lsof -i -n -P | grep TCP
-
+--  To see the memory used:
+    $ free    // or free -mt  (en megas)
 --  To see messages from linux kernel to help identify a killed process:
     > dmesg -T| grep -E -i -B100 'killed process'
     > dmesg | grep -E -i -B100 'killed process'   // in Mac.
