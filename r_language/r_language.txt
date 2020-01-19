@@ -1,9 +1,14 @@
 ARITHMETIC
 ====================================
 
+--  Modulo:
+    > a%%b
 --  To get the decimal part of a number:
     > decimals <- number%%1
     > decimals <- number - floor(number)
+--  To round up: ceiling (‘the smallest integer greater than’)
+    > ceiling(decimalNumber)
+
 
 
 DATES
@@ -42,6 +47,9 @@ FACTORS
     > fct_reorder, fct_reorder2, fct_relevel, fct_infreq, fct_rev
 --  To discretise continuous variables:
     > cut(..)
+
+--  To check factor levels (number of rows in each of the levels):
+    > table(df$factorName)
 
 FUNCTIONS
 ====================================

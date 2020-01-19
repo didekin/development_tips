@@ -8,17 +8,43 @@ CONTINGENCY TABLES
     > prop.table(mytable, 2)    # column percentages
     Variantes: ftable, xtabs.
 
-DATA PREPARATION
-================
+DATA PREPARATION and EXPLORATION
+====================================
 
 --  To standardize the data so that all variables are given a mean of zero and a standard deviation of one:
     > scale(dataSetName)
+
+Data frames
+-----------
+
+--  To know the different values in a variable
+    > length(table(varName))
+
+--  To summarize by some of the explanatory variables:
+    > with(dfName,tapply(varToSummarize,list(varName1,varName2),mean))  // summarize (mean, p.e.) one variable for each of
+                                                                           the groups defined for the values of another two.
+    Similar, but not the same:
+    > aggregate(dfName[,c(2,3,5,7)], list(aliasVar1=varName1,alisVar2=varName2),mean)  // mean for the variables 2,3,5,7, for
+                                                                                          each of the groups defined by var1 and var2.
+
+--  To cross-tabulate a continuous variable in the categories defined by two factor variables:
+    > with(df, tapply(contVar,list(factor1,factor2),mean))
 
 PROBABILITIES
 ====================================
 
 --  To calculate a binomial coefficient:
     > choose(40,5)
+--  Normal distribution:
+    > dnorm(...)     // density.
+    > pnorm(...)     // accumulative. 'pnorm' gives the probability of getting a value less than the value specified.
+    > qnorm(...)     // 'quantiles of the normal distribution'
+    If we want to provide values of the normal deviate and work out probabilities, we use pnorm; if we want to provide probabilities
+    and work out values of the normal deviate, we use qnorm.
+
+Plots
+-----
+
 --  To draw a normal curve with equally distributed values in [-4,4]:
     > curve(dnorm(x), from=-4, to=4)
 --  To draw a binomial distribution in a histogram:
@@ -64,9 +90,24 @@ SAMPLE STATISTICS
 > var(--)
 > sd(--)  # standard deviation
 > median(--)
+  Or manually: > sorted[ceiling(length(df$varX)/2)]
 > quantile(--)
 > cor(dfName)  # correlation among columns of a data frame.
 > cor(dfName[,-5]) # exclude column 5 (non-numeric values).
+
+Tests
+-----
+
+Notes:
+++  When the variances are different, don't compare the means.
+
+--  t Student test for a two-tails 0.05 confidence interval:
+    > qt(.025, numDegOfFreedom)  // left hand tail.
+    > qt(.975, numDegOfFreedom)    // rigth hand.
+    Confidence interval: "estimate +- (tEstimate * sd)"", wher sd is standard deviation and tEstimante is the number of sd obtained from 'qt'.
+    > qt(.975, numDegOfFreedom) * sd(varName)
+--  F test for equality of variances:
+    > var.test(variance1,variance2)
 
 SAMPLING
 ====================================
@@ -89,3 +130,12 @@ SIMULATIONS
 --  To simulate the distribution of the mean of 20 random numbers from the exponential distribution by repeating the operation 10 times:
     > replicate(10,mean(rexp(20)))
     > sapply(1:10, function(x) mean(rexp(20)))
+
+--  To simulate 16 samples and their variances from a normal distribution and to plot them:
+    > plot(c(0,32),c(0,15),type="n",xlab="Sample size",ylab="Variance")  // to draw the axis and the labels.
+    > for (n in seq(3,31,2)) {
+          for( i in 1:30){
+            x <- rnorm(n,mean=10,sd=2)
+            points(n,var(x))
+          }
+      }

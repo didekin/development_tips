@@ -63,13 +63,14 @@ DATA FRAMES
     > df[1:2] <- NULL
     > df –> df[setdiff(names(df), "z")]     // delete column 'z'
 
---  To coerce a tibble to a data frame:
-    as.data.frame(tibbleName)
-
 --  To combine data frames:
     > bind_rows(...), bind_cols(...), combine(...)
 --  To make the cartesian product of two data frames:
     > merge(., pg1_df, all.x = TRUE)
+--  To sort rows in ascending order by the values of a certain variable:
+    > df[order(varName),]
+    In reversing order, by column 5, all the rows by just the values of columns 5 and 7.
+    > df[rev(order(df[,5])),c(5,7)]
 
 --  To get a simple table with a label and frequency count of occurrences in a column:
     > count(df_name, columnName)
@@ -80,19 +81,25 @@ DATA FRAMES
 --  To produce a numerical summary of each variable in a particular data set.
     > summary(mtcars)
 
+--  To get first rows:
+    > head(mydataFrame)
+--  To get last rows:
+    > tail(mydataFrame)
 --  To pull out a single variable (column)
     > dataframName[["variableName"]] or dataframName[[position]]
-    > pull(dataFrame, var = ?)      # var may be a literal name, a positive or a negative integer.
     Inside a pipe, dataframe uses a placeholder '.':
     > .[["variableName"]] or .[[position]]
-
+--  To pullo out a set of columns:
+    > df[, c(numCol1, numCol2, numCol3)]
 
 --  To get values of one column conditional on values on another:
     > mydataFrame <- data.frame(name = c(LETTERS[1:5]), values = c(6,7,8,9,2))
-    > name[values > 7]  # gives: C D
-    > mydataFrame[values > 7,]  # gives:   name values
+    > name[values > 7]  # gives: C D ; it is a vector: we select only values from column 'name'.
+    > mydataFrame[values > 7,]  # gives:   name values     ; it is a data frame: we select all columns of the filtered rows.
                                              C      8
                                              D      9
+
+    > df_name_bis <- subset(df_name,var1 < 7)
 
 --  To get a list of vectors grouping values in var2 by corresponding values in var1:
     > split(my_df$var2,my_df$var1)  # my_df <- data.frame(name = c("A","B","B","A","A"), value = c(3,2,1,4,5))
@@ -101,18 +108,13 @@ DATA FRAMES
                                                                 $B
                                                                 [1] 2 1
 
---  To get first rows:
-    > head(mydataFrame)
---  To get last rows:
-    > tail(mydataFrame)
 --  To get the index of the last column:
     > df[,ncol(df)]  // ncol(data)
-
---  To filter rows of a dataframe basedo on the values of one column/variable:
-    > df_name_bis <- subset(df_name,var1 < 7)
+--  To get the indexes of the rows with a certain condition for some of the columns:
+    > with(df, which(var1 > 3 & var2 == "Arable"))  // returns a vector of row indexes.
 
 --  To identify rows with EQUAL VALUES:
-    > idx <- duplicated(df) | duplicated(df, fromLast = TRUE)
+    > idx <- duplicated(df) or idx <- duplicated(df, fromLast = TRUE)
       df[idx, ]
 
 -- To refer to non-standard column names, surround the name with backticks
@@ -361,6 +363,8 @@ OPERATIONS
 
 --  To check if all the values of one o more logical vectors are TRUE:
     > all(v1, v2, v3)
+--  To calculate the sum of the elements:
+    > sum(vectorName)
 --  To calculate the product of a vector of numbers:
     > prod(40:36)
 --  To divide a vector in an unknown number of chunks of size S:
