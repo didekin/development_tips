@@ -194,6 +194,8 @@ LOAD
         avg_redencion = col_integer()
         )
       )
+--  To see columns defined by read_csv:
+    > spec(dfName)
 
 --  To check the variable names of the loaded file:
     > names(fileName)

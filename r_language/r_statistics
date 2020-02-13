@@ -47,8 +47,19 @@ Plots
 
 --  To draw a normal curve with equally distributed values in [-4,4]:
     > curve(dnorm(x), from=-4, to=4)
+--  To plot a range of values of a normal distribution:
+    > ht <- seq(lowRange,hightRange,0.01)
+    > plot(ht,dnorm(ht,mean,sd),type="l",col="brown", ylab="Probability density",xlab="Height")
 --  To draw a binomial distribution in a histogram:
     > plot(x <- 0:50,dbinom(x,size=100,prob=.33),type="h")
+
+Tests
+-----
+
+--  To test normality:
+    > qqnorm(valuesToTest)  // If the sample is normally distributed then the line will be straight.
+    > qqline(valuesToTest)  // To check against the straight line.
+
 
 REGRESSION
 ====================================
@@ -100,6 +111,12 @@ Tests
 
 Notes:
 ++  When the variances are different, don't compare the means.
+++  An outlier is a value more than 1.5 times the interquartile range above the third quartile, or below the first quartile.
+
+--  Test for a single sample mean with bootstrap:
+    >  meansVector <- numeric(10000)
+    >  for(i in 1:10000)  mean[i] <- mean(sample(speed,replace=T))
+    >  hist(meansVector)  or max(meansVector)
 
 --  t Student test for a two-tails 0.05 confidence interval:
     > qt(.025, numDegOfFreedom)  // left hand tail.

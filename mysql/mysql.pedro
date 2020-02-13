@@ -1,14 +1,9 @@
--- To have launchd start mysql at login:
-   $ ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
-   Then to load mysql now:
-   $ launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+COMMANDS
+========
 
 -- To start/stop manually mysql server:
    $ mysql.server start
    $ mysql.server stop
-
-COMMANDS
-========
 
 --  To execute a .sql file from the console
     $ mysql -h hostname -uuser -ppassword database < path/to/test.sql
@@ -19,9 +14,9 @@ COMMANDS
 CONFIGURATION
 =============
 
---  Location of my.cnf file with a Homebrew installation: /usr/local/etc/my.cnf
+--  Location of my.cnf file with a Homebrew installation: /usr/local/etc/my.cnf (Not used now)
 
---  Databases data directory: /usr/local/var/mysql/databaseName
+--  Location of mysql installation with a native Mac installer: /usr/local/mysql
 
 --  To display system variable names and values:
     $ mysqld --verbose --help
@@ -57,6 +52,8 @@ CONFIGURATION
 DATABASE
 ========
 
+--  To see databases created:
+    > show databases;
 --  To create a database:
     mysql> create database databasename
 --  To delete a database
@@ -72,7 +69,7 @@ DATABASE
     mysql> show tables;
 
 --  To see the disk storage used by a database:
-    $ sudo du -sh /usr/local/var/mysql/databaseName
+    $ sudo du -sh /usr/local/mysql/databaseName
 
 FILES
 =====
@@ -178,6 +175,8 @@ USERS
 --  To create a user with a host:
     mysql> create user 'userName'@'host' identified by 'password';
     mysql> grant all on dataBase.* to 'userName'@'localhost';
+    En instalaciones con versión 8.*, para evitar problemas con caching_sha2_password Authentication Plugin:
+    > create user 'pedro'@'localhost' identified WITH mysql_native_password by 'password';
 --  To create a user without specifying a host:
     mysql> create user 'userName'@'%' identified by 'password';
     mysql> grant all on dataBase.* to 'userName'@'%';

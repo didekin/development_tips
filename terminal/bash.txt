@@ -294,18 +294,6 @@ NETWORK UTILITIES
     $ dig -x 208.201.239.36 +short  // reverse dns lookup
     $ dig dig www.didekin.es +short
 
-PERMISSIONS
-===========
-
--- To change password (it dosen't change it in keychain):
-   $ passwd
--- To spawn a new shell with root privileges:
-   $ sudo -s
--- To close the shell with root privileges:
-   $ exit
--- To add execute permission to an user:
-   $ chmod u+x filename
-
 REGULAR EXPRESSIONS
 ===================
 
@@ -343,6 +331,25 @@ SYSTEM UTILITIES
     $ drutil eject
 
 
+USERS AND PERMISSIONS
+=====================
 
+--  To get a list of all users (Mac):
+    > dscl . -list /Users
+--  To get detailed user info on a particular user (Mac):
+    > dscl . -read /Users/<username>
+--  To see all groups with their name, ID numbers, and list of members:
+    > dscacheutil -q group
+--  To list sorted groups by name:
+    > dscl . list /Groups PrimaryGroupID
+
+-- To change password (it dosen't change it in keychain):
+   $ passwd
+-- To spawn a new shell with root privileges:
+   $ sudo -s
+-- To close the shell with root privileges:
+   $ exit
+-- To add execute permission to an user:
+   $ chmod u+x filename
 
 
