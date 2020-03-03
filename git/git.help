@@ -4,8 +4,11 @@ BASICS
 --  To initialize a repository from the source directory:
     $ git init
 
--- To add a new remote Git repository as a shortname:
-   $ git remote add [shortname] [url]
+--  To add a new remote Git repository as a shortname:
+    $ git remote add [shortname] [url]
+
+-   To rename an existing remote:
+    $ git remote rename 'oldname' 'newname'
 
 -- To see which remote servers you have configured:
    $ git remote -v
