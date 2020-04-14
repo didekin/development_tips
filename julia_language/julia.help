@@ -1,0 +1,58 @@
+OPERATORS
+=========
+
+--  To concatenate strings:
+    $ string1 * string2
+--  To concatenate the same string a number of times:
+    $ string1 ^ numberOftimes
+
+--  To comment:
+    $ # comment here.
+
+--  Scalar vector multiplication:
+    > scalar * vector
+--  Scalar vector division:
+    > vector / scalar
+    > scalar \ vector  // same result in both lines.
+
+DATA STRUCTURES
+===============
+
+VECTORS - ARRAYS
+
+--  To reference the last element from an array:
+    > x[end]
+    > x[length(x)]
+--  To create a new copy of an array:
+    > array2 = copy(array1)
+--  To concatenate vectors in a single array:
+    > z = [x;y]  // where x and y are vectors.
+    > z = vcat(x,y)
+--  To concatenate vectors with scalars:
+    > z = [1;x;2]
+--  To create an array whose elements are vectors (an array of vectors):
+    > z = [x,y]
+--  To create a tuple or a list of vectors:
+    > l = (x,y)
+
+--  To subset the values between two indexes:
+    > x[indexBegin:indexEnd]
+--  To subset 'jumping':
+    > x[indexBegin:jumpsize:indexEnd]  // where jumpsize is the increment between succesive indexes between the range.
+--  To extract a vector of an array or a tuple of vectors:
+    > l[indexVector]  // we obtain a vector.
+--  To extract a component of vector in an array or list of vectors:
+    > l[indexVector][indexComponent]
+
+--  To create a zero vector of dimension n:
+    > zeros(n)
+--  For a vector of ones:
+    > ones(n)
+--  To create a unit vector (Ei) with a function:
+    > unit_vector(i,n) = [zeros(i-1); 1 ; zeros(n-i)]
+    > unit_vector(a,b)  // create 1 in index a in a vector with length b.
+
+--  To generate a random vector of length n with entries that are between 0 and 1:
+    > rand(n)
+--  From a normal distribution:
+    > randn(n)

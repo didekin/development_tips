@@ -1,0 +1,4 @@
+--  To plot a time series with data obtained with a function:
+    > plot(temperature_data(), marker = :circle, legend = false, grid = false)
+--  To save the plot in a file:
+    > savefig("temp.pdf")
