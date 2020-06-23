@@ -1,0 +1,6 @@
+DIRECTIVES
+==========
+
+--  'v-bind' :  keeps an element’s attribute up-to-date with a certain property on the Vue instance.
+--  'v_if' bind the presence of an element in the structure of the DOM to a certain property.
+--  'v_for' for displaying a list of items using the data from an Array.

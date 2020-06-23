@@ -1,0 +1,13 @@
+--  To start Idea from the terminal with debug information:
+    --  Set the environment variable before starting the IDE:
+        $ export IDEA_LAUNCHER_DEBUG=true
+    --  $ cd /Applications
+        $ ./IntelliJ\ IDEA.app/Contents/MacOS/idea
+
+JAVA THREADS
+
+--  Utilities in JAVA_HOME\bin: jstack, jps.
+--  To get the process identifier (PID) of a java process:
+    $ jps -mv
+--  To a get a dump thread to a file:
+    $ jstack -l <PID> > dump.txt   (where <PID> is obtained with jps)
