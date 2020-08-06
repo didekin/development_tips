@@ -1,3 +1,9 @@
+PACKAGES
+========
+
+--  Default package server with juliacomputing installation:
+    https://pkg.juliacomputing.com
+
 --  To change to package manager:
     > ]
 --  To see options in the package manager:

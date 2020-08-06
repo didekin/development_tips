@@ -104,7 +104,6 @@ HELP
 --  To get a list of command names that contain a given pattern:
     > apropos("GLM")
 
-
 PACKAGES
 ========
 
