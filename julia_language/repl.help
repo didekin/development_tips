@@ -13,17 +13,13 @@ PACKAGES
 --  To come back to Julia shell:
     > Ctrl C
 
+--  To import packages into Julia:
+    > using LinearAlgebra, SparseArrays, VMLS
+
+SESSION
+=======
+
 --  To begin a interactive session:
     > ENTER
 --  To end a session:
     > Ctrl D  or exit()
---  To import packages into Julia:
-    > using LinearAlgebra, SparseArrays, VMLS
-
---  To evaluate an script:
-    > include("script_name.jl")
---  To run the scritp in a terminal:
-    $ julia script_name.jl
-
-
-
