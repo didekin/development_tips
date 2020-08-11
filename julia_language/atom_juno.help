@@ -5,15 +5,21 @@ COMMANDS
     > cmd + shift + p
 -- To view settings:
     > cmd + ,
+--  To pull up the grammar selector:
+    > ctrl + shift + l
 
 FILES
 
+--  To add a directory to an open project:
+    > cmd + shift + o
 --  To open a file:
     > cmd + o
---  To open a file:
-    > cmd + shift + o
 --  To search for a file in a project:
     > cmd + t  or cmd + p
+--  To see/not see  file tree view:
+    > cmd + K cmd + B
+--  To save all open files:
+    > alt + cmd + s
 
 CODE
 
@@ -25,20 +31,84 @@ CODE
     > cmd + up
 --  To move to the end of a file:
     > cmd + down
+--  Selection is similar to movement but adding alt + shift + ...
+
+--  To select the current word:
+    > ctrl + shift + w
+--  To select the entire contents of a file
+    > cmd + a
+--  To select the entire line:
+    > cmd + l
+
+--  To join the next line to the end of the current line:
+    > cmd + j
+--  To duplicate the current line:
+    > cmd + shift + d
+--  To upper case the current word:
+    > cmd + k cmd + u
+--  To lower case the current word:
+    > cmd + k cmd + l
+
 --  To go to a specific line:
     > cmd + g
 --  To jump to a symbol:
     > cmd + r
+--  To jump to the nearest closing bracket:
+    > ctrl + m
+--  To select all text inside current brackets:
+    > cmd + ctrl + m
+
+-- Multiple cursors in Chapter 2 'Editing and deleting text'
+
+--  To delete current line:
+    > ctrl + shift + k
+--  To delete to beginning of line:
+    > cmd + backspace
+--  To delete to end of line:
+    > cmd + delete
+--  To cut to end of line:
+    > ctrl + k
+
+--  To find and replace in a file:
+    > cmd + f
+    > cmd + g  (to move to next occurrence)
+--  In the whole project:
+    > cmd + shift + f
+
+--  To see the snippets available:
+    > cmd + shift + p  snippets:available
+--  To autocomplete:
+    > tab  or enter
+--  To unfold or fold everything:
+    > alt + cmd + shift + ]
+    > alt + cmd + shift + [
+
+--  To comment:
+    $ # comment here.
+
+RUNNING CODE
 
 --  To evaluate a code block:
     > cmd + enter
 --  To evaluate a whole script:
     > cmd + shift + enter
 
+DOCS
+
 --  To get the documentation for the symbol under the cursor:
     > cmd + j cmd - d
 --  To go to the definition of the symbol under the cursor:
     > cmd + j cmd - g
+
+PANES
+
+--  To split editor pane horizontally:
+    > cmd + k + up
+    > cmd + k + down
+--  To switch between panes:
+    > cmd + k + cmd + up
+    > cmd + k + cmd + down
+--  Similarly for vertical panes: left, right.
 
 SCRIPTS
 =======

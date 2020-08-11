@@ -1,0 +1,5 @@
+--  To profile a code block:
+    --  Wrap it with:
+        @time begin
+              .....
+              end

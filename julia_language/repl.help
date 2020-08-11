@@ -19,7 +19,11 @@ PACKAGES
 SESSION
 =======
 
+--  To open REPL:
+    > cmd + j + cmd + o
 --  To begin a interactive session:
     > ENTER
+--  To clear REPL:
+    > cmd + j + cmd + c
 --  To end a session:
     > Ctrl D  or exit()

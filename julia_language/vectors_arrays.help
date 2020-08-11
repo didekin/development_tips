@@ -37,3 +37,11 @@ VECTORS - ARRAYS
     > rand(n)
 --  From a normal distribution:
     > randn(n)
+
+OPERATIONS
+
+--  Scalar vector multiplication:
+    > scalar * vector
+--  Scalar vector division:
+    > vector / scalar
+    > scalar \ vector  # same result in both lines.

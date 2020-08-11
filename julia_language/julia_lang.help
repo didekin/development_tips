@@ -1,16 +1,7 @@
-OPERATORS
-=========
+STRINGS
+=======
 
 --  To concatenate strings:
     $ string1 * string2
 --  To concatenate the same string a number of times:
     $ string1 ^ numberOftimes
-
---  To comment:
-    $ # comment here.
-
---  Scalar vector multiplication:
-    > scalar * vector
---  Scalar vector division:
-    > vector / scalar
-    > scalar \ vector  # same result in both lines.
