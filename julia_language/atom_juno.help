@@ -33,12 +33,21 @@ CODE
     > cmd + down
 --  Selection is similar to movement but adding alt + shift + ...
 
+--  To go to a specific line:
+    > cmd + g
+--  To jump to a symbol:
+    > cmd + r
+--  To jump to the nearest closing bracket:
+    > ctrl + m
+
 --  To select the current word:
     > ctrl + shift + w
 --  To select the entire contents of a file
     > cmd + a
 --  To select the entire line:
     > cmd + l
+--  To select all text inside current brackets:
+    > cmd + ctrl + m
 
 --  To join the next line to the end of the current line:
     > cmd + j
@@ -48,15 +57,6 @@ CODE
     > cmd + k cmd + u
 --  To lower case the current word:
     > cmd + k cmd + l
-
---  To go to a specific line:
-    > cmd + g
---  To jump to a symbol:
-    > cmd + r
---  To jump to the nearest closing bracket:
-    > ctrl + m
---  To select all text inside current brackets:
-    > cmd + ctrl + m
 
 -- Multiple cursors in Chapter 2 'Editing and deleting text'
 
@@ -109,11 +109,3 @@ PANES
     > cmd + k + cmd + up
     > cmd + k + cmd + down
 --  Similarly for vertical panes: left, right.
-
-SCRIPTS
-=======
-
---  To evaluate an script:
-    > include("script_name.jl")
---  To run the scritp in a terminal:
-    $ julia script_name.jl

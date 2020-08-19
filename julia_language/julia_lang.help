@@ -1,7 +1,92 @@
+PACKAGES
+========
+
+--  To user a package in a script (written at the beginning):
+    - using LinearAlgebra, SparseArrays, VMLS
+    - (Or) import LinearAlgebra (in this case, functions must be called with:) LinearAlgebra.myfunction
+      - In this case, an alias for the package can be created with: const alg = LinearAlgebra.
+        (Reference to the function:) alg.myfunction
+      - To statically import a function:
+        import LinearAlgebra: myFunction
+        (And then:) myFunction() (without package name or alias)
+
+--  To include code in another file:
+    - include("myFile.jl")
+
+FUNCTIONS
+=========
+
+--  To define a function f(x), where x is a vector of at least 4 elements:
+    > f(x) = x[1] + x[2] - x[4]^2
+
+TYPES
+=====
+
+--  To check the type of a variable:
+    > typeof(variableName)
+
+NUMERIC
+
+--  To display the architecture type of a computer:
+    > Sys.WORD_SIZE
+--  Max and min values of a numeric primitive:
+    > typemax(Int64)
+    > typemin(Int64)
+
+Floats
+
+--  Three components:
+    --  a signed integer whose length determines the precision (the significand).
+    --  the base used to represent the number (usually base 10).
+    --  a signed integer that changes the magnitude of the floating point number (the exponent)
+--  Inf # positive infinity.
+    > isinf(1/0)
+--  -Inf # negative infinity.
+    > isinf(-11/0)
+--  NaN  # not a number.
+    > isnan(0/0)
+--  Machine epsilon, an upper-bound on the rounding error in floating point arithmetic:
+    > eps()
+
+BOOLEAN
+
+--  Boolean values are 8-bit integers.
+
 STRINGS
-=======
+
+--  A string is a sequence of Unicode code points, using UTF-8 encoding.
+    String is the built-in type for strings and string literals.
+    Strings are defined by double (or triple) quotes.
+--  Char is a numeric value representing a Unicode code point. Char is the built-in type used to represent single characters.
 
 --  To concatenate strings:
     $ string1 * string2
+    > string("Yes.", " Sure is :)")
 --  To concatenate the same string a number of times:
     $ string1 ^ numberOftimes
+--  To generate a new string that is the original string str repeated n times:
+    > repeat(str, n)
+
+--  String interpolation takes place when a string literal is defined with a variable inside its instantiation. The variable is prepended with $.
+    > "1 + 2 = $(1 + 2)"  # "1 + 2 = 3"
+
+--  Substrings:
+    > my_string[4:6] # indexes included
+    > my_string[end] # last character
+    --  To return the indices of the characters in the string str matching the pattern pat:
+        > findfirst(pat, str)
+    --  To check true/false depending on the presence/absence of substr in str.
+        > occursin(substr, str)
+
+--  To searche string str for the pattern ptn and, if it is present, replaces it with rep:
+    > replace(str, ptn => rep)
+
+--  Regular expressions are defined as strings with a leading r outside the quotes.
+    > occursin(r"[a-zA-Z0-9]$", str)
+--  To return true/false if the regex has a match in the string str.
+    > occursin(regex, str)
+--  To return the first match of regex in the string. If there is no match, it returns the special Julia value nothing.
+    > match(regex, str)
+--  To return all the matches of regex in the string str as an array.
+    > eachmatch(regex, str)
+    > collect(eachmatch(r"[^a-zA-Z0-9]", str))

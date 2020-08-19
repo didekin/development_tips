@@ -1,3 +1,10 @@
+HELP
+====
+
+--  To get help about a function:
+    > ?
+    > methods(functionName)
+
 PACKAGES
 ========
 
@@ -11,9 +18,11 @@ PACKAGES
 --  To add a package from a repository:
     > add https://github.com/VMLS-book/VMLS.jl
 --  To come back to Julia shell:
-    > Ctrl C
+    > backspace or Ctrl C
 
---  To import packages into Julia:
+--  To import a package into a Julia session:
+    > using LinearAlgebra, SparseArrays, VMLS
+--  To user a package in a script (written at the beginning):
     > using LinearAlgebra, SparseArrays, VMLS
 
 SESSION
@@ -26,4 +35,23 @@ SESSION
 --  To clear REPL:
     > cmd + j + cmd + c
 --  To end a session:
-    > Ctrl D  or exit()
+    > Ctrl D  or exit() or cmd + j + cmd + k
+--  To open a session on a Terminal window:
+    > julia
+
+--  The variable 'ans' is bounded to the last evaluated expression.
+
+SCRIPTS
+=======
+
+--  To evaluate an script within julia REPL:
+    > include("script_name.jl")
+--  To run the scritp in a terminal window:
+    $ julia script_name.jl arg1 arg2 ..
+
+--  To suppress output after a command:
+  > (at the end of the instruction) ;
+--  Single comment:
+  > #
+--  Multiline comments:
+  > #=  (lines) =#

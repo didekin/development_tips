@@ -4,12 +4,17 @@ COMMANDS
 --  To open the plot pane:
     > cmd + j cmd + p
 
-TECHNIQUES
-==========
+EXAMPLES
+========
 
 --  To plot a time series with data obtained with a function:
     > plot(temperature_data(), marker = :circle, legend = false, grid = false)
 
+--  Scatter plot for predicted vs real price in a regresssion model:
+    > scatter(price, predicted, lims = (0,800));
+    # Line for x = y (perfect fit)
+    > plot!([0, 800], [0, 800], linestyle = :dash);
+    > plot!(xlims = (0,800), ylims = (0,800), size = (500,500)); julia> plot!(xlabel = "Actual price", ylabel = "Predicted price");
 
 FILES
 =====
