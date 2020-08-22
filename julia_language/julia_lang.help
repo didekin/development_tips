@@ -95,7 +95,11 @@ FUNCTIONS
 =========
 
 --  A function is an object that takes argument values as a tuple and maps them to a return value.
---  Functions with ! at the end of their names modify their argu- ments instead of copying them.
+--  Functions with ! at the end of their names modify their arguments instead of copying them.
+
+--  To type de COMPOSITE OPERATOR '∘' :
+    > \circ + tab
+
 --  Arguments after the ';' are keyword arguments the default values are evaluated from left-to-right.
     This allows keyword arguments to refer to previously defined keywords or arguments. Keyword arguments can have explicit types.
     > function mm_median(x, eps = 0.001; maxit = 25, iter::Int64=Int(floor(eps))) ..... end
@@ -109,6 +113,7 @@ FUNCTIONS
         function add(x,y)
              return(x+y)
         end
+
 --  To define an argument by default (always in the last positions):
     > add(x, y = 5) = x + y
     > add(12)  # returns 17.
@@ -118,6 +123,13 @@ FUNCTIONS
     OR still better:
     > b = map(abs, v)
 
+BROADCAST
+
+--  'broadcast' expands singleton dimensions in array arguments to match the corresponding dimension in the other array
+    without using extra memory, and applies the given function elementwise.
+--  Dotted operators such as .+ and .* are equivalent to broadcast calls.
+--  There is also a 'broadcast!' function to specify an explicit destination (which can also be accessed in a fusing fashion
+    by '.=' assignment).
 
 CONTROL FLOW
 ============
