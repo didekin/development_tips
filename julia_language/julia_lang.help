@@ -1,7 +1,10 @@
 PACKAGES
 ========
 
---  To user a package in a script (written at the beginning):
+--  To add a package:
+    > using Pkg
+    > Pkg.add(["LinearAlgebra", "Clustering"])
+--  To use a package in a script (written at the beginning):
     - using LinearAlgebra, SparseArrays, VMLS
     - (Or) import LinearAlgebra (in this case, functions must be called with:) LinearAlgebra.myfunction
       - In this case, an alias for the package can be created with: const alg = LinearAlgebra.
@@ -13,17 +16,14 @@ PACKAGES
 --  To include code in another file:
     - include("myFile.jl")
 
-FUNCTIONS
-=========
-
---  To define a function f(x), where x is a vector of at least 4 elements:
-    > f(x) = x[1] + x[2] - x[4]^2
-
 TYPES
 =====
 
 --  To check the type of a variable:
     > typeof(variableName)
+--  As a general rule, primitive types such as Int64 or Float32 are immutable. The same goes for composite types defined using the struct keyword.
+    An exception to this is for composite types that are explicitly defined as mutable struct.
+    > isimmutable(varName)
 
 NUMERIC
 
@@ -90,3 +90,76 @@ STRINGS
 --  To return all the matches of regex in the string str as an array.
     > eachmatch(regex, str)
     > collect(eachmatch(r"[^a-zA-Z0-9]", str))
+
+FUNCTIONS
+=========
+
+--  A function is an object that takes argument values as a tuple and maps them to a return value.
+--  Functions with ! at the end of their names modify their argu- ments instead of copying them.
+--  Arguments after the ';' are keyword arguments the default values are evaluated from left-to-right.
+    This allows keyword arguments to refer to previously defined keywords or arguments. Keyword arguments can have explicit types.
+    > function mm_median(x, eps = 0.001; maxit = 25, iter::Int64=Int(floor(eps))) ..... end
+    Another example with typed arguments:
+    > times1c(y::Float64) = *(y, 1)
+
+--  To define a function f(x), where x is a vector of at least 4 elements:
+    > f_1(x) = x[1] + x[2] - x[4]^2
+    > add(x,y) = x + y
+    OR
+        function add(x,y)
+             return(x+y)
+        end
+--  To define an argument by default (always in the last positions):
+    > add(x, y = 5) = x + y
+    > add(12)  # returns 17.
+--  When the function body contains one or more return keywords, it returns immediately when a return keyword is evaluated.
+--  Anonymus function passed as an argument to the function map:
+    >  b = map(h -> abs(h), v)
+    OR still better:
+    > b = map(abs, v)
+
+
+CONTROL FLOW
+============
+
+--  Chain
+    >  b2 = (c = 20 ; d = 5 ; c * d)
+        > 100
+
+--  if-elseif-else
+    if condition
+            do
+        elseif
+            do
+        else
+            do
+    end
+    # OR
+    if condition
+        do
+    else
+        do
+    end
+    # OR
+    a ? b : c
+
+--  Loops
+
+    --  Nested for loops can be written as a single outer loop with multiple indexing variables forming a Cartesian product,
+        e.g., if there are two indexing variables then, for each value of the first index, each value of the second index is evaluated.
+
+        > for i in str, j = 1:length(str)
+            println((i, j))
+          end
+
+    --  When using variables defined outside the body of the loop, preappend them with the global keyword inside the body of the loop.
+
+        > n=0
+          x=1
+          while x<10:
+            global n
+            n=n+1
+          end
+
+    --  To allow a loop to terminate early, before it has completed: break
+    --  To move from the current iteration of a loop immediately into the next iteration before the current one is finished: continue
