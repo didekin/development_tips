@@ -59,6 +59,8 @@ UNDO
     $ git checkout -- .
 -- To undo changes to a file:
     $ git checkout -- path/to/file
+--  To discard local changes and to restore the state to the last commit/push:
+    > git reset --hard
 
 BRANCH
 ======
@@ -74,6 +76,8 @@ BRANCH
    $ git branch -d branchToDelete
 -- To delete a remote branch:
    $ git push remoterepo --delete remotebranch
+--  To prune a remote repository of not-referecend branches:
+    >  git remote prune remoteRepository
 
 -- To set up a local branch to track a remote branch:
    $ git checkout -b localbrach origin/remotebranch
