@@ -1,6 +1,7 @@
 # Previousl, in REPL:  ] add https://github.com/VMLS-book/VMLS.jl
 using Pkg
 Pkg.add(["LinearAlgebra", "SparseArrays", "Plots"])
+Pkg.add("https://github.com/VMLS-book/VMLS.jl")
 using LinearAlgebra, SparseArrays, Plots, VLMS
 
 CREATION
@@ -32,7 +33,8 @@ CREATION
 --  > zeros(m,n) # a m * n zero matrix.
 --  To create an n × n identity matrix:
     > 1.0 * Matrix(I,n,n)  # multiplying by 1.0 converts the matrix into one with numerical entries; otherwise it has Boolean entries.
---  > ones(m,n)
+    > eye(n,n)
+--  > ones(m,n) # a matrix of ones.
 --  To construct the diagonal matrix with diagonal entries in the vector s:
     > diagm(0 => s)
 --  To put the diagonal entries of the (possibly not square) matrix X into a vector:
@@ -92,9 +94,9 @@ OPERATIONS
     > C = A .* B   # creates a matrix of the same size with elements Cij = AijBij.
     > Y = exp.(X)  # creates a matrix of the same size, with elements Yij = exp(Xij).
 
---  > difference_matrix(n) = [-eye(n-1) zeros(n-1)] + [zeros(n-1) eye(n-1)]; # eye is a function in VLMS
+--  > difference_matrix(n) = [-eye(n-1) zeros(n-1)] + [zeros(n-1) eye(n-1)]; # eye is a function in VMLS
     --  Sparse version:
-    > difference_matrix(n) = [-speye(n-1) spzeros(n-1)] + [spzeros(n-1) speye(n-1)];  # speye is a function in VLMS.
+    > difference_matrix(n) = [-speye(n-1) spzeros(n-1)] + [spzeros(n-1) speye(n-1)];  # speye is a function in VMLS.
 
 # Vandermonde Matrix
 function vandermonde(t,n)
@@ -114,3 +116,5 @@ end
 OR:
 # The ... operator in hcat(a...) splits the array a into its elements. hcat stacks horizontally the m-vectors t.^i.
 vandermonde(t,n) = hcat([t.^i for i = 0:n-1]... )
+
+de_mean(x) = eye(n)

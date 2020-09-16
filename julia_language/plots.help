@@ -7,14 +7,27 @@ COMMANDS
 EXAMPLES
 ========
 
+TIME SERIES
+
+--  With matrices, each column represents the variable whose values evolve in time.
+
 --  To plot a time series with data obtained with a function:
+    # temperature_data() is a column-vector.
     > plot(temperature_data(), marker = :circle, legend = false, grid = false)
+--  To plot T line-graphs, one for each column in the transposed state matrix state_traj', with
+    xlabel and one label for each line-graph. I transpose to get one column for each variable in x_t.
+    > plot(1:T, state_traj', xlabel = "t", label = ["(x_t)_1", "(x_t)_2", "(x_t)_3"])
+
+SCATTER
 
 --  Scatter plot for predicted vs real price in a regresssion model:
     > scatter(price, predicted, lims = (0,800));
     # Line for x = y (perfect fit)
     > plot!([0, 800], [0, 800], linestyle = :dash);
-    > plot!(xlims = (0,800), ylims = (0,800), size = (500,500)); julia> plot!(xlabel = "Actual price", ylabel = "Predicted price");
+    > plot!(xlims = (0,800), ylims = (0,800), size = (500,500));
+    > plot!(xlabel = "Actual price", ylabel = "Predicted price");
+
+
 
 FILES
 =====

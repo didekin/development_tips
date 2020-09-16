@@ -86,9 +86,16 @@ SUBSETTING AND OPERATIONS
 --  To select the nearest vector to x in a z set of vectors:
     > z[argmin([norm(x-y) for y in z])];
 
+ORDER
+
+--  To sort in decreaing order:
+    > sort(vectorNm, rev = true);
+
 OPERATIONS
 
 --  Vector equality: ==
+-- To transpose a vector:
+    > vectorNm'
 --  Scalar vector multiplication:
     > scalar * vector
 --  Scalar vector division:
@@ -131,7 +138,7 @@ OPERATIONS
     > nearest_neighbor(x,z) = z[argmin([norm(x-y) for y in z])];
 
 --  To substract the mean from every element of a vector:
-    > de_mean(x) = x .- mean(x);
+    > de_mean(x) = x .- avg(x);
 --  Standard deviation function:
     > stdev(x) = norm(x .- avg(x))/sqrt(length(x));
 --  Function to standardize vectors:

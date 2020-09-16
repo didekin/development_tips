@@ -9,6 +9,7 @@ COMMANDS
     > ctrl + shift + l
 
 FILES
+=====
 
 --  To add a directory to an open project:
     > cmd + shift + o
@@ -22,6 +23,7 @@ FILES
     > alt + cmd + s
 
 CODE
+====
 
 --  To move to the beginning of a word:
     > alt + left
@@ -85,8 +87,11 @@ CODE
 
 --  To comment:
     $ # comment here.
+--  Multiline comments:
+  > #=  (lines) =#
 
 RUNNING CODE
+============
 
 --  To evaluate a code block:
     > cmd + enter
@@ -94,13 +99,17 @@ RUNNING CODE
     > cmd + shift + enter
 
 DOCS
+====
 
 --  To get the documentation for the symbol under the cursor:
     > cmd + j cmd + d
 --  To go to the definition of the symbol under the cursor:
     > cmd + j cmd + g
+    OR
+    > cmd + cursor click
 
 PANES
+=====
 
 --  To split editor pane horizontally:
     > cmd + k + up

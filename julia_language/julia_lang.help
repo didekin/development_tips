@@ -78,7 +78,7 @@ STRINGS
     --  To check true/false depending on the presence/absence of substr in str.
         > occursin(substr, str)
 
---  To searche string str for the pattern ptn and, if it is present, replaces it with rep:
+--  To search string str for the pattern ptn and, if it is present, replaces it with rep:
     > replace(str, ptn => rep)
 
 --  Regular expressions are defined as strings with a leading r outside the quotes.
@@ -108,6 +108,7 @@ FUNCTIONS
 
 --  To define a function f(x), where x is a vector of at least 4 elements:
     > f_1(x) = x[1] + x[2] - x[4]^2
+--  To define an addition function:
     > add(x,y) = x + y
     OR
         function add(x,y)
