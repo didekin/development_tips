@@ -1,2 +1,15 @@
---  @show
-    Show an expression and result, returning the result
+META LANGUAGE
+=============
+
+--  Meta.parse takes a string and transforms it into an expression:
+    > expr = Meta.parse("1+2*3")
+--  Core.eval evaluates an expression:
+    > Core.eval(expr)
+
+MACRO EXAMPLES
+==============
+
+--  @show  Show an expression and result, returning the result
+    > @show x1 x2
+
+--  @view

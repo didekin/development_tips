@@ -13,10 +13,17 @@ EXPLORING
     > last(df, 10)
 --  To see a subset:
     > @view df[12:15, :A]
+--  Dimensions:
+    > size(df); size(df,1) # rows ; size(df,2) #columns
 
 --  To summarize data:
     > describe(df)
-    > describe(df[!, [:A]))
+    > describe(df[!, [:A]))  # column A.
+
+NAMES (for column names)
+
+--  > Symbol(:_, "hola")  # :_hola
+--  > Symbol("_", "hola")  # :_hola
 
 SUBSETTING
 ==========
@@ -37,7 +44,7 @@ SUBSETTING
     > df[!, [:colName1, :colName2]]
     > df[!, r"x"]  # column name contains "x"
 
---  Similar (but copying values?):
+--  Similar (but copying values):
     > df[1:3, :]
     > df[[1, 5, 10], :]
     > df[:, [:A, :B]]
@@ -46,26 +53,35 @@ SUBSETTING
     > df[:, All(r"x")]
 --  To exclude
     > df[:, All(Not(r"A"))]
+    > df[!, Not(:x1)]
 
 --  To select rows based on conditions on variables:
     > df[df.A .> 500, :]
     > df[(df.A .> 500) .& (300 .< df.C .< 400), :]
+    To match a specific subset of values (**IN**):
     > df[in.(df.A, Ref([1, 5, 601])), :]
 
---  Selection with new DataFrame:
+--  To select in a new DataFrame with exclusion (**NOT**):
     > select(df, Not(:x1))
-    > select(df, :colName1 => :a1, :colName2 => :a2)   # rename columns
-    > select(df, :colName1, :colName2 => (x -> x .- minimum(x)) => :colName2)  # transform colName2: the minimum is by column.
-    > select(df, :x2, :x2 => ByRow(sqrt))  # transform columns by row
---  To avoid copying:
+--  To select avoiding copying:
     > select(df, :x1, copycols=false)
 --  Similarly, to perform the selection operation in-place:
     > select!(df, Not(:x1));
 
+--  To rename a column:
+    > rename!(df, (:Documento => :IdCliente))
+--  To select and rename:
+    > select(df, :colName1 => :a1, :colName2 => :a2)   # rename colName2
+
+--  To select and transform:
+    > select(df, :colName1, :colName2 => (x -> x .- minimum(x)) => :colName2)  # transform colName2: the minimum is by column.
+    > select(df, :x2, :x2 => ByRow(sqrt))  # transform columns by row
+
 TRANSFORMATION
 ==============
 
---  transform and transform! functions work identically to select and select! with the only difference that they retain all columns that are present in the source data frame.
+--  transform and transform! functions work identically to select and select! with the only difference
+    that they retain all columns that are present in the source data frame.
 
 --  To move to the front all columns whose name match a regex:
     > df[:, All(r"x", :)]

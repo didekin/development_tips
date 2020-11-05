@@ -1,0 +1,399 @@
+# Previousl, in REPL:  ] add https://github.com/VMLS-book/VMLS.jl
+using Pkg
+Pkg.add(["LinearAlgebra", "SparseArrays"])
+Pkg.add((url="https://github.com/VMLS-book/VMLS.jl")
+using LinearAlgebra, SparseArrays, VMLS
+
+==============================================================================
+********************************   VECTORS  ********************************
+==============================================================================
+
+--  Indexes start counting from 1
+
+CREATION
+========
+
+--  > x = [ -1.1, 0.0, 3.6, -7.2 ]   # commas   4-element Array{Float64,1}
+--  > y = [ -1.1; 0.0; 3.6; -7.2 ]  # semicolons  4-element Array{Float64,1}
+--  > v = collect(Float64, 3:-1:1)  # 3-element Array{Float64,1}
+--  > v = collect(1:2:13)  # 7-element Array{Int64,1}
+--  However, 1 x 4 array (2 dimensions): x = [-1.1 0.0 3.6 -7.2]  # 1×4 Array{Float64,2}
+
+--  To create an empty vector:
+    > vectorName = Vector{Float64}(undef, lengthInt)  # undef is a Julia constant.
+--  To create a zero vector of dimension n:
+    > zeros(n)
+--  For a vector of ones:
+    > ones(n)
+--  To create an array of 4 vectors with contain each of them 3 zero elements:
+    > arr_zeros = [zeros(3) for j = 1:4]
+--  To create a unit vector (Ei) with a function:
+    > unit_vector(i,n) = [zeros(i-1); 1 ; zeros(n-i)]  # this is an inline function.
+    > unit_vector(a,b)  # create 1 in index a in a vector with length b.
+--  To fill the array A with all values as x:
+    > fill!(A, x)
+--  To create a vector with n equally spaced numbers between a and b:
+    > linspace(a,b,n)
+
+--  To assign values to a range of indexes:
+    > x[i:j] = [val1, val2, ]
+--  To create a vector with repeated elements:
+    > repeat(...)  # see docs for string and numeric values.
+
+--  To create vectors by COMPREHENSION:
+    > A1 = [sqrt(i) for i in [16,25,64]]   # 3-element Array{Float64,1}
+    > A2 = [i^2 for i in [1,2,3]]   # 3-element Array{Int64,1}
+--  To create k arrays extracting occurrences (i) with a certain value (j) and put them in k-elements vector:
+    groups = [[X[i] for i=1:N if assignment[i] == j] for j=1:k]
+    -- To see the length of the groups:
+    > occurr = [length(groups[i]) for i in 1:k]
+
+--  To reverse a vector:
+    > z[end:-1:1]
+--  To create a vector of succesive differences of the elements of a vector:
+    > d = x[2:end] - x[1:end-1]
+
+--  To concatenate vectors with scalars:
+    > z = [1;x;2]
+--  To concatenate vectors in a single vector:
+    > z = [x;y]  // where x and y are vectors.
+    > z = vcat(A1, A2) # concatenates arrays vertically, i.e., stacks A1 on top of A2.
+    > z = hcat(A1, A2) # concatenates arrays horizontally, i.e., adds A2 to the right of A1.
+--  To create an array whose elements are vectors (an array of vectors):
+    > z = [x,y]  # attention to the comma. z = [x y] is a 4x2 array (four rows with 2 elements each)
+--  To create a tuple or a list of vectors:
+    > l = (x,y)
+
+--  To generate a random vector of length n with entries that are between 0 and 1:
+    > rand(n)
+    > rand(n,1)
+--  From a normal distribution:
+    > randn(n)
+--  To generate pairs (arrays of two elements) and put them in a vector:
+    > [randn(2) for i = 1:length]
+    Similar for 3-elements tuples:
+    > [randn(3) for i = 1:length]
+
+Sparse vectors
+
+--  package SparseArrays
+
+--  To create a vector with non-zero elements in two indexes, with 10^6 elements:
+    > a = sparsevec( [i,j], [1.0, -1.0], 10^6)
+--  To create a sparse vector of a non-sparse one:
+    > sparse(x)
+--  To see the number of non-zero elements:
+    > nnz(sx)
+
+COPY
+
+--  To create a shallow copy of a vector:
+    > y = copy(x)
+--  To create a fully independent copy:
+    > y = deepcopy(x)
+
+SUBSETTING
+==========
+
+--  Last element of a vector: x[end] OR x[length(x)]
+--  To subset the values between two indexes:
+    > x[i:j]
+--  To subset 'jumping':
+    > x[i:jumpsize:j]  // where jumpsize is the increment between succesive indexes between the range.
+--  The slice operator [:], makes a copy of the whole array
+    > arrayB = arrayA[:]
+
+--  To extract a vector of an array or a tuple of vectors:
+    > l[indexVector]  // we obtain a vector.
+--  To extract a component of vector in an array or list of vectors:
+    > l[indexVector][indexComponent]
+
+SUBSETTING AND OPERATIONS
+
+--  To subset with elementwise function:
+    > x[abs.(x) .> 1]
+--  To sum a subset (elements 6:19):
+    > sum(x[6:19])
+--  To select the nearest vector to x in a z set of vectors:
+    > z[argmin([norm(x-y) for y in z])];
+
+ORDER
+=====
+
+--  To sort in decreaing order:
+    > sort(vectorNm, rev = true);
+
+OPERATIONS
+==========
+
+--  Vector equality: ==
+--  To transpose a vector:
+    > vectorNm'
+--  Scalar vector multiplication:
+    > scalar * vector
+--  Scalar vector division:
+    > vector / scalar
+    > scalar \ vector  # same result in both lines.
+--  Elementwise operations between vectors of same length:
+    > x .== y # equality of components.
+    Similar with .>, .<, .>=, ....
+    > x .* y
+    > x ./ y  # elements of x divided by elements of y.
+    > x .\ y  # elements of y divided by elements of x.
+    > x .^ y
+--  Elementwise operations with scalars:
+    > v .+ scalar
+    > v .- scalar
+    > v .^ scalar # elements of v to the power a.
+    > scalar .^ v # a to the power of the different elements of v.
+
+--  Elementwise function:
+    > sin .(x) # returns a vector with the sin of each element of x.
+    > abs.(x) .>= scalar # returns a vector with 1 (true) or 0 (false) with as many elements as x.
+--  Elementwise assingment to the same value:
+    > x[2:3] .= scalar
+
+--  To transform collection c by applying f to each element:
+    > map(x -> x * 2, [1, 2, 3])
+
+EXAMPLES
+========
+
+--  A vector of discount factors to calcualte NPV:
+    > r = 0.05; # 5% per-period interest rate
+    > d = (1+r) .^ -(0:n-1)
+
+==============================================================================
+********************************    MATRICES  ********************************
+==============================================================================
+
+CREATION
+========
+
+--  Matrices are represented in Julia as 2- dimensional arrays.
+    These are constructed by giving the elements in each row, separated by space,
+    with the rows separated by semicolons.
+    > A = [0 1 -2.3 0.1; 1.3 4 -0.1 0; 4.1 -1 0 1.7]
+--  To get dimensions:
+    > size(A)
+    > size(A1) # rows
+    > size(A2) # columns
+
+--  To convert an array (or a tuple) of column vectors into a matrix:
+    > a = [[1., 2.], [4., 5.], [7., 8.]]
+    > A = hcat(a...)  # a 2 * 3 matrix.
+    The ... operator in hcat(a...) splits the array a into its elements, i.e., hcat(a...) is the same as hcat(a[1], a[2], a[3]), which concatenates a[1], a[2], a[3] horizontally.
+--  To convert an array (or a tuple) of row vectors into a matrix:
+    > A = vcat(a...)  # a 3 * 2 matrix.
+--  To stack matrices B,C,D and E use ';' and a space to do (horizontal) concatenation.
+    > A = [B C ; D E]
+--  To stack an identity matrix with the right dimensions horizontally:
+    > [A I]
+--  To stack an identity matrix with the right dimensions vertically:
+    > [A ; I]
+--  To add an identity matrix with the right dimensions to the entries in A:
+    > A + I
+
+--  > zeros(m,n) # a m * n zero matrix.
+--  To create an n × n identity matrix:
+    > 1.0 * Matrix(I,n,n)  # multiplying by 1.0 converts the matrix into one with numerical entries; otherwise it has Boolean entries.
+    > eye(n,n)
+--  > ones(m,n) # a matrix of ones.
+--  To construct the diagonal matrix with diagonal entries in the vector s:
+    > diagm(0 => s)
+--  To put the diagonal entries of the (possibly not square) matrix X into a vector:
+    > diag(A)
+--  To create a triangular matrix with elements above the diagonal equal to zero:
+    > tril(ones(nrows, ncolumns))
+--  To create a random lower triangular matrix:
+    > tril(randn(n,n))
+--  To create 15 identity matrix (12 * 12) and stack them vertically:
+    >  vcat([eye(12) for i=1:15]...)
+
+--  To create a sparse matrix from three arrays that specify the row indexes, column indexes, and values of the nonzero elements:
+    > A = sparse([nonzero row indexes],[nonzero column indexes],[values], nrows, ncolumns)
+    > A = sparse([1,2,2,1,3,4], [1,1,2,3,3,4], [ -1.11, 0.15, -0.10, 1.17, -0.30, 0.13 ], 4, 5)
+--  > nnz(A)  # number of nonzero entries.
+--  To have the sparse version of a full matrix:
+    > sparse(A)
+--  To have the full matrix from a sparse one:
+    > Array(sparseA)
+--  To create a sparse m × n zero matrix:
+    > spzeros(m,n)
+--  To create a sparse n × n identity matrix:
+    > sparse(1.0I,n,n)
+
+--  To create a random m×n matrix with entries between 0 and 1
+    > rand(m,n)
+--  From a normal distribution:
+    > randn(m,n)
+--  To create a random sparse matrix ():
+    > sprand(nrows,ncolumns,density)  # with entries between 0 and 1. density is nnz(A)/(nrows * ncolumns)
+    > sprandn(m,n,d) # with entries that range over all numbers.
+    > A = sprand(10000,10000,10^-7)
+
+SUBSETTING
+==========
+
+--  To get the i,j entry:
+    > A[i,j]
+--  To get entries in certain rows and columns:
+    > A[1:2,3:4]  # entries in rows 1:2 and columns 3:4.
+    > A[:, j]  # entries in column j.
+    > A[2,:]   # second row.
+--  To reverse the order of rows:
+    > X[numberRows:-1:1,:]
+
+--  To get a randomly chosen set of rows:
+    > randomPermutation = Random.randperm(nrows); # a 100% random sample of the set of rows.
+    > randomIndexes = randomPermutation[k:j] # where k-j is the sample size + 1.
+    > sampleRows = A[randomIndexes,:]
+
+OPERATIONS
+==========
+
+--  A == B
+--  A .== B   # creates a matrix whose entries are Boolean, depending on whether the corresponding entries of A and B are the same.
+--  sum(A .== B)  # gives the number of entries that are equal.
+--  Transpose: A'
+--  > norm(A)  or  norm(A[:])  # Frobenius norm.
+--  Norm of a column:
+    > norm(A[:,col_i])
+--  Inner product of two columns:
+    > A[:,col_i]' * A[:,col_j]
+
+--  To add an identity matrix with the right dimensions to the entries in A:
+    > A + I
+--  A + B
+--  A - B
+--  Scalar multiplication: scalar * A
+--  Matrix vector multiplication: A * x
+--  Matrix power:
+    > A ^ powerN  (A^3)
+
+--  Elementwise operations (examples)
+    > C = A .* B   # creates a matrix of the same size with elements Cij = AijBij.
+    > Y = exp.(X)  # creates a matrix of the same size, with elements Yij = exp(Xij).
+
+SPECIAL MATRICES
+================
+
+--  Difference matrix
+    > difference_matrix(n) = [-eye(n-1) zeros(n-1)] + [zeros(n-1) eye(n-1)]; # eye is a function in VMLS
+    --  Sparse version:
+    > difference_matrix(n) = [-speye(n-1) spzeros(n-1)] + [spzeros(n-1) speye(n-1)];  # speye is a function in VMLS.
+
+--  Vandermonde Matrix function:
+    # The ... operator in hcat(a...) splits the array a into its elements. hcat stacks horizontally the m-vectors t.^i.
+    >   vandermonde_B(t,n) = hcat([t.^i for i = 0:n-1]... )
+
+--  Auto-regressive matrix with memory of length M:
+    > A = hcat([t_train[i:i+m-1] for i=M:-1:1]...); # wher t_train is the set of temporal observations.
+
+ ==============================================================================
+ ******************************  LINEAR ALGEBRA *******************************
+ ==============================================================================
+
+ VECTORS
+ =======
+
+--  Linear combination function:
+      function lincomb(coeff, vectors)
+          return sum(coeff[i] * vectors[i] for i = 1:length(vectors))
+      end
+--  Inner product:
+    > x' * y
+--  Norm:
+    > norm(v)
+--  Root mean square:
+    > rms(x) = norm(x) / sqrt(length(x));
+--  Chebyshev bound function
+    > cheb_bound(x,a) = floor(norm(x)^2/a^2);
+--  Distance between two vectors:
+    > norm(u-v)
+--  Nearest neighbour function:
+    > nearest_neighbor(x,z) = z[argmin([norm(x-y) for y in z])];
+
+--  Function for angle (in radians) between two vectors:
+    > ang(x,y) = acos(x'*y/(norm(x)*norm(y)));
+--  Smallest angle with vectors in a set:
+    > smallest_ang(x,z) = z[argmin([ang(x,y) for y in z])];
+
+--  Gram-Schmidt algorithm
+    function gram_schmidt(arrVectors, tol = 1e-10)
+        # array of orthonormal vectors
+        q = []
+        for i = 1:length(arrVectors)
+            q_tilde = arrVectors[i]
+            for j = 1:i-1
+                q_tilde -= (q[j]' * arrVectors[i]) * q[j]
+            end
+            if (norm(q_tilde) < tol)
+                return
+            end
+            push!(q, q_tilde/norm(q_tilde))
+        end;
+        return q
+    end
+
+MATRICES
+========
+
+--  QR factorization:
+    > Q,R = qr(A)
+    To obtain Q as a matrix:
+    > Q = Matrix(Q)
+    To obtain R
+    > R
+
+--  Inverse
+    > inv(A)
+    > A^-1
+    From QR factorization:
+    > Q,R = qr(A)
+    > Q = Matrix(Q)
+    > AI = inv(R)*Q'
+
+--  To solve the LINEAR EQUATION Ax = b
+    > x = A\b
+    Solution of multiple linear equations with the same coefficient matrix A
+    and different right-hand sides b1, b2, both of them columns of B:
+    > X = A\B # where X is n * 2 matrix: x1 for b1 and x2 for b2.
+
+--  Pseudo-inverse
+    > A_inv = pinv(A)
+    Or:
+    > A_inv = inv(R) * Q' where A = Q * R
+    Or:
+    > A_inv = R\Q'  # Same as resolving R*A_inv = Q' as a system of linear equations.
+
+==============================================================================
+*********************************  STATISTICS *******************************
+==============================================================================
+
+--  To substract the mean from every element of a vector:
+    > de_mean(x) = x .- avg(x);
+--  Standard deviation function:
+    > stdev(x) = norm(x .- avg(x))/sqrt(length(x));
+--  Function to standardize vectors:
+    > function standardize(x)
+        x_demean = de_mean(x)
+        return x_demean/rms(x_demean)
+      end
+--  Correlation function:
+    > function correl_coeff(u,v)
+        u_demean = de_mean(u)
+        v_demean = de_mean(v)
+        return (u_demean'*v_demean)/(norm(u_demean)*norm(v_demean))
+      end
+
+LEAST SQUARES
+=============
+
+--  Four methods:
+    > ls_1 = A\b
+    > ls_2 = inv(A'*A)*(A'*b)
+    > ls_3 = pinv(A)*b
+    > ls_4 = R\(Q'*b)  where Q,R = qr(A), Q = Matrix(Q)
+--  Piecewise linear fit
+    > A = [ones(m) x max.(x.+1,0) max.(x.-1,0)]  # matrix with 4 basis functions. LS: theta = A\y, where y is the response to predict.

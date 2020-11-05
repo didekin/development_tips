@@ -17,6 +17,8 @@ PACKAGES
     > ?
 --  To add a package from a repository:
     > add https://github.com/VMLS-book/VMLS.jl
+--  To add a development version:
+    > add TextAnalysis#master
 --  To come back to Julia shell:
     > backspace or Ctrl C
 
@@ -36,7 +38,7 @@ SESSION
     > cmd + j + cmd + c
 --  To end a session:
     > Ctrl D  or exit() or cmd + j + cmd + k
---  To open a session on a Terminal window:
+--  To open a session on a Terminal window:j
     > julia
 
 --  The variable 'ans' is bounded to the last evaluated expression.

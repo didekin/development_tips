@@ -1,0 +1,41 @@
+DICTIONARIES
+=============
+
+--  Associative collections consisting of a key-value pair.
+--  > D0 = Dict()  # Dict{Any,Any} with 0 entries
+--  > D2 = Dict{Integer, String}(1 => "red", 2 => "white")  # Dict{Integer,String} with 2 entries:  2 => "white"  1 => "red"
+--  > wine = ["red", "white", "rose"]
+    > wine_dict = Dict{Int,String}(i => wine[i] for i in 1:length(wine))  # Dict{Int64,String} with 3 entries: 2 => "white" 3 => "rose"  1 => "red"
+
+--  To associate a new value with an existing key:
+    > wine_dict[1] = "sparkling"
+--  Two ways to add new entries:
+    > wine_dict[4] = "bourdeaux"
+    > get!(wine_dict, 4, "borgogne") # will not add the new entry if a value is already associated with the the key.
+--  To delete entries by key:
+    > delete!(wine_dict,4)
+
+--  To coerce keys or values into arrays:
+    >  collect(keys(wine_dict))
+    >  collect(values(wine_dict))
+
+Subsetting
+
+--  > wine_dict[2]
+      > "white"
+--  > get(wine_dict, 1, "unknown")  # "unknown" is the value returned here if the key is not in the dictionary.
+      > "red"
+--  > haskey(wine_dict, 2)
+      > true
+--  > getkey(wine_dict, 4, 999)  # 999 is the value returned here if the key is not in the dictionary.
+--  > findall(f::Function, A)
+      Return a vector I of the keys of A where f(A[I]) returns true. If there are no such elements of A, return an empty array.
+
+TUPLES
+======
+
+--  They are an abstraction of function arguments without the function.
+--  Tuples can have any number of parameters, and they do not have field names.
+--  Fields are accessed by their index, and tuples are defined using brackets () and commas.
+
+--  > tup2 = ("Data", 2.5, "Science", 8.8)

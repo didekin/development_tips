@@ -26,6 +26,7 @@ TYPES
     > isimmutable(varName)
 
 NUMERIC
+------
 
 --  To display the architecture type of a computer:
     > Sys.WORD_SIZE
@@ -47,17 +48,30 @@ Floats
     > isnan(0/0)
 --  Machine epsilon, an upper-bound on the rounding error in floating point arithmetic:
     > eps()
+--  To convert integers to floating-point numbers:
+    > float(integer)
 
 BOOLEAN
+-------
 
 --  Boolean values are 8-bit integers.
 
 STRINGS
+-------
 
---  A string is a sequence of Unicode code points, using UTF-8 encoding.
+--  'Char' is a numeric value representing a Unicode code point. Char represents a
+    single character and is surrounded by single quotes.
+    > b = 'C'; > typeof(b)   # returns Char
+
+--  A string is a inmutable sequence of Unicode code points, using UTF-8 encoding.
     String is the built-in type for strings and string literals.
     Strings are defined by double (or triple) quotes.
---  Char is a numeric value representing a Unicode code point. Char is the built-in type used to represent single characters.
+    A character in the sequence can be accessed by the [] operator.
+
+--  To get the number of 'bytes' in a string:
+    > sizeof(stringName)
+--  To get the number of 'characters' in a string:
+    > length(stringName)
 
 --  To concatenate strings:
     $ string1 * string2
@@ -67,47 +81,59 @@ STRINGS
 --  To generate a new string that is the original string str repeated n times:
     > repeat(str, n)
 
---  String interpolation takes place when a string literal is defined with a variable inside its instantiation. The variable is prepended with $.
-    > "1 + 2 = $(1 + 2)"  # "1 + 2 = 3"
-
 --  Substrings:
     > my_string[4:6] # indexes included
     > my_string[end] # last character
-    --  To return the indices of the characters in the string str matching the pattern pat:
-        > findfirst(pat, str)
-    --  To check true/false depending on the presence/absence of substr in str.
-        > occursin(substr, str)
 
+--  'uppercase'
+--  To remove the first head and the last tail characters from string s:
+    > chop(s, head = 5, tail = 2)
+
+--  String interpolation takes place when a string literal is defined with a variable inside its instantiation. The variable is prepended with $.
+    > "1 + 2 = $(1 + 2)"  # "1 + 2 = 3"
+    > word = "banana"; println("Your word is: $word")
+
+
+SEARCH, REPLACE, REGEX
+
+
+--  ∈ (\in + TAB):
+    > 'a' ∈ "banana"  # true
 --  To search string str for the pattern ptn and, if it is present, replaces it with rep:
     > replace(str, ptn => rep)
+--  'findfirst', 'findnext'
+    To return the indices of the characters in the string str matching the pattern pat:
+    > findfirst(pat, str)
+--  To check true/false depending on the presence/absence of substr in str.
+    > occursin(substr, str)
 
 --  Regular expressions are defined as strings with a leading r outside the quotes.
+    To return true/false if the regex has a match in the string str.
     > occursin(r"[a-zA-Z0-9]$", str)
---  To return true/false if the regex has a match in the string str.
-    > occursin(regex, str)
 --  To return the first match of regex in the string. If there is no match, it returns the special Julia value nothing.
     > match(regex, str)
 --  To return all the matches of regex in the string str as an array.
     > eachmatch(regex, str)
     > collect(eachmatch(r"[^a-zA-Z0-9]", str))
 
+OPERATORS
+=========
+
+--  Floor division divides two numbers and rounds down to an integer:
+    > 10 ÷ 3     # the symbol is written with: '\div + tab'
+--  Modulus operator divides two numbers and returns the remainder:
+    > 10 % 3
+--  ∈ is typed: \in TAB   # para copiar y pegar: ∉ ∈ ∋ ∌
+
 FUNCTIONS
 =========
 
 --  A function is an object that takes argument values as a tuple and maps them to a return value.
 --  Functions with ! at the end of their names modify their arguments instead of copying them.
-
---  To type de COMPOSITE OPERATOR '∘' :
-    > \circ + tab
-
---  Arguments after the ';' are keyword arguments the default values are evaluated from left-to-right.
-    This allows keyword arguments to refer to previously defined keywords or arguments. Keyword arguments can have explicit types.
-    > function mm_median(x, eps = 0.001; maxit = 25, iter::Int64=Int(floor(eps))) ..... end
-    Another example with typed arguments:
-    > times1c(y::Float64) = *(y, 1)
-
---  To define a function f(x), where x is a vector of at least 4 elements:
-    > f_1(x) = x[1] + x[2] - x[4]^2
+--  To define an argument by default (always in the last positions):
+    > add(x, y = 5) = x + y
+    > add(12)  # returns 17.
+--  When the function body contains one or more return keywords, it returns immediately when a return keyword is evaluated.
 --  To define an addition function:
     > add(x,y) = x + y
     OR
@@ -115,14 +141,22 @@ FUNCTIONS
              return(x+y)
         end
 
---  To define an argument by default (always in the last positions):
-    > add(x, y = 5) = x + y
-    > add(12)  # returns 17.
---  When the function body contains one or more return keywords, it returns immediately when a return keyword is evaluated.
+--  To type de COMPOSITE OPERATOR '∘' :
+    > \circ + tab
+
+--  Arguments after the ';' are keyword arguments. Their default values are evaluated from left-to-right.
+    This allows keyword arguments to refer to previously defined keywords or arguments. Keyword arguments can have explicit types.
+    > function mm_median(x, eps = 0.001; maxit = 25, iter::Int64=Int(floor(eps))) ..... end
+    Another example with typed arguments:
+    > times1c(y::Float64) = *(y, 1)
+
 --  Anonymus function passed as an argument to the function map:
     >  b = map(h -> abs(h), v)
     OR still better:
     > b = map(abs, v)
+
+--  Reuse of GLOBAL VARIABLES requires preceding its name with 'global':
+    > global varName = varValue
 
 BROADCAST
 
@@ -132,14 +166,21 @@ BROADCAST
 --  There is also a 'broadcast!' function to specify an explicit destination (which can also be accessed in a fusing fashion
     by '.=' assignment).
 
+USEFUL FUNCTIONS
+
+--  To print values of variables wich can be 'nothing':
+    > show(varValue)
+--  To stop the program and wait for the user to type something:
+    > readline() # after input, ENTER
+
 CONTROL FLOW
 ============
 
---  Chain
+--  CHAIN
     >  b2 = (c = 20 ; d = 5 ; c * d)
         > 100
 
---  if-elseif-else
+--  IF-ELSEIF-ELSE
     if condition
             do
         elseif
@@ -147,16 +188,18 @@ CONTROL FLOW
         else
             do
     end
+
     # OR
     if condition
         do
     else
         do
     end
+
     # OR
     a ? b : c
 
---  Loops
+--  LOOPS
 
     --  Nested for loops can be written as a single outer loop with multiple indexing variables forming a Cartesian product,
         e.g., if there are two indexing variables then, for each value of the first index, each value of the second index is evaluated.
@@ -176,3 +219,11 @@ CONTROL FLOW
 
     --  To allow a loop to terminate early, before it has completed: break
     --  To move from the current iteration of a loop immediately into the next iteration before the current one is finished: continue
+
+SPECIAL CHARACTERS
+==================
+
+--  The subscript numbers are available in the Unicode character encoding: \_1 + TAB, \_2 + TAB, ..
+--  Superscript numbers are also available: \^2 + TAB
+--  Composite operator '∘' : \circ + tab
+--  ∈ (\in + TAB)    # para copiar y pegar: ∉ ∈ ∋ ∌

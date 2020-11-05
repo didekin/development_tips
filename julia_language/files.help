@@ -1,0 +1,9 @@
+FILES
+=====
+
+--  To open a file in a input stream:
+    > fin = open("words.txt")
+--  To close the input stream
+    > close(fin)
+--  To read a line of the file:
+    > readline(fin)

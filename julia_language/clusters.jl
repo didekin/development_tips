@@ -53,7 +53,7 @@ function kmeans_vmls(x, k; maxiters = 100, tol = 1e-5)
 end
 # EXAMPLE
 # An array of 300 2-elements vectors.
-N = 300
+N = 30
 k = 3
 X = vcat([0.3*randn(2) for i = 1:(N/3)], [[1,1] + 0.3*randn(2) for i = 1:(N/3)],[[1,-1] + 0.3*randn(2) for i = 1:(N/3)])
 scatter([x[1] for x in X], [x[2] for x in X])
