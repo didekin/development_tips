@@ -153,6 +153,9 @@ OPERATIONS
 --  Elementwise assingment to the same value:
     > x[2:3] .= scalar
 
+--  Elementwise conditional evaluation:
+    > yy = (((-0.5 .<= x) .& (x .< 0.1)) .| (x .<= 0.5))
+
 --  To transform collection c by applying f to each element:
     > map(x -> x * 2, [1, 2, 3])
 
@@ -176,15 +179,23 @@ CREATION
     > A = [0 1 -2.3 0.1; 1.3 4 -0.1 0; 4.1 -1 0 1.7]
 --  To get dimensions:
     > size(A)
-    > size(A1) # rows
-    > size(A2) # columns
-
---  To convert an array (or a tuple) of column vectors into a matrix:
+    > size(A,1) # rows
+    > size(A,2) # columns
+--  To convert an array (or a tuple) of "column" vectors (vectors) into a matrix:
     > a = [[1., 2.], [4., 5.], [7., 8.]]
     > A = hcat(a...)  # a 2 * 3 matrix.
     The ... operator in hcat(a...) splits the array a into its elements, i.e., hcat(a...) is the same as hcat(a[1], a[2], a[3]), which concatenates a[1], a[2], a[3] horizontally.
---  To convert an array (or a tuple) of row vectors into a matrix:
-    > A = vcat(a...)  # a 3 * 2 matrix.
+--  To convert an array (or a tuple) of "row" vectors (arrays) into a matrix:
+    >  aa = ([1. 2.], [4. 5.], [7. 8.])
+    > A = vcat(aa...)  # a 3 * 2 matrix.
+--  To stack two "arrays" vertically in a matrix:
+    > [arr1; arr2]
+--  To stack two "vectors" horizontally in a matrix:
+    > [vector1; vector2]
+--  To stack horizontally a matrix and a vector:
+    > [matrixName vectorName]
+--  To stack vertically a matrix and a vector :
+    > [matrixName, vectorName]
 --  To stack matrices B,C,D and E use ';' and a space to do (horizontal) concatenation.
     > A = [B C ; D E]
 --  To stack an identity matrix with the right dimensions horizontally:
@@ -231,6 +242,16 @@ CREATION
     > sprand(nrows,ncolumns,density)  # with entries between 0 and 1. density is nnz(A)/(nrows * ncolumns)
     > sprandn(m,n,d) # with entries that range over all numbers.
     > A = sprand(10000,10000,10^-7)
+
+MODIFICATION
+============
+
+--  To modify entry i-row, j-column:
+    > A[i,j] = new value
+--  To modify entries i-row, k-row in j-column with the same value:
+    > A[[i,k], j] .= newValue
+--  To modify entries i-column, k-column in j-row with the same value:
+    > A[j, [i,k]] .= newValue
 
 SUBSETTING
 ==========
@@ -282,6 +303,8 @@ SPECIAL MATRICES
     > difference_matrix(n) = [-eye(n-1) zeros(n-1)] + [zeros(n-1) eye(n-1)]; # eye is a function in VMLS
     --  Sparse version:
     > difference_matrix(n) = [-speye(n-1) spzeros(n-1)] + [spzeros(n-1) speye(n-1)];  # speye is a function in VMLS.
+--  Circular difference matrix
+    > circ_diff_matrix(n) = -eye(n) + [zeros(n-1,1) eye(n-1); 1 zeros(1,n-1)];
 
 --  Vandermonde Matrix function:
     # The ... operator in hcat(a...) splits the array a into its elements. hcat stacks horizontally the m-vectors t.^i.
@@ -368,7 +391,7 @@ MATRICES
     > A_inv = R\Q'  # Same as resolving R*A_inv = Q' as a system of linear equations.
 
 ==============================================================================
-*********************************  STATISTICS *******************************
+****************************  STATISTICS AND ML ******************************
 ==============================================================================
 
 --  To substract the mean from every element of a vector:
@@ -397,3 +420,44 @@ LEAST SQUARES
     > ls_4 = R\(Q'*b)  where Q,R = qr(A), Q = Matrix(Q)
 --  Piecewise linear fit
     > A = [ones(m) x max.(x.+1,0) max.(x.-1,0)]  # matrix with 4 basis functions. LS: theta = A\y, where y is the response to predict.
+
+Least squares classifier
+------------------------
+
+> theta = A \ (2*y .- 1)  # where y has values 0/1 which are transformed via 2*y -1 in -1/1
+> yhat = A * theta .> 0
+--  Useful functions:
+    > VMLS.confusion_matrix(y, yhat)  # y, yhat must have only 0,1 values, not -1,1
+    > error_rate(y, yhat) = avg(y .!= yhat)
+
+--  Multi-classifier
+
+    -   To create the matrix one-versus-others, where
+        ycl: N-vector with values from 1...K
+        K: number of categories
+        >   function one_hot(ycl,K) N = length(ycl)
+                Y = zeros(N,K)
+                for j in 1:K
+                    Y[findall(ycl .== j), j] .= 1
+                end
+            return Y
+            end;
+
+    -   The LS classifier; where boolean 0/1 values are transformed to -1/1 with 2 * b - 1
+        >   function ls_multiclass(X,ycl,K)
+                n, N = size(X)
+                Theta = X' \ (2 * one_hot(ycl,K) .- 1)
+                yhat = VMLS.row_argmax(X'*Theta)   # row_argmax(u) = [argmax(u[i,:]) for i = 1:size(u,1)]
+                return Theta, yhat
+            end;
+        > Theta, yhat = ls_multiclass(Xtrain, ytrain, Knumber)
+
+Multi-objective least squares
+-----------------------------
+
+>   function mols_solve(As,bs,lambdas)  # in library VMLS
+        k = length(lambdas);
+        Atil = vcat([sqrt(lambdas[i])*As[i] for i=1:k]...) # As is an vector of matrices.
+        btil = vcat([sqrt(lambdas[i])*bs[i] for i=1:k]...) # bs is a vector of vectors.
+        return Atil \ btil
+    end

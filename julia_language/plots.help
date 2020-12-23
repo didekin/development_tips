@@ -1,8 +1,10 @@
-COMMANDS
+REPL COMMANDS
 ========
 
 --  To open the plot pane:
     > cmd + j cmd + p
+--  To close the plot pane (valid for all panes):
+    > cmd + k + w
 
 ===============================================================
 ======================== PLOTS LIBRARY ========================
@@ -16,6 +18,11 @@ COMMANDS
     Pkg.add("GR")
     using GR
     gr()  OR Plots.GRBackend()
+
+STATEMENTS
+==========
+
+--  The 'plot' command skips NaN values.
 
 FILES
 =====

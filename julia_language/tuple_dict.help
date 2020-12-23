@@ -30,6 +30,7 @@ Subsetting
 --  > getkey(wine_dict, 4, 999)  # 999 is the value returned here if the key is not in the dictionary.
 --  > findall(f::Function, A)
       Return a vector I of the keys of A where f(A[I]) returns true. If there are no such elements of A, return an empty array.
+      Example: findall(isequal(3), A)
 
 TUPLES
 ======

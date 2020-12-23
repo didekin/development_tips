@@ -114,7 +114,7 @@ BRANCH
 
 -- To merge a branch into the master branch:
    $ git checkout master
-   $ git merge branch
+   $ git merge branchName
 
 -- To see which branches are already merged into the branch you’re on:
    $ git branch --merged

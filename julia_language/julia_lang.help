@@ -34,6 +34,10 @@ NUMERIC
     > typemax(Int64)
     > typemin(Int64)
 
+--  NaN
+    --  To select these values:
+        > isnan.(vectorValues)
+
 Floats
 
 --  Three components:
@@ -55,6 +59,8 @@ BOOLEAN
 -------
 
 --  Boolean values are 8-bit integers.
+--  To transform boolean 'true/false' in +1/-1 :
+    > (2*b)-1
 
 STRINGS
 -------
