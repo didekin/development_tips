@@ -55,10 +55,13 @@ CREATION
 
 --  To concatenate vectors with scalars:
     > z = [1;x;2]
---  To concatenate vectors in a single vector:
-    > z = [x;y]  // where x and y are vectors.
-    > z = vcat(A1, A2) # concatenates arrays vertically, i.e., stacks A1 on top of A2.
-    > z = hcat(A1, A2) # concatenates arrays horizontally, i.e., adds A2 to the right of A1.
+--  To stack two vectors vertically:
+    > uv = [u;v]
+    > z = vcat(u,v)
+--  To concatenate two vectors horizontally:
+    > h = [u' v']
+--  To concatenate arrays horizontally:
+    > z = hcat(A1, A2)
 --  To create an array whose elements are vectors (an array of vectors):
     > z = [x,y]  # attention to the comma. z = [x y] is a 4x2 array (four rows with 2 elements each)
 --  To create a tuple or a list of vectors:
@@ -191,7 +194,7 @@ CREATION
 --  To stack two "arrays" vertically in a matrix:
     > [arr1; arr2]
 --  To stack two "vectors" horizontally in a matrix:
-    > [vector1; vector2]
+    > [vector1 vector2]
 --  To stack horizontally a matrix and a vector:
     > [matrixName vectorName]
 --  To stack vertically a matrix and a vector :
@@ -208,8 +211,8 @@ CREATION
 --  > zeros(m,n) # a m * n zero matrix.
 --  To create an n × n identity matrix:
     > 1.0 * Matrix(I,n,n)  # multiplying by 1.0 converts the matrix into one with numerical entries; otherwise it has Boolean entries.
-    > eye(n,n)
---  > ones(m,n) # a matrix of ones.
+    > eye(n)
+--  > ones(m,n) # a matrix of ones m * n
 --  To construct the diagonal matrix with diagonal entries in the vector s:
     > diagm(0 => s)
 --  To put the diagonal entries of the (possibly not square) matrix X into a vector:
@@ -385,6 +388,8 @@ MATRICES
 
 --  Pseudo-inverse
     > A_inv = pinv(A)
+    If A*x = d then:
+    > x = pinv(A)*d   OR x = A\d , where pinv(A) is a right pseudo-inverse of A (wide matrix)
     Or:
     > A_inv = inv(R) * Q' where A = Q * R
     Or:
@@ -460,4 +465,39 @@ Multi-objective least squares
         Atil = vcat([sqrt(lambdas[i])*As[i] for i=1:k]...) # As is an vector of matrices.
         btil = vcat([sqrt(lambdas[i])*bs[i] for i=1:k]...) # bs is a vector of vectors.
         return Atil \ btil
+    end
+
+Constrained least squares
+-------------------------
+(Use this)
+>   function cls_solve(A,b,C,d)
+        m, n = size(A)
+        p, n = size(C)
+        Q, R = qr([A; C])
+        Q = Matrix(Q)
+        Q1 = Q[1:m,:]
+        Q2 = Q[m+1:m+p,:]
+        Qtil, Rtil = qr(Q2')
+        Qtil = Matrix(Qtil)
+        w = Rtil \ (2*Qtil'*Q1'*b - 2*(Rtil'\d))
+        return xhat = R \ (Q1'*b - Q2'*w/2)
+    end
+
+(Second option)
+>  function cls_solve_kkt(A,b,C,d) m, n = size(A)
+        p, n = size(C)
+        G = A'*A  # Gram matrix
+        KKT = [2*G C'; C zeros(p,p)] # KKT matrix
+        xzhat = KKT \ [2*A'*b; d]
+    return xzhat[1:n,:]
+end;
+
+(Sparse version)
+>   function cls_solve_sparse(A,b,C,d)
+        m, n = size(A)
+        p, n = size(C)
+        # Sparse version of A.
+        bigA = [zeros(n,n) A' C'; A -I/2 zeros(m,p) ; C zeros(p,m) zeros(p,p)]
+        xyzhat = bigA \ [zeros(n) ; b ; d]
+        return xhat = xyzhat[1:n]
     end
