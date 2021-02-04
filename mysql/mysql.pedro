@@ -180,6 +180,8 @@ USERS
 --  To create a user without specifying a host:
     mysql> create user 'userName'@'%' identified by 'password';
     mysql> grant all on dataBase.* to 'userName'@'%';
+--  To allow dropping views to a user:
+    mysql> GRANT SYSTEM_USER ON *.* TO 'pedro'@'localhost';
 
 --  To grant privilege to write a file:
     mysql> GRANT FILE ON *.* TO 'john'@'%';

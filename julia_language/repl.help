@@ -27,6 +27,21 @@ PACKAGES
 --  To user a package in a script (written at the beginning):
     > using LinearAlgebra, SparseArrays, VMLS
 
+SCRIPTS
+=======
+
+--  To evaluate an script within julia REPL:
+    > include("script_name.jl")
+--  To run the scritp in a terminal window:
+    $ julia script_name.jl arg1 arg2 ..
+
+--  To suppress output after a command:
+  > (at the end of the instruction) ;
+--  Single comment:
+  > #
+--  Multiline comments:
+  > #=  (lines) =#
+
 SESSION
 =======
 
@@ -43,17 +58,8 @@ SESSION
 
 --  The variable 'ans' is bounded to the last evaluated expression.
 
-SCRIPTS
-=======
+SOME COMMANDS AND FUNCTIONS
+===========================
 
---  To evaluate an script within julia REPL:
-    > include("script_name.jl")
---  To run the scritp in a terminal window:
-    $ julia script_name.jl arg1 arg2 ..
-
---  To suppress output after a command:
-  > (at the end of the instruction) ;
---  Single comment:
-  > #
---  Multiline comments:
-  > #=  (lines) =#
+--  Tos see contents of current directory:
+    > readdir()

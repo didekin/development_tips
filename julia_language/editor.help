@@ -5,20 +5,12 @@ COMMANDS
     > cmd + shift + p
 -- To view settings:
     > cmd + ,
---  To pull up the grammar selector:
-    > ctrl + shift + l
 
 FILES
 =====
 
---  To add a directory to an open project:
-    > cmd + shift + o
 --  To open a file:
-    > cmd + o
---  To search for a file in a project:
-    > cmd + t  or cmd + p
---  To see/not see  file tree view:
-    > cmd + K cmd + B
+    > cmd + p
 --  To save all open files:
     > alt + cmd + s
 
@@ -90,11 +82,14 @@ CODE
 --  Multiline comments:
   > #=  (lines) =#
 
+--  To see functions available in a package:
+    > pkgName + TAB
+
 RUNNING CODE
 ============
 
 --  To evaluate a code block:
-    > cmd + enter
+    > ctrl + enter
 --  To evaluate a whole script:
     > cmd + shift + enter
 

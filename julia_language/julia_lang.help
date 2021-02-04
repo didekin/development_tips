@@ -1,3 +1,113 @@
+CONTROL FLOW
+============
+
+--  CHAIN
+    >  b2 = (c = 20 ; d = 5 ; c * d)
+        > 100
+
+--  IF-ELSEIF-ELSE
+    if condition
+            do
+        elseif
+            do
+        else
+            do
+    end
+
+    # OR
+    if condition
+        do
+    else
+        do
+    end
+
+    # OR
+    a ? b : c
+
+--  LOOPS
+
+    --  Nested for loops can be written as a single outer loop with multiple indexing variables forming a Cartesian product,
+        e.g., if there are two indexing variables then, for each value of the first index, each value of the second index is evaluated.
+
+        > for i in str, j = 1:length(str)
+            println((i, j))
+          end
+
+    --  When using variables defined outside the body of the loop, preappend them with the global keyword inside the body of the loop.
+
+        > n=0
+          x=1
+          while x<10:
+            global n
+            n=n+1
+          end
+
+    --  To allow a loop to terminate early, before it has completed: break
+    --  To move from the current iteration of a loop immediately into the next iteration before the current one is finished: continue
+
+FUNCTIONS
+=========
+
+--  A function is an object that takes argument values as a tuple and maps them to a return value.
+--  Functions with ! at the end of their names modify their arguments instead of copying them.
+--  To define an argument by default (always in the last positions):
+    > add(x, y = 5) = x + y
+    > add(12)  # returns 17.
+--  When the function body contains one or more return keywords, it returns immediately when a return keyword is evaluated.
+--  To define an addition function:
+    > add(x,y) = x + y
+    OR
+        function add(x,y)
+             return(x+y)
+        end
+
+--  To type de COMPOSITE OPERATOR '∘' :
+    > \circ + tab
+
+--  Arguments after the ';' are keyword arguments. Their default values are evaluated from left-to-right.
+    This allows keyword arguments to refer to previously defined keywords or arguments. Keyword arguments can have explicit types.
+    > function mm_median(x, eps = 0.001; maxit = 25, iter::Int64=Int(floor(eps))) ..... end
+    Another example with typed arguments:
+    > times1c(y::Float64) = *(y, 1)
+
+--  Anonymus function passed as an argument to the function map:
+    >  b = map(h -> abs(h), v)
+    OR still better:
+    > b = map(abs, v)
+
+--  Reuse of GLOBAL VARIABLES requires preceding its name with 'global':
+    > global varName = varValue
+
+BROADCAST
+
+--  'broadcast' expands singleton dimensions in array arguments to match the corresponding dimension in the other array
+    without using extra memory, and applies the given function elementwise.
+--  Dotted operators such as .+ and .* are equivalent to broadcast calls.
+--  There is also a 'broadcast!' function to specify an explicit destination (which can also be accessed in a fusing fashion
+    by '.=' assignment).
+
+USEFUL FUNCTIONS
+
+--  To print values of variables wich can be 'nothing':
+    > show(varValue)
+--  To stop the program and wait for the user to type something:
+    > readline() # after input, ENTER
+
+METHODS
+=======
+
+--  To see the different uses of a function:
+    > methods(functionName)
+
+OPERATORS
+=========
+
+--  Floor division divides two numbers and rounds down to an integer:
+    > 10 ÷ 3     # the symbol is written with: '\div + tab'
+--  Modulus operator divides two numbers and returns the remainder:
+    > 10 % 3
+--  ∈ is typed: \in TAB   # para copiar y pegar: ∉ ∈ ∋ ∌
+
 PACKAGES
 ========
 
@@ -15,6 +125,14 @@ PACKAGES
 
 --  To include code in another file:
     - include("myFile.jl")
+
+SPECIAL CHARACTERS
+==================
+
+--  The subscript numbers are available in the Unicode character encoding: \_1 + TAB, \_2 + TAB, ..
+--  Superscript numbers are also available: \^2 + TAB
+--  Composite operator '∘' : \circ + tab
+--  ∈ (\in + TAB)    # para copiar y pegar: ∉ ∈ ∋ ∌
 
 TYPES
 =====
@@ -79,6 +197,9 @@ STRINGS
 --  To get the number of 'characters' in a string:
     > length(stringName)
 
+--  To create a new String object from a byte vector v containing UTF-8 encoded characters:
+    > String.(byteVectorName)
+
 --  To concatenate strings:
     $ string1 * string2
     > string("Yes.", " Sure is :)")
@@ -121,115 +242,3 @@ SEARCH, REPLACE, REGEX
 --  To return all the matches of regex in the string str as an array.
     > eachmatch(regex, str)
     > collect(eachmatch(r"[^a-zA-Z0-9]", str))
-
-OPERATORS
-=========
-
---  Floor division divides two numbers and rounds down to an integer:
-    > 10 ÷ 3     # the symbol is written with: '\div + tab'
---  Modulus operator divides two numbers and returns the remainder:
-    > 10 % 3
---  ∈ is typed: \in TAB   # para copiar y pegar: ∉ ∈ ∋ ∌
-
-FUNCTIONS
-=========
-
---  A function is an object that takes argument values as a tuple and maps them to a return value.
---  Functions with ! at the end of their names modify their arguments instead of copying them.
---  To define an argument by default (always in the last positions):
-    > add(x, y = 5) = x + y
-    > add(12)  # returns 17.
---  When the function body contains one or more return keywords, it returns immediately when a return keyword is evaluated.
---  To define an addition function:
-    > add(x,y) = x + y
-    OR
-        function add(x,y)
-             return(x+y)
-        end
-
---  To type de COMPOSITE OPERATOR '∘' :
-    > \circ + tab
-
---  Arguments after the ';' are keyword arguments. Their default values are evaluated from left-to-right.
-    This allows keyword arguments to refer to previously defined keywords or arguments. Keyword arguments can have explicit types.
-    > function mm_median(x, eps = 0.001; maxit = 25, iter::Int64=Int(floor(eps))) ..... end
-    Another example with typed arguments:
-    > times1c(y::Float64) = *(y, 1)
-
---  Anonymus function passed as an argument to the function map:
-    >  b = map(h -> abs(h), v)
-    OR still better:
-    > b = map(abs, v)
-
---  Reuse of GLOBAL VARIABLES requires preceding its name with 'global':
-    > global varName = varValue
-
-BROADCAST
-
---  'broadcast' expands singleton dimensions in array arguments to match the corresponding dimension in the other array
-    without using extra memory, and applies the given function elementwise.
---  Dotted operators such as .+ and .* are equivalent to broadcast calls.
---  There is also a 'broadcast!' function to specify an explicit destination (which can also be accessed in a fusing fashion
-    by '.=' assignment).
-
-USEFUL FUNCTIONS
-
---  To print values of variables wich can be 'nothing':
-    > show(varValue)
---  To stop the program and wait for the user to type something:
-    > readline() # after input, ENTER
-
-CONTROL FLOW
-============
-
---  CHAIN
-    >  b2 = (c = 20 ; d = 5 ; c * d)
-        > 100
-
---  IF-ELSEIF-ELSE
-    if condition
-            do
-        elseif
-            do
-        else
-            do
-    end
-
-    # OR
-    if condition
-        do
-    else
-        do
-    end
-
-    # OR
-    a ? b : c
-
---  LOOPS
-
-    --  Nested for loops can be written as a single outer loop with multiple indexing variables forming a Cartesian product,
-        e.g., if there are two indexing variables then, for each value of the first index, each value of the second index is evaluated.
-
-        > for i in str, j = 1:length(str)
-            println((i, j))
-          end
-
-    --  When using variables defined outside the body of the loop, preappend them with the global keyword inside the body of the loop.
-
-        > n=0
-          x=1
-          while x<10:
-            global n
-            n=n+1
-          end
-
-    --  To allow a loop to terminate early, before it has completed: break
-    --  To move from the current iteration of a loop immediately into the next iteration before the current one is finished: continue
-
-SPECIAL CHARACTERS
-==================
-
---  The subscript numbers are available in the Unicode character encoding: \_1 + TAB, \_2 + TAB, ..
---  Superscript numbers are also available: \^2 + TAB
---  Composite operator '∘' : \circ + tab
---  ∈ (\in + TAB)    # para copiar y pegar: ∉ ∈ ∋ ∌

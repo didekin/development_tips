@@ -1,0 +1,32 @@
+META LANGUAGE
+=============
+
+--  Meta.parse takes a string and transforms it into an expression:
+    > expr = Meta.parse("1+2*3")
+--  Core.eval evaluates an expression:
+    > Core.eval(expr)
+
+MACRO EXAMPLES
+==============
+
+--  @edit functionName  // Show the source code of the function.
+
+--  Interact: @manipulate
+    > @manipulate for i in 1:10
+        i
+      end
+
+--  @show       // Show an expression and result, returning the result
+    > @show x1 x2
+
+--  @view
+
+--  @which expressionWithFunction  // Show the particular method used of the function in the expresssion.
+    Ex: @which @which im * 2im  // Show *(z::Complex, w::Complex) in Base at complex.jl:277
+
+PACKAGES
+========
+
+--  Interact.jl for interactive visualization
+--  JuMP.jl for constrained optimization
+--  OffsetArrays.jl for arrays with arbitrary indexes (beginning in 0, p.e.)
