@@ -27,6 +27,24 @@ MACRO EXAMPLES
 PACKAGES
 ========
 
+--  To add a package:
+    > Pkg.add(["LinearAlgebra", "Clustering"])
+    
+--  To use a package in a script (written at the beginning):
+    - using LinearAlgebra, SparseArrays, VMLS
+    - (Or) import LinearAlgebra (in this case, functions must be called with:) LinearAlgebra.myfunction
+      - In this case, an alias for the package can be created with: const alg = LinearAlgebra.
+        (Reference to the function:) alg.myfunction
+      - To statically import a function:
+        import LinearAlgebra: myFunction
+        (And then:) myFunction() (without package name or alias)
+
 --  Interact.jl for interactive visualization
 --  JuMP.jl for constrained optimization
 --  OffsetArrays.jl for arrays with arbitrary indexes (beginning in 0, p.e.)
+--  SparseArrays.jl
+--  VMLS.jl
+    in REPL:  ] add https://github.com/VMLS-book/VMLS.jl
+    > Pkg.add((url="https://github.com/VMLS-book/VMLS.jl") 
+
+

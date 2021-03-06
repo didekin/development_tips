@@ -1,11 +1,14 @@
 DICTIONARIES
 =============
 
---  Associative collections consisting of a key-value pair.
---  > D0 = Dict()  # Dict{Any,Any} with 0 entries
+--  Associative collections consisting of a key-value pair. MUTABLE
+--  > D0 = DictDict{Integer, String}()
 --  > D2 = Dict{Integer, String}(1 => "red", 2 => "white")  # Dict{Integer,String} with 2 entries:  2 => "white"  1 => "red"
---  > wine = ["red", "white", "rose"]
-    > wine_dict = Dict{Int,String}(i => wine[i] for i in 1:length(wine))  # Dict{Int64,String} with 3 entries: 2 => "white" 3 => "rose"  1 => "red"
+--  To create a Dict from a vector:
+    > wine = ["red", "white", "rose"]
+    > wine_dict = Dict{Int,String}(i => wine[i] for i in 1:length(wine))  
+
+MODIFICATION
 
 --  To associate a new value with an existing key:
     > wine_dict[1] = "sparkling"
@@ -15,18 +18,28 @@ DICTIONARIES
 --  To delete entries by key:
     > delete!(wine_dict,4)
 
---  To coerce keys or values into arrays:
+FACADES
+
+--  To coerce KEYS or VALUES into arrays: # the functions keys(dictName) and values(dictName) return collections with keys and values, respectively.
     >  collect(keys(wine_dict))
     >  collect(values(wine_dict))
+--  To traverse keys or values:
+    > for c in keys(dictName) ...
+    > for v iin values(dictName)
 
-Subsetting
+SUBSETTING
 
+--  > dictNam[keyName]  # return an exception if keyName is not in the dictionary.
 --  > wine_dict[2]
       > "white"
 --  > get(wine_dict, 1, "unknown")  # "unknown" is the value returned here if the key is not in the dictionary.
       > "red"
---  > haskey(wine_dict, 2)
-      > true
+--   To see whether something appears as a key in the dictionary:
+     --  > haskey(wine_dict, 2)
+        > true
+     --  > keyName ∈ keysCollectionName
+--  To check a value:
+    > valueNm ∈ valuesCollection
 --  > getkey(wine_dict, 4, 999)  # 999 is the value returned here if the key is not in the dictionary.
 --  > findall(f::Function, A)
       Return a vector I of the keys of A where f(A[I]) returns true. If there are no such elements of A, return an empty array.
@@ -35,8 +48,28 @@ Subsetting
 TUPLES
 ======
 
---  They are an abstraction of function arguments without the function.
+--  They are an abstraction of function arguments without the function. IMMUTABLE
 --  Tuples can have any number of parameters, and they do not have field names.
---  Fields are accessed by their index, and tuples are defined using brackets () and commas.
+--  Fields are accessed by their index, and tuples are defined using brackets () and commas:
+    > tupName = ("Data", 2.5, "Science", 8.8)
+--  To create a tuple with a single element, you have to include a final comma: 
+    > tName = ('a',)
+--  To create an empty tuple:
+    > tNm = tuple()
 
---  > tup2 = ("Data", 2.5, "Science", 8.8)
+--  To swap the values of variables varA and varB:
+    > varA, varB = varB, varA  # where the left side is a tuple of variables.
+    > varA, varB  # return the tuple (varAValue, varBValue)
+--  Another example of creation:
+    > uname, domain = split("julius.caesar@rome", '@')  # where split returns an array of two strings.
+    > uname, domain   # return ("julius.caesar", "rome")
+
+SUBSETTING
+
+--  > tupName[i] 
+--  > tupName[i:j]
+
+ORDER
+
+--  Comparison is decideb by the first different element:   
+    > (0, 1, 2000000) < (0, 3, 4)  # true.

@@ -5,14 +5,10 @@ COMMANDS
     > cmd + shift + p
 -- To view settings:
     > cmd + ,
-
-FILES
-=====
-
---  To open a file:
-    > cmd + p
---  To save all open files:
-    > alt + cmd + s
+--  To view all keyboard shortcuts
+    > cmd + k
+--  To view shorcuts defined by user:
+    @source:user  in the keyboard shorcuts bar
 
 CODE
 ====
@@ -85,14 +81,6 @@ CODE
 --  To see functions available in a package:
     > pkgName + TAB
 
-RUNNING CODE
-============
-
---  To evaluate a code block:
-    > ctrl + enter
---  To evaluate a whole script:
-    > cmd + shift + enter
-
 DOCS
 ====
 
@@ -103,13 +91,28 @@ DOCS
     OR
     > cmd + cursor click
 
-PANES
+EDITORS
+=======
+
+--  To switch to first open editor tab:
+    > ctrl + 1
+
+FILES
 =====
 
---  To split editor pane horizontally:
-    > cmd + k + up
-    > cmd + k + down
---  To switch between panes:
-    > cmd + k + cmd + up
-    > cmd + k + cmd + down
---  Similarly for vertical panes: left, right.
+--  To open a file:
+    > cmd + p
+--  To save all open files:
+    > alt + cmd + s
+--  To include code in another file:
+    - include("myFile.jl")
+
+RUNNING CODE
+============
+
+--  To evaluate a code block:
+    > cmd + enter
+--  To evaluate a whole script file:
+    > cmd + ctrl + enter
+
+

@@ -32,15 +32,8 @@ CONTROL FLOW
         > for i in str, j = 1:length(str)
             println((i, j))
           end
-
-    --  When using variables defined outside the body of the loop, preappend them with the global keyword inside the body of the loop.
-
-        > n=0
-          x=1
-          while x<10:
-            global n
-            n=n+1
-          end
+        > for dummyElemName in vectorName dosomething(dummyElemName)
+        > for i in eachindex(vectorName)  dosomething(vectorName[i])...
 
     --  To allow a loop to terminate early, before it has completed: break
     --  To move from the current iteration of a loop immediately into the next iteration before the current one is finished: continue
@@ -50,10 +43,10 @@ FUNCTIONS
 
 --  A function is an object that takes argument values as a tuple and maps them to a return value.
 --  Functions with ! at the end of their names modify their arguments instead of copying them.
---  To define an argument by default (always in the last positions):
+--  To define an ARGUMENT BY DEFAULT (always in the last positions):
     > add(x, y = 5) = x + y
     > add(12)  # returns 17.
---  When the function body contains one or more return keywords, it returns immediately when a return keyword is evaluated.
+--  When the function body contains one or more RETURN keywords, it returns immediately when a return keyword is evaluated.
 --  To define an addition function:
     > add(x,y) = x + y
     OR
@@ -64,19 +57,29 @@ FUNCTIONS
 --  To type de COMPOSITE OPERATOR '∘' :
     > \circ + tab
 
---  Arguments after the ';' are keyword arguments. Their default values are evaluated from left-to-right.
+--  Arguments after the ';' are KEYWORD ARGUMENTS. Their default values are evaluated from left-to-right.
     This allows keyword arguments to refer to previously defined keywords or arguments. Keyword arguments can have explicit types.
     > function mm_median(x, eps = 0.001; maxit = 25, iter::Int64=Int(floor(eps))) ..... end
     Another example with typed arguments:
     > times1c(y::Float64) = *(y, 1)
 
---  Anonymus function passed as an argument to the function map:
+--  ANONYMUS function passed as an argument to the function map:
     >  b = map(h -> abs(h), v)
     OR still better:
     > b = map(abs, v)
 
---  Reuse of GLOBAL VARIABLES requires preceding its name with 'global':
-    > global varName = varValue
+--  To reassign a GLOBAL VARIABLE inside a function or a loop you have to declare the variable global before you use it: 
+    been_called = false
+    function fName()
+        global been_called
+        been_called = true
+    end
+--  If a GLOBAL VARIABLE refers to a mutable data structure (array, dictionary, ..), you can modify the value without declaring the variable global:
+    known = Dict(0=>0, 1=>1)
+    function fName()
+        known[2] = 1
+    end
+--  When you pass an ARRAY to a function, the function gets a reference to the array. If the function modifies the array, the caller sees the change.
 
 BROADCAST
 
@@ -106,25 +109,11 @@ OPERATORS
     > 10 ÷ 3     # the symbol is written with: '\div + tab'
 --  Modulus operator divides two numbers and returns the remainder:
     > 10 % 3
+--  Euclidean division all in one tuple: divrem(x, y, r::RoundingMode=RoundToZero) is equivalent to (x÷y, x%y)
 --  ∈ is typed: \in TAB   # para copiar y pegar: ∉ ∈ ∋ ∌
-
-PACKAGES
-========
-
---  To add a package:
-    > using Pkg
-    > Pkg.add(["LinearAlgebra", "Clustering"])
---  To use a package in a script (written at the beginning):
-    - using LinearAlgebra, SparseArrays, VMLS
-    - (Or) import LinearAlgebra (in this case, functions must be called with:) LinearAlgebra.myfunction
-      - In this case, an alias for the package can be created with: const alg = LinearAlgebra.
-        (Reference to the function:) alg.myfunction
-      - To statically import a function:
-        import LinearAlgebra: myFunction
-        (And then:) myFunction() (without package name or alias)
-
---  To include code in another file:
-    - include("myFile.jl")
+--  To check whether two variables refer to the same object: ≡ (\equiv TAB) or === operator
+--  To divide two integers or rational numbers, giving a Rational result:
+    > 3 // 5  # equivalent to 3/5 without converting to decimal.
 
 SPECIAL CHARACTERS
 ==================
@@ -133,6 +122,9 @@ SPECIAL CHARACTERS
 --  Superscript numbers are also available: \^2 + TAB
 --  Composite operator '∘' : \circ + tab
 --  ∈ (\in + TAB)    # para copiar y pegar: ∉ ∈ ∋ ∌
+--  ≡ (\equiv TAB)   # similar to ===
+--  To add subscript to a letter:
+    > Letter + \ + subscript + TAB   # I\_1 + TAB is I₁
 
 TYPES
 =====
@@ -200,6 +192,16 @@ STRINGS
 --  To create a new String object from a byte vector v containing UTF-8 encoded characters:
     > String.(byteVectorName)
 
+--  Substrings:
+    > my_string[4:6] # indexes included
+    > my_string[end] # last character
+
+MODIFICATION
+
+--  'uppercase'
+--  To remove the first head and the last tail characters from string s:
+    > chop(s, head = 5, tail = 2)
+
 --  To concatenate strings:
     $ string1 * string2
     > string("Yes.", " Sure is :)")
@@ -208,21 +210,20 @@ STRINGS
 --  To generate a new string that is the original string str repeated n times:
     > repeat(str, n)
 
---  Substrings:
-    > my_string[4:6] # indexes included
-    > my_string[end] # last character
-
---  'uppercase'
---  To remove the first head and the last tail characters from string s:
-    > chop(s, head = 5, tail = 2)
+--  To convert from a string to an array of characters
+    > collect(stringToConvert)
+--  To break a string into words
+    > split(stringToSplit)
+    > split(stringToSplit, ',')  # with a character delimiter.
+--  To concatenate the elements of an array of strings:
+    > join(arrayToJoin) 
+    > join(arrayToJoin, '_') 
 
 --  String interpolation takes place when a string literal is defined with a variable inside its instantiation. The variable is prepended with $.
     > "1 + 2 = $(1 + 2)"  # "1 + 2 = 3"
     > word = "banana"; println("Your word is: $word")
 
-
 SEARCH, REPLACE, REGEX
-
 
 --  ∈ (\in + TAB):
     > 'a' ∈ "banana"  # true
@@ -234,7 +235,7 @@ SEARCH, REPLACE, REGEX
 --  To check true/false depending on the presence/absence of substr in str.
     > occursin(substr, str)
 
---  Regular expressions are defined as strings with a leading r outside the quotes.
+--  REGULAR EXPRESSIONS are defined as strings with a leading r outside the quotes.
     To return true/false if the regex has a match in the string str.
     > occursin(r"[a-zA-Z0-9]$", str)
 --  To return the first match of regex in the string. If there is no match, it returns the special Julia value nothing.

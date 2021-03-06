@@ -1,7 +1,3 @@
-# Previousl, in REPL:  ] add https://github.com/VMLS-book/VMLS.jl
-using Pkg
-Pkg.add(["LinearAlgebra", "SparseArrays"])
-Pkg.add((url="https://github.com/VMLS-book/VMLS.jl")
 using LinearAlgebra, SparseArrays, VMLS
 
 ==============================================================================
@@ -21,8 +17,13 @@ CREATION
 
 --  To create an empty vector:
     > vectorName = Vector{Float64}(undef, lengthInt)  # undef is a Julia constant.
---  To create a zero vector of dimension n:
+    > emptyVector = []
+    > zeros(0,1)  # zero rows, one column.
+    --  To add first element to a empty zeros(0,1) vector:
+        > [zeros(0,1), firstElem]
+--  To create a zero vector of real numbers of dimension n:
     > zeros(n)
+    > zeros(Int64, n) # for integers.
 --  For a vector of ones:
     > ones(n)
 --  To create an array of 4 vectors with contain each of them 3 zero elements:
@@ -30,8 +31,8 @@ CREATION
 --  To create a unit vector (Ei) with a function:
     > unit_vector(i,n) = [zeros(i-1); 1 ; zeros(n-i)]  # this is an inline function.
     > unit_vector(a,b)  # create 1 in index a in a vector with length b.
---  To fill the array A with all values as x:
-    > fill!(A, x)
+--  To create a vector 3*1 filled with 'valueX'
+    > fill!(valueX, 3)
 --  To create a vector with n equally spaced numbers between a and b:
     > linspace(a,b,n)
 
@@ -73,7 +74,7 @@ CREATION
 --  To generate a random vector of length n with entries that are between 0 and 1:
     > rand(n)
     > rand(n,1)
---  From a normal distribution:
+--  From a normal distribution 0,1:
     > randn(n)
 --  To generate pairs (arrays of two elements) and put them in a vector:
     > [randn(2) for i = 1:length]
@@ -82,8 +83,6 @@ CREATION
 
 Sparse vectors
 
---  package SparseArrays
-
 --  To create a vector with non-zero elements in two indexes, with 10^6 elements:
     > a = sparsevec( [i,j], [1.0, -1.0], 10^6)
 --  To create a sparse vector of a non-sparse one:
@@ -91,12 +90,29 @@ Sparse vectors
 --  To see the number of non-zero elements:
     > nnz(sx)
 
-COPY
+COPY, ORDER, MODIFICATION
+=========================
+
+--  To add a new element:
+    > push!(vectorName, newElement)  # to the end.
+    > pushfirst!(vectorName, newElement) # to the beginning.
+--  To append a vector to the end of another:
+    > append!(vectorName1, vectorName2)
+
+--  To delete elements
+    > splice!(vectorName, indexTodelete)  # return the element removed.
+    > pop!(vectorName)   # delete and return the last element.
+    > popfirst!(vectorName) # delete and return the first element.
 
 --  To create a shallow copy of a vector:
     > y = copy(x)
 --  To create a fully independent copy:
     > y = deepcopy(x)
+--  Select the whole vector and make a copy of it:
+    > vectorName[:]
+
+--  To sort in decreaing order:
+    > sort(vectorNm, rev = true);
 
 SUBSETTING
 ==========
@@ -111,6 +127,7 @@ SUBSETTING
 
 --  To find elements with a certain value:
     > findfirst(vectorName .== "aValue")
+    > elementId ∈ vectorName
 
 --  To extract a vector of an array or a tuple of vectors:
     > l[indexVector]  // we obtain a vector.
@@ -121,16 +138,12 @@ SUBSETTING AND OPERATIONS
 
 --  To subset with elementwise function:
     > x[abs.(x) .> 1]
+--  To sum all the elements:
+    > sum(vectorName)
 --  To sum a subset (elements 6:19):
     > sum(x[6:19])
 --  To select the nearest vector to x in a z set of vectors:
     > z[argmin([norm(x-y) for y in z])];
-
-ORDER
-=====
-
---  To sort in decreaing order:
-    > sort(vectorNm, rev = true);
 
 OPERATIONS
 ==========
@@ -143,6 +156,7 @@ OPERATIONS
 --  Scalar vector division:
     > vector / scalar
     > scalar \ vector  # same result in both lines.
+
 --  Elementwise operations between vectors of same length:
     > x .== y # equality of components.
     Similar with .>, .<, .>=, ....
@@ -155,23 +169,30 @@ OPERATIONS
     > v .- scalar
     > v .^ scalar # elements of v to the power a.
     > scalar .^ v # a to the power of the different elements of v.
-
 --  Elementwise function:
     > sin .(x) # returns a vector with the sin of each element of x.
     > abs.(x) .>= scalar # returns a vector with 1 (true) or 0 (false) with as many elements as x.
 --  Elementwise assingment to the same value:
     > x[2:3] .= scalar
-
 --  Elementwise conditional evaluation:
     > yy = (((-0.5 .<= x) .& (x .< 0.1)) .| (x .<= 0.5))
 
 --  To transform collection c by applying f to each element:
     > map(x -> x * 2, [1, 2, 3])
 
+--  To get minimun and maximum in a tuple: extrema(vectorName)  
+    > maximum(vectorName)  # only maximum value in vector
+--  Cumulative product of an array or vector:
+    > cumprod(vector)  # cumprod([1,2,3]) return vector 1, 2, 6.
+--  To count the number of true elements in a vector:
+    > count(vectorName)
+    > count(vectorName .== true)
+    > count(.!(vectorName))  # to count false.
+
 EXAMPLES
 ========
 
---  A vector of discount factors to calcualte NPV:
+--  A vector of discount factors to calculate NPV:
     > r = 0.05; # 5% per-period interest rate
     > d = (1+r) .^ -(0:n-1)
 
@@ -186,6 +207,9 @@ CREATION
     These are constructed by giving the elements in each row, separated by space,
     with the rows separated by semicolons.
     > A = [0 1 -2.3 0.1; 1.3 4 -0.1 0; 4.1 -1 0 1.7]
+--  To create a matrix 3*2 repeating valueX:
+    > fill(valueX, (3,2))
+
 --  To get dimensions:
     > size(A)
     > size(A,1) # rows
@@ -213,22 +237,23 @@ CREATION
     > [A ; I]
 --  To add an identity matrix with the right dimensions to the entries in A:
     > A + I
-
---  > zeros(m,n) # a m * n zero matrix.
---  To create an n × n identity matrix:
+--  To create 15 IDENTITY matrix (12 * 12) and stack them vertically:
+    >  vcat([eye(12) for i=1:15]...)
+    
+--  > zeros(m,n) # a m * n ZERO matrix.
+--  To create an n × n IDENTITY matrix:
     > 1.0 * Matrix(I,n,n)  # multiplying by 1.0 converts the matrix into one with numerical entries; otherwise it has Boolean entries.
     > eye(n)
---  > ones(m,n) # a matrix of ones m * n
---  To construct the diagonal matrix with diagonal entries in the vector s:
+--  > ones(m,n) # a matrix of ONES m * n
+--  To construct the DIAGONAL matrix with diagonal entries in the vector s:
+    > diagonal(s)
     > diagm(0 => s)
---  To put the diagonal entries of the (possibly not square) matrix X into a vector:
+--  To put the DIAGONAL entries of the (possibly not square) matrix X into a vector:
     > diag(A)
---  To create a triangular matrix with elements above the diagonal equal to zero:
+--  To create a TRIANGULAR matrix with elements above the diagonal equal to zero:
     > tril(ones(nrows, ncolumns))
---  To create a random lower triangular matrix:
+--  To create a random lower TRIANGULAR matrix:
     > tril(randn(n,n))
---  To create 15 identity matrix (12 * 12) and stack them vertically:
-    >  vcat([eye(12) for i=1:15]...)
 
 --  To create a sparse matrix from three arrays that specify the row indexes, column indexes, and values of the nonzero elements:
     > A = sparse([nonzero row indexes],[nonzero column indexes],[values], nrows, ncolumns)
@@ -421,8 +446,8 @@ MATRICES
         return (u_demean'*v_demean)/(norm(u_demean)*norm(v_demean))
       end
 
-LEAST SQUARES
-=============
+LINEAR LEAST SQUARES
+====================
 
 --  Four methods:
     > ls_1 = A\b
@@ -490,7 +515,8 @@ Constrained least squares
     end
 
 (Second option)
->  function cls_solve_kkt(A,b,C,d) m, n = size(A)
+>  function cls_solve_kkt(A,b,C,d) 
+        m, n = size(A)
         p, n = size(C)
         G = A'*A  # Gram matrix
         KKT = [2*G C'; C zeros(p,p)] # KKT matrix
@@ -507,3 +533,54 @@ end;
         xyzhat = bigA \ [zeros(n) ; b ; d]
         return xhat = xyzhat[1:n]
     end
+
+NON-LINEAR LEAST SQUARES
+========================
+
+Gauss-Newton
+-------------------
+
+>   function newton(f, Df, x1; kmax = 20, tol = 1e-6)
+        x = x1
+        fnorms = zeros(0,1)
+        for k = 1:kmax
+            fk = f(x)
+            # A sequence with succesive values of the norms of approximations f(X)
+            fnorms = [fnorms; norm(fk)]
+            if norm(fk) < tol
+                break 
+            end;
+            x = x - Df(x)\fk
+        end
+        return x, fnorms
+    end
+
+Levenberg-Marquardt
+-------------------
+> VMLS.levenberg_marquardt
+> function levenberg_marquardt(f, Df, x1, lambda1; kmax=100, tol=1e-6)
+    n = length(x1)
+    x=x1
+    lambda = lambda1
+    # Es un vector vacío.
+    objectives = zeros(0,1)
+    residuals = zeros(0,1)
+    for k = 1:kmax
+        fk = f(x)
+        Dfk = Df(x)
+        objectives = [objectives; norm(fk)^2] # En la primera iteración pone el primer valor de norm(fk)^2 como primer elemento; luego va añadiendo.
+        residuals = [residuals; norm(2*Dfk'*fk)] # Comentario similar al de objectives.
+        if norm(2*Dfk'*fk) < tol
+            break
+        end;
+        xt = x - [Dfk; sqrt(lambda)*eye(n) ] \ [fk; zeros(n)]
+        if norm(f(xt)) < norm(fk)
+            lambda = 0.8*lambda
+            x = xt
+        else
+            lambda = 2.0*lambda
+        end
+    end
+    return x, Dict([ ("objectives", objectives),
+        ("residuals", residuals)])
+ end

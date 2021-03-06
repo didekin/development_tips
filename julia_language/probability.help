@@ -1,0 +1,23 @@
+PACKAGES
+========
+
+--  Random.jl (in standar library)
+
+FUNCTIONS
+=========
+
+--  Random.seed!()  to get a reproducible sequence of random numbers.
+
+IDIOMS
+======
+
+--  To obtain a frequency distribution from a sequence of values in a vector:
+    >   vv = [1,2,1,2,3,1,2,2,3];
+        counts = zeros(Int, 3);
+        for score in vv
+            counts[score] += 1
+        end
+
+--  To generate a random sequence of -1, +1 values:
+    > rand((-1, +1), numValues)
+    > rand(Bool) # sequence true, false.
