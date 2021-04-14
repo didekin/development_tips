@@ -1,0 +1,48 @@
+
+COMMANDS
+========
+
+--  To open Vscode from the command (terminal) line in the current directory:
+    > code .
+
+--  To see keyboard shortcuts:
+    > cmd + k
+--  To open settings
+    > cmd + ,
+
+--  To open command palette:
+    > shitf + cmd + p
+--  To get command suggestions:
+    > cmd + p + ? 
+
+EDITION
+=======
+
+--  To create a cursor of all the occurrences of a string: select one occurrence and press ctrl + cmd + G.
+    - See 'Add cursor' in shift + cmd + p.
+
+--  To invoke IntelliSense
+    > ctrl + space
+
+FILES
+=====
+
+--   /Users/pedro/Library/Application\ Support/Code/User/keybindings.json
+--   /Users/pedro/Library/Application\ Support/Code/User/settings.json
+
+--  To open files quickly:
+    > cmd + p 
+
+
+
+ERRORS
+======
+
+--  To see problems:
+    > shift + cmd + m
+
+NAVIGATION
+==========
+
+--  To toggle among panels and editor:
+    > cmd + j

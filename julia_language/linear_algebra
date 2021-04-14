@@ -584,3 +584,51 @@ Levenberg-Marquardt
     return x, Dict([ ("objectives", objectives),
         ("residuals", residuals)])
  end
+
+ Constrained non-linear least squares
+-------------------------------------
+
+function penalty_method(f, Df, g, Dg, initPoint, initLambda, initMu; kMax = 100, feas_tol = 1e-4, optco_tol = 1e-4)
+    x = initPoint
+    mu = initMu
+    lambda = initLambda
+    feas_res = [norm(g(x))]
+    optco_res = [norm(2*Df(x)'*f(x) + 2*mu*Dg(x)'*g(x))]
+    num_iter = zeros(Int64,0,1);
+    for i in 1:kMax 
+        fg(x) = [f(x); sqrt(mu)*g(x)]
+        Dfg(x) = [Df(x); sqrt(mu)*Dg(x)]
+        x, allRes =  levenberg_marquardt(fg, Dfg, x, lambda, tol = optco_tol)
+        optco_res = [optco_res; allRes["residuals"][end]]
+        feas_res = [feas_res; norm(g(x))]
+        num_iter = [num_iter; length(allRes["residuals"])]
+        if norm(g(x)) < feas_tol
+            break
+        end
+        mu = 2*mu
+    end
+    return x, Dict([("num_iter", num_iter), ("feas_res", feas_res), ("optco_res", optco_res)])
+end
+
+function augmented_lagrange(f, Df, g, Dg, initX, initLambda; kMax=100, feas_tol=1e-4, optco_tol=1e-4)
+    x = initX
+    mu = 1.0
+    zeta = zeros(length(g(x)))
+    feas_res = [norm(g(x))]
+    optco_res = [norm(2*Df(x)'*f(x) + 2*mu*Dg(x)'* zeta)]
+    num_iter = zeros(Int64, 0, 1);
+    for i in 1:kMax
+        fg(x) = [f(x); sqrt(mu)*g(x) + zeta/(2*sqrt(mu))]
+        Dfg(x) = [Df(x); sqrt(mu) * Dg(x)]
+        x, allRes =  levenberg_marquardt(fg, Dfg, x, initLambda, tol=optco_tol)
+        optco_res = [optco_res; allRes["residuals"][end]]
+        feas_res = [feas_res; norm(g(x))]
+        num_iter = [num_iter; length(allRes["residuals"])]
+        zeta = zeta + 2*mu*g(x)
+        if norm(g(x)) < feas_tol
+            break
+        end
+        mu = norm(g(x)) < .25 * feas_res[end - 1] ? mu : 2*mu
+    end
+    return x, zeta, Dict([("num_iter", num_iter), ("feas_res", feas_res), ("optco_res", optco_res)])
+end

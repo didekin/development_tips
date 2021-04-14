@@ -2,11 +2,12 @@ DICTIONARIES
 =============
 
 --  Associative collections consisting of a key-value pair. MUTABLE
---  > D0 = DictDict{Integer, String}()
+--  > D0 = Dict{Integer, String}()
 --  > D2 = Dict{Integer, String}(1 => "red", 2 => "white")  # Dict{Integer,String} with 2 entries:  2 => "white"  1 => "red"
 --  To create a Dict from a vector:
     > wine = ["red", "white", "rose"]
     > wine_dict = Dict{Int,String}(i => wine[i] for i in 1:length(wine))  
+    > wine_dict = Dict{Int,String}([(1, "white"), (2, "red")])
 
 MODIFICATION
 
