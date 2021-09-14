@@ -1,6 +1,8 @@
-COMMANDS
-========
+CONFIGURATION
+=============
 
+--  To open vscode from the terminal in the current directory:
+    > code .
 --  To get help for commands:
     > cmd + shift + p
 -- To view settings:
@@ -9,6 +11,8 @@ COMMANDS
     > cmd + k
 --  To view shorcuts defined by user:
     @source:user  in the keyboard shorcuts bar
+--  To open a julia terminal:
+    > alt + j + alt + o
 
 CODE
 ====
@@ -43,12 +47,6 @@ CODE
     > cmd + j
 --  To duplicate the current line:
     > cmd + shift + d
---  To upper case the current word:
-    > cmd + k cmd + u
---  To lower case the current word:
-    > cmd + k cmd + l
-
--- Multiple cursors in Chapter 2 'Editing and deleting text'
 
 --  To delete current line:
     > ctrl + shift + k
@@ -66,7 +64,7 @@ CODE
     > cmd + shift + f
 
 --  To see the snippets available:
-    > cmd + shift + p  snippets:available
+    > ctrl + space  snippets:available
 --  To autocomplete:
     > tab  or enter
 --  To unfold or fold everything:
@@ -78,40 +76,58 @@ CODE
 --  Multiline comments:
   > #=  (lines) =#
 
---  To see functions available in a package:
-    > pkgName + TAB
+--  To upper case the current word:
+    > alt + u
+--  To lower case the current word:
+    > alt + l
 
-DOCS
-====
+DOCS - SYMBOLS
+==============
 
---  To get the documentation for the symbol under the cursor:
-    > cmd + j cmd + d
---  To go to the definition of the symbol under the cursor:
-    > cmd + j cmd + g
+--  To go to declaration:
+    > cmd + b
+--  To go to type definition:
+    > cmd + shift + b
     OR
     > cmd + cursor click
 
-EDITORS
-=======
+--  To go a symbol inside a file:
+    > cmd + shift + t
+--  To search for a symbol in the workspace:
+    > cmd + t and type name
+
+EDITORS AND PANELS
+==================
 
 --  To switch to first open editor tab:
     > ctrl + 1
+--  To see quick panel options:
+    > ctrl + q
+--  To close an open panel
+    > cmd + w
+--  To toggle panels:
+    > cmd + j
+
+ERRORS
+======
+
+--  To see errors and warnings:
+    > 
 
 FILES
 =====
 
 --  To open a file:
     > cmd + p
+    --  To select one:
+        > ctrl + tab (to move) and the release ctrl
+
+--  To reopen last file closed:
+    > cmd  + shift + o
 --  To save all open files:
     > alt + cmd + s
 --  To include code in another file:
     - include("myFile.jl")
-
-RUNNING CODE
-============
-
---  To evaluate a code block:
-    > cmd + enter
 --  To evaluate a whole script file:
     > cmd + ctrl + enter
 

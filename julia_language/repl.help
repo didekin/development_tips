@@ -27,6 +27,9 @@ PACKAGES
 --  To user a package in a script (written at the beginning):
     > using LinearAlgebra, SparseArrays, VMLS
 
+--  To see functions available in a package:
+    > pkgName + TAB
+
 SCRIPTS
 =======
 
@@ -34,6 +37,16 @@ SCRIPTS
     > include("script_name.jl")
 --  To run the scritp in a terminal window:
     $ julia script_name.jl arg1 arg2 ..
+--  To evaluate code as though it were the contents of a file
+    $ include_string(moduleName, codeString)  
+    For long chunks of code: """ 
+                             beginninCode......endingCode
+                             """
+
+--  To send current line or selection to REPL:
+    > cmd + shift + enter
+--  To evaluate a whole script file:
+    > cmd + ctrl + enter
 
 --  To suppress output after a command:
   > (at the end of the instruction) ;
@@ -46,20 +59,14 @@ SESSION
 =======
 
 --  To open REPL:
-    > cmd + j + cmd + o
---  To begin a interactive session:
-    > ENTER
---  To clear REPL:
-    > cmd + j + cmd + c
+    > alt + j + alt + o
 --  To end a session:
     > Ctrl D  or exit() or cmd + j + cmd + k
---  To open a session on a Terminal window:j
-    > julia
-
 --  The variable 'ans' is bounded to the last evaluated expression.
 
 SOME COMMANDS AND FUNCTIONS
 ===========================
 
---  Tos see contents of current directory:
+--  To see contents of current directory:
     > readdir()
+--  To know how to type a symbol, just type ? and then paste the symbol.

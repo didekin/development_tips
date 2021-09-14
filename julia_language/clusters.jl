@@ -1,7 +1,7 @@
 # Previousl, in REPL:  ] add https://github.com/VMLS-book/VMLS.jl
 using Pkg
 Pkg.add(["LinearAlgebra", "Clustering", "Plots"])
-using LinearAlgebra, VMLS, Plots, Clustering
+using LinearAlgebra, VMLS, Plots, Clustering       
 
 # Clustering objective function
 Jclust(x,reps,assignment) = avg([norm(x[i]-reps[assignment[i]])^2 for i=1:length(x)])
@@ -11,7 +11,7 @@ reps = [[1,1],[0,0]]
 assignment = [1,2,1]
 Jclust(x, reps, assignment)
 assignment = [1,1,2]
-Jclust(x,reps,assignment)
+Jclust(x,reps,assignment)   
 
 # K-means
 function kmeans_vmls(x, k; maxiters = 100, tol = 1e-5)

@@ -8,6 +8,7 @@
 --  Useful locations:
     > /Library/Frameworks/R.framework/Versions
     > /usr/local/bin/R
+    > /var/folders/qz/l75rzz8n23d6rfs98xbmzh180000gn/T   // contiene packages.
 
 --  To leave R console.
     > quit()
@@ -109,6 +110,7 @@ PACKAGES
 
 --  To install a new package:
     > install.packages("xlsx")
+    >  install.packages("languageserver", repos='https://cran.rediris.es/')
 --  To detach a package from the current session:
     > detach("package:packagename")
 --  To see packages in a session:
