@@ -238,6 +238,7 @@ LOOK INTO files
    $ tail -f logfile
 -- To page a file (SPACE to display the next screen of text):
    $ less filename
+
 -- To compare two files:
    $ diff -u filename1 filename2
 
@@ -259,6 +260,15 @@ SEARCH FOR a file
     $ if [ -f file.txt ]
 --  To search for a file by name:
     $ find / -name fileName
+
+TRANSFORMATIONS
+
+-- To substitute a set of characters for another:
+   Mac:
+   $  sed -i '.bak' 's/charsToBeSubstituted/newChars/' fileToBeTransformed.txt 
+   $  sed -i '' 's/hola/hey/' test.txt
+   Linux:
+   $  sed -i 's/hello/hola/' test.txt    // No es necesario especificar un sufijo para el fichero de backup, ni siquiera con ''.
 
 FUNCTIONS AND SCRIPTS
 =====================

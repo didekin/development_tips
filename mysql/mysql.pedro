@@ -145,10 +145,22 @@ mysql> SELECT COUNT(distinct titular_id) from tx_schindler where tx_fecha <= '20
 -- Similar, but for the first (1) value of the set:
    mysql> SELECT * FROM tbl_name WHERE set_col & 1;
 
+JOINS
+-----
+
 -- To join a table with itself:
    mysql> SELECT p1.name, p1.sex, p2.name, p2.sex, p1.species
             FROM pet AS p1 INNER JOIN pet AS p2
      	    ON p1.species = p2.species AND p1.sex = 'f' AND p2.sex = 'm';
+
+--  To exclude from the records in one table those in another:
+    Option 1 (only counting here):
+        SELECT count(DISTINCT id_conv) id_conv FROM turno WHERE id_conv NOT IN (SELECT id_conv FROM enlace);
+    Option 2 (only counting here):
+        SELECT count(DISTINCT t.id_conv) 
+        FROM turno t
+        LEFT JOIN enlace e ON t.id_conv = e.id_conv;
+        WHERE e.id_conv IS NULL;
 
 STORED PROCEDURES
 ================

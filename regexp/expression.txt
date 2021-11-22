@@ -1,0 +1,40 @@
+CHARACTERS
+----------
+
+--  \d  or [0-9]  match all Arabic digits
+--  \D  [^0-9]  [^\d]  matches any character that is not a digit
+--  \w  matches all word characters. The difference between \D and \w is that \D matches whitespace, punctuation, quotation marks,
+        hyphens, forward slashes, square brackets, and other similar characters, while \w does not—it matches letters and numbers.
+--  [a-zA-Z0-9] similar to \w
+--  [^a-zA-Z0-9]   \W  matches non word characters.
+--  .  will match any character (except, in certain situations, a line ending).
+    To match a literal dot, you have to either escape it or put it in a character class.
+--  $  matches the end of a line.
+--  \s   [ \t\n\r]   matches white space.
+--  \S   [^\s]    non whitespace.
+--  ^  matchs the beginning of a line or string.
+--  $  matchs the end of a line or string.
+
+GROUPS
+------
+
+--  \1 refers to the first group (paranthesis of the expression), \2 to the second ....
+    expression (\d)0\1(\D)\d\d\1\2\1\d\d\d   match 404-224-4333  where: '4' is (\d) referred by \1,  '-' is (\D) referred by \2.
+--  Non capturing group: (?:a|b)  // tras la apertura del paréntesis, ?: y luego la expresión.
+
+QUANTIFIERS
+-----------
+
+--  ?  -> the character is optional
+--  +  ->  one or more
+--  *  ->  zero or more
+--  {3}  ->  three times
+    expression: (\d{3,4}[.-]?)+   matches: 124.   1234.  123-  124.123-
+-- Lazy quantifiers: add ?, like 9.+?
+
+BOUNDARIES
+----------
+
+--  \b  matches a word boundary, without consuming any characters
+    expression \bA.{5}T\b  match AndienT ANCIENT
+--  \B  matches locations that are not equivalent to a word boundary, like a letter or a number within a word or string. 

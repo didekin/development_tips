@@ -131,4 +131,15 @@ FILES
 --  To evaluate a whole script file:
     > cmd + ctrl + enter
 
+--  To filter files by type:
+    > xlsFiles = filter(endswith(".xlsx), readdir())
 
+INTEGRATION WITH SHELL COMMANDS
+===============================
+
+--  To see contents of current directory:
+    > readdir()
+--  To make a directory:
+    $ mkdir("dirName")
+--  To go to a directory:
+    $ cd("dirname")

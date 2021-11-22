@@ -30,6 +30,9 @@ PACKAGES
 --  To see functions available in a package:
     > pkgName + TAB
 
+--  To see where is in local the source code of a module:
+    > (pathof(MySQL)  // module MySQL.
+
 SCRIPTS
 =======
 
@@ -67,6 +70,4 @@ SESSION
 SOME COMMANDS AND FUNCTIONS
 ===========================
 
---  To see contents of current directory:
-    > readdir()
 --  To know how to type a symbol, just type ? and then paste the symbol.

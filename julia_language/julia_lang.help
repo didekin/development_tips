@@ -54,6 +54,17 @@ CONTROL FLOW
     --  To allow a loop to terminate early, before it has completed: BREAK
     --  To move from the current iteration of a loop immediately into the next iteration before the current one is finished: CONTINUE
 
+--  SWITCH defining a new function switch(x...):
+    n = 1.0
+    m = switch(n) do n
+        n ≤ 0.1 && return 0.0
+        n ≤ 0.6 && return 1.0
+        n ≤ 0.8 && return 1.1
+        n ≤ 1.0 && return 1.2
+        n ≤ 1.3 && return 1.35
+        return 2.2
+    end
+
 FUNCTIONS
 =========
 
@@ -133,8 +144,9 @@ SPECIAL CHARACTERS
 --  Composite operator '∘' : \circ + tab
 --  ∈ (\in + TAB)    # para copiar y pegar: ∉ ∈ ∋ ∌
 --  ≡ (\equiv TAB)   # similar to ===
+--  ≈ (\approx TAB)
 --  To add subscript to a letter:
-    > Letter + \ + subscript + TAB   # I\_1 + TAB is I₁
+--  $ Letter + \ + subscript + TAB   #  I\_1 + TAB is I₁
 
 TYPES
 =====

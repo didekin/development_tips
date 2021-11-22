@@ -11,6 +11,7 @@ CREATION
 
 --  > x = [ -1.1, 0.0, 3.6, -7.2 ]   # commas   4-element Vector{Float64}
 --  > y = [ -1.1; 0.0; 3.6; -7.2 ]  # semicolons  4-element Vector{Float64}
+--  > y = Float64[ -1.1; 0.0; 3.6; -7.2 ]  # specifying type Float.
 --  > v = collect(Float64, 3:-1:1)  # 3-element Vector{Float64}
 --  > v = collect(1:2:13)  # 7-element Vector{Int64}
 --  > vcat("A", "B", "C")  # 3-element Vector{String}
@@ -56,9 +57,9 @@ CREATION
     -- To see the length of the groups:
     > occurr = [length(groups[i]) for i in 1:k]
 
---  To reverse a vector:
+--  To REVERSE a vector:
     > z[end:-1:1]
---  To create a vector of succesive differences of the elements of a vector:
+--  To create a vector of SUCCESIVE DIFFERENCES of the elements of a vector:
     > d = x[2:end] - x[1:end-1]
 
 --  To concatenate vectors with scalars:
@@ -132,6 +133,8 @@ SUBSETTING
 --  To find elements with a certain value:
     > findfirst(vectorName .== "aValue")
     > elementId ∈ vectorName
+--  To use a function with a logical result:
+    > x[map(ispow2, x)]   // 'x' refers to the same vector. It returns a vector with the elements that are a power of 2.
 
 --  To extract a vector of an array or a tuple of vectors:
     > l[indexVector]  // we obtain a vector.
@@ -187,7 +190,7 @@ OPERATIONS
 
 --  To get minimun and maximum in a tuple: extrema(vectorName)  
     > maximum(vectorName)  # only maximum value in vector
---  Cumulative product of an array or vector:
+--  CUMULATIVE PRODUCT of an array or vector:
     > cumprod(vector)  # cumprod([1,2,3]) return vector 1, 2, 6.
 --  To count the number of true elements in a vector:
     > count(vectorName)

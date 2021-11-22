@@ -8,6 +8,9 @@ DICTIONARIES
     > wine = ["red", "white", "rose"]
     > wine_dict = Dict{Int,String}(i => wine[i] for i in 1:length(wine))  
     > wine_dict = Dict{Int,String}([(1, "white"), (2, "red")])
+--  To know the number of entries:
+    > length(dictName)
+    > dictName.count
 
 MODIFICATION
 
@@ -64,6 +67,8 @@ TUPLES
 --  Another example of creation:
     > uname, domain = split("julius.caesar@rome", '@')  # where split returns an array of two strings.
     > uname, domain   # return ("julius.caesar", "rome")
+
+--  To create a tuple copying from another, see function:  Base.structdiff
 
 SUBSETTING
 
