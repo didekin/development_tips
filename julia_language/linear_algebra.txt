@@ -15,17 +15,16 @@ CREATION
 --  > v = collect(Float64, 3:-1:1)  # 3-element Vector{Float64}
 --  > v = collect(1:2:13)  # 7-element Vector{Int64}
 --  > vcat("A", "B", "C")  # 3-element Vector{String}
---  However,
---  ["A" "B" "C"]  # 1×3 Matrix{String}
---  > x = [-1.1 0.0 3.6 -7.2]  # 1×4 Matrix{Float64}
---  hcat("A", "B", "C")  # 1×3 Matrix{String}
+    However,
+    ["A" "B" "C"]  # 1×3 Matrix{String}
+    > x = [-1.1 0.0 3.6 -7.2]  # 1×4 Matrix{Float64}
+    > hcat("A", "B", "C")  # 1×3 Matrix{String}
 
 --  To create an empty vector:
     > vectorName = Vector{Float64}(undef, lengthInt)  # undef is a Julia constant.
     > emptyVector = []
-    > zeros(0,1)  # zero rows, one column.
-    --  To add first element to a empty zeros(0,1) vector:
-        > [zeros(0,1), firstElem]
+--  To create an uninitialized mutable array with the given element type and size, based upon the given source array.
+    > similar(array, [element_type=eltype(array)], [dims=size(array)])
 --  To create a zero vector of real numbers of dimension n:
     > zeros(n)
     > zeros(Int64, n) # for integers.

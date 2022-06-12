@@ -53,13 +53,18 @@ TUPLES
 ======
 
 --  They are an abstraction of function arguments without the function. IMMUTABLE
---  Tuples can have any number of parameters, and they do not have field names.
 --  Fields are accessed by their index, and tuples are defined using brackets () and commas:
     > tupName = ("Data", 2.5, "Science", 8.8)
 --  To create a tuple with a single element, you have to include a final comma: 
     > tName = ('a',)
 --  To create an empty tuple:
     > tNm = tuple()
+--  To create with a macro:
+    > @NamedTuple begin
+           a::Int
+           b::String
+       end
+    > @NamedTuple{a::Int, b::String}
 
 --  To swap the values of variables varA and varB:
     > varA, varB = varB, varA  # where the left side is a tuple of variables.

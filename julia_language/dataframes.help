@@ -1,3 +1,9 @@
+CONSTRUCTORS
+============
+
+--  To create a data frame with no rows, but with predefined columns and their types:
+    > DataFrame(A=Int[], B=Float64[], C=String[])  // 0 rows × 3 columns
+
 EXPLORING
 =========
 
@@ -80,14 +86,18 @@ SUBSETTING
 TRANSFORMATION
 ==============
 
---  To transform a column variable in categorical:
-    > df -> transform!(df, :varName => categorical => :varNameCateg)
-
 --  transform and transform! functions work identically to select and select! with the only difference
     that they retain all columns that are present in the source data frame.
 
---  To move to the front all columns whose name match a regex:
+--  To transform a column variable in categorical:
+    > df -> transform!(df, :varName => categorical => :varNameCateg)
+
+--  To move some column ("Sex") to the front of a data frame:
+    > select(german, "Sex", :)
+--  To move some columns (with "x" in name) to the front:
+    > df[:, Cols(r"x", :)]
     > df[:, All(r"x", :)]
+
 --  To exclude:
     > df[:, All(Not(r"x"), :)]
 --  To order rows:

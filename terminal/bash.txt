@@ -198,6 +198,8 @@ COMPRESSION AND CONVERSION
 --  To decompress it:
     $ gzip -d filename.gz
 
+--  To know the encoding of a file:
+    > $ file -I reale_2020_1_med.csv  (Mac)  
 --  To change the encoding of a text file:
     $ iconv -f utf-16 -t utf-8 datos/marzo2018 > output_file
     $ iconv -f CP1250 -t utf-8 bridgestone.csv > bridgestone_utf8.csv

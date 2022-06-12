@@ -53,10 +53,6 @@ SCRIPTS
 
 --  To suppress output after a command:
   > (at the end of the instruction) ;
---  Single comment:
-  > #
---  Multiline comments:
-  > #=  (lines) =#
 
 SESSION
 =======
@@ -66,6 +62,8 @@ SESSION
 --  To end a session:
     > Ctrl D  or exit() or cmd + j + cmd + k
 --  The variable 'ans' is bounded to the last evaluated expression.
+--  To know the active environment:
+    > Base.active_project()
 
 SOME COMMANDS AND FUNCTIONS
 ===========================

@@ -1,3 +1,24 @@
+LISTA
+=====
+
+--  Interact.jl for interactive visualization
+--  JuMP.jl for constrained optimization
+--  OffsetArrays.jl for arrays with arbitrary indexes (beginning in 0, p.e.)
+--  VMLS.jl
+    in REPL:  ] add https://github.com/VMLS-book/VMLS.jl
+    > Pkg.add((url="https://github.com/VMLS-book/VMLS.jl") 
+
+PROJECTS
+========
+
+--  To check active project
+    if Pkg.project().path != joinpath("", "Project.toml")
+    end
+
+--  To check and add dependencies:
+    ["PkgName"] ∉ keys(Pkg.project().dependencies) && Pkg.add(["PkgName"])
+
+
 PACKAGES
 ========
 
@@ -13,14 +34,4 @@ PACKAGES
         import LinearAlgebra: myFunction
         (And then:) myFunction() (without package name or alias)
 
-LISTA
-=====
-
---  Interact.jl for interactive visualization
---  JuMP.jl for constrained optimization
---  OffsetArrays.jl for arrays with arbitrary indexes (beginning in 0, p.e.)
---  SparseArrays.jl
---  VMLS.jl
-    in REPL:  ] add https://github.com/VMLS-book/VMLS.jl
-    > Pkg.add((url="https://github.com/VMLS-book/VMLS.jl") 
 

@@ -80,12 +80,12 @@ FUNCTIONS
 --  To define an ARGUMENT BY DEFAULT (always in the last positions):
     > add(x, y = 5) = x + y
     > add(12)  # returns 17.
+--  Recursive definition:
+    > fib(n::Integer) = n ≤ 2 ? one(n) : fib(n-1) + fib(n-2)
 
 --  Arguments after the ';' are KEYWORD ARGUMENTS. Their default values are evaluated from left-to-right.
     This allows keyword arguments to refer to previously defined keywords or arguments. Keyword arguments can have explicit types.
     > function mm_median(x, eps = 0.001; maxit = 25, iter::Int64=Int(floor(eps))) ..... end
-    Another example with typed arguments:
-    > times1c(y::Float64) = *(y, 1)
 
 --  To reassign a GLOBAL VARIABLE inside a function or a loop you have to declare the variable global before you use it: 
     been_called = false
@@ -142,7 +142,8 @@ SPECIAL CHARACTERS
 --  The subscript numbers are available in the Unicode character encoding: \_1 + TAB, \_2 + TAB, ..
 --  Superscript numbers are also available: \^2 + TAB
 --  Composite operator '∘' : \circ + tab
---  ∈ (\in + TAB)    # para copiar y pegar: ∉ ∈ ∋ ∌
+--  ∈ (\in + TAB)    # para copiar y pegar:   ∋ ∌ ⊆
+--  ∉ (\notin + TAB)
 --  ≡ (\equiv TAB)   # similar to ===
 --  ≈ (\approx TAB)
 --  To add subscript to a letter:

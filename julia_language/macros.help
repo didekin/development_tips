@@ -9,12 +9,17 @@ META LANGUAGE
 MACRO EXAMPLES
 ==============
 
+--  @. // To convert every function call, operation, and assignment in an expression into the "dotted" version.
+    > @. X = sin(cos(Y)) # equivalent to X .= sin.(cos.(Y))
 --  @assert  // To evalutate (and throw exception) a boolean expression.
+--  @big // To define arbitray precision numbers. Ex: big"1.23456789012345678901"
 --  @code_llvm   // To view the code used by Julia in its backend.
 --  @edit functionName  // Show the source code of the function.
 --  @evalpoly   / Evaluate the polynomial ∑ z^{k-1}*c[k] for the coefficients c[1], c[2] ...
 --  @isdefined(s) -> Bool  //  Tests whether variable s is defined in the current scope.
 --  @macroexpand // To view a macro as a set of symbols.
+
+--  @NamedTuple   // To create named tuple type.
 
 --  @show       // Show an expression and result, returning the result
     > @show x1 x2
@@ -22,8 +27,9 @@ MACRO EXAMPLES
 --  @which expressionWithFunction  // Show the particular method used of the function in the expresssion.
     Ex: @which im * 2im  // Show *(z::Complex, w::Complex) in Base at complex.jl:277
 
+LIBRARIES
+
 --  Interact.@manipulate
     > @manipulate for i in 1:10
-        i
-      end
-
+        i                   
+      end       
