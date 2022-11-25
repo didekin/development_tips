@@ -146,8 +146,11 @@ SPECIAL CHARACTERS
 --  ∉ (\notin + TAB)
 --  ≡ (\equiv TAB)   # similar to ===
 --  ≈ (\approx TAB)
+--  ÷ \div TAB
 --  To add subscript to a letter:
 --  $ Letter + \ + subscript + TAB   #  I\_1 + TAB is I₁
+--  To know how to type a special symbol:
+    > type ? and then paste the symbol   
 
 TYPES
 =====
@@ -215,11 +218,12 @@ CHARACTER
 STRINGS
 -------
 
---  A string is a inmutable sequence of Unicode code points, using UTF-8 encoding.
-    String is the built-in type for strings and string literals.
-    Strings are defined by double (or triple) quotes.
+--  Strings are defined by double (or triple) quotes.
     A character in the sequence can be accessed by the [] operator.
     String indexing, like most indexing in Julia, is 1-based.
+--  To break up a long stirng use a newline with a backslash (\)
+    "This is a long \ 
+     line"
 
 --  To get the number of 'bytes' in a string:
     > sizeof(stringName)
@@ -245,7 +249,7 @@ MODIFICATION
     $ string1 * string2
     > string("Yes.", " Sure is :)")
 --  To concatenate the same string a number of times:
-    $ string1 ^ numberOftimes
+    $ string1 ^ numberOftimes¶ø
 --  To generate a new string that is the original string str repeated n times:
     > repeat(str, n)
 

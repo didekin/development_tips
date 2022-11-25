@@ -144,6 +144,12 @@ EXECUTION AND PROCESSES
    $ pstree
 -- To see the hash table with the commands in session:
    $ hash
+-- To see processes and threads running
+   $ top -o th  // help: top -h        // more info: explainshello.com
+
+   JAVA
+-- To print Java stack traces of Java threads for a given Java process or core file or a remote debug server.
+   $ jstack .... // See Java SE documentation
 
 -- To see listening ports and processes:
    $ sudo lsof -i -n -P | grep TCP
@@ -199,7 +205,7 @@ COMPRESSION AND CONVERSION
     $ gzip -d filename.gz
 
 --  To know the encoding of a file:
-    > $ file -I reale_2020_1_med.csv  (Mac)  
+    > $ file -I reale_2020_1_med.csv  (Mac)
 --  To change the encoding of a text file:
     $ iconv -f utf-16 -t utf-8 datos/marzo2018 > output_file
     $ iconv -f CP1250 -t utf-8 bridgestone.csv > bridgestone_utf8.csv
@@ -267,7 +273,7 @@ TRANSFORMATIONS
 
 -- To substitute a set of characters for another:
    Mac:
-   $  sed -i '.bak' 's/charsToBeSubstituted/newChars/' fileToBeTransformed.txt 
+   $  sed -i '.bak' 's/charsToBeSubstituted/newChars/' fileToBeTransformed.txt
    $  sed -i '' 's/hola/hey/' test.txt
    Linux:
    $  sed -i 's/hello/hola/' test.txt    // No es necesario especificar un sufijo para el fichero de backup, ni siquiera con ''.

@@ -86,8 +86,8 @@ SUBSETTING
 TRANSFORMATION
 ==============
 
---  transform and transform! functions work identically to select and select! with the only difference
-    that they retain all columns that are present in the source data frame.
+--  To add an index column from 1 to length(df):
+    > df.id = axes(df, 1)
 
 --  To transform a column variable in categorical:
     > df -> transform!(df, :varName => categorical => :varNameCateg)
