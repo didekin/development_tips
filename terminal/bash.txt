@@ -147,10 +147,6 @@ EXECUTION AND PROCESSES
 -- To see processes and threads running
    $ top -o th  // help: top -h        // more info: explainshello.com
 
-   JAVA
--- To print Java stack traces of Java threads for a given Java process or core file or a remote debug server.
-   $ jstack .... // See Java SE documentation
-
 -- To see listening ports and processes:
    $ sudo lsof -i -n -P | grep TCP
 --  To see the memory used:

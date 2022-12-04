@@ -1,0 +1,7 @@
+--  To have a common spring-boot parent starter in projects with various modules,
+    we can put in the parent of the modules the tags:
+        <parent>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-parent</artifactId>
+            <version>3.0.0</version>
+        </parent>

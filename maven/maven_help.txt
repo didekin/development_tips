@@ -1,0 +1,16 @@
+MCS tool
+========
+
+--  Installed with sdk install mcs
+--  Docs in https://github.com/mthmulders/mcs
+
+--  To retrieve all artifacts, containing spring-boot-starter:
+    > mcs search spring-boot-starter
+    Or more precise:
+    > mcs search org.springframework.boot:spring-boot-starter
+--  To specify the maximum number of results (3 in this case):
+    > mcs search -l 3 org.springframework.boot:spring-boot-starter
+--  To retrieve artifacts containing a specific class name:
+    > mcs class-search ClassName
+--  To specify a fully class name:
+    > mcs class-search -f org.optaplanner.core.api.score.stream.ClassName

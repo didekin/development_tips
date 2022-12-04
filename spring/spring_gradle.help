@@ -1,7 +1,0 @@
--- Arranque de la aplicación.
-
-   $ cd didekinspring
-   $ ./gradlew build && java -jar service_one/build/libs/didekinspring-serviceone-0.1.jar
-
--- To run the application directly (spring boot):
-   $ ./gradlew bootRun
