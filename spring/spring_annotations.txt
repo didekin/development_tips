@@ -8,28 +8,34 @@ GENERAL
 WEB
 ===
 
---- @RequestMapping  (at the class level) Ej: /spittles
+--- @ControllerAdvice
 
-    @Controller
-    @RequestMapping("/spittles")
-    public class SpittleController {
+	One of the most practical uses for @ControllerAdvice is to gather all
+	@Exception- Handler methods in a single class so that exceptions from all
+	controllers are handled consistently in one place.
+
+	@ControllerAdvice
+    public class AppWideExceptionHandler {
+      @ExceptionHandler(DuplicateSpittleException.class)
+      public String duplicateSpittleHandler() {
+        return "error/duplicate";
+      }
     }
 
---- @RequestParam (at the parameter level) Ej: /spittles/show?max=12345&count=20
+    Now, if a DuplicateSpittleException is thrown from any controller method,
+    no matter which controller it’s in, this duplicateSpittleHandler() method
+    will be called to handle the exception.
 
-    It qualifies the @RequestMapping annotation in the class level, with
-    path (/show) and parameters information, at the method level.
+--- @ExceptionHandler (in the method of a CONTROLLER)
 
-    @RequestMapping(value = "/show", method=RequestMethod.GET)
-    public List<Spittle> spittles(
-        @RequestParam
-            (value="max", defaultValue=MAX_LONG_AS_STRING) long max,
-        @RequestParam
-            (value="count", defaultValue="20") int count
-    )
-    {
-      return spittleRepository.findSpittles(max, count);
+    @ExceptionHandler(DuplicateSpittleException.class)
+    public String handleDuplicateSpittle() {
+      return "error/duplicate";
     }
+
+    @ExceptionHandler methods handle the exceptions of that type from any
+    handler method in the same controller, althought it is defined for a
+    particular method in the controller.
 
 --- @PathVariable   Ej: /spittles/12345
 
@@ -56,6 +62,46 @@ WEB
     If no value attribute is given for @PathVariable, it assumes the placeholder’s
     name is the same as the method parameter name.
 
+--- @RequestMapping  (at the class level) Ej: /spittles
+
+    @Controller
+    @RequestMapping("/spittles")
+    public class SpittleController {
+    }
+
+--- @RequestParam (at the parameter level) Ej: /spittles/show?max=12345&count=20
+
+    It qualifies the @RequestMapping annotation in the class level, with
+    path (/show) and parameters information, at the method level.
+
+    @RequestMapping(value = "/show", method=RequestMethod.GET)
+    public List<Spittle> spittles(
+        @RequestParam
+            (value="max", defaultValue=MAX_LONG_AS_STRING) long max,
+        @RequestParam
+            (value="count", defaultValue="20") int count
+    )
+    {
+      return spittleRepository.findSpittles(max, count);
+    }
+
+--- @ResponseStatus
+
+    @ResponseStatus(value=HttpStatus.NOT_FOUND,reason="Spittle Not Found")
+    public class SpittleNotFoundException extends RuntimeException {
+    }
+
+    if a SpittleNotFoundException were to be thrown from a controller method,
+    the response would have a status code of 404 and a reason of Spittle Not
+    Found.
+
+--- @RequestBody
+
+    It tells Spring that you want to send the returned object as a resource to the
+    client, converted into some representational form that the client can accept. More
+    specifically, DispatcherServlet considers the request’s Accept header and looks for
+    a message converter that can give the client the representation it wants.
+
 --- @Valid
     It indicates that the command object has validation constraints that have
     to be enforced.
@@ -69,52 +115,6 @@ WEB
         spitterRepository.save(spitter);
         return "redirect:/spitter/" + spitter.getUsername();
     }
-
---- @ResponseStatus
-
-    @ResponseStatus(value=HttpStatus.NOT_FOUND,reason="Spittle Not Found")
-    public class SpittleNotFoundException extends RuntimeException {
-    }
-
-    if a SpittleNotFoundException were to be thrown from a controller method,
-    the response would have a status code of 404 and a reason of Spittle Not
-    Found.
-
---- @ExceptionHandler (in the method of a CONTROLLER)
-
-    @ExceptionHandler(DuplicateSpittleException.class)
-    public String handleDuplicateSpittle() {
-      return "error/duplicate";
-    }
-
-    @ExceptionHandler methods handle the exceptions of that type from any
-    handler method in the same controller, althought it is defined for a
-    particular method in the controller.
-
---- @ControllerAdvice
-
-	One of the most practical uses for @ControllerAdvice is to gather all
-	@Exception- Handler methods in a single class so that exceptions from all
-	controllers are handled consistently in one place.
-
-	@ControllerAdvice
-    public class AppWideExceptionHandler {
-      @ExceptionHandler(DuplicateSpittleException.class)
-      public String duplicateSpittleHandler() {
-        return "error/duplicate";
-      }
-    }
-
-    Now, if a DuplicateSpittleException is thrown from any controller method,
-    no matter which controller it’s in, this duplicateSpittleHandler() method
-    will be called to handle the exception.
-
---- @RequestBody
-
-    It tells Spring that you want to send the returned object as a resource to the
-    client, converted into some representational form that the client can accept. More
-    specifically, DispatcherServlet considers the request’s Accept header and looks for
-    a message converter that can give the client the representation it wants.
 
 
 

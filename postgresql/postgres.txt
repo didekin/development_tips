@@ -3,6 +3,12 @@
 --  To start/stop postgres:
     > brew services start postgresql@15
     > brew services stop postgresql@15
+
+--  To restart postgresql@15 after an upgrade:
+    > brew services restart postgresql@15
+    Or, if you don't want/need a background service you can just run:
+    >  /usr/local/opt/postgresql@15/bin/postgres -D /usr/local/var/postgresql@15
+
 --  To have psql in path, I added the following line to .zshrc
     > export PATH="/usr/local/opt/postgresql@15/bin:$PATH"
 --  To see if postgresql is running:
@@ -14,44 +20,61 @@
     > createdb dyndis  {outside psql}
 --  To delete a database:
     > dropdb dyndis
-
 --  To log in psql
     > psql dbasename
+
+--  To create a user
+    > psql CREATE USER cl_dyndis WITH PASSWORD 'dyndispswd';
+--  To grant privileges to a user in a database:
+    > psql GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA dyndis TO cl_dyndis;
 
 PSQL
 ====
 
+--  To login in a database with a user and propmpt of password:
+    > psql -d dyndis -U cl_dyndis -W
+    Without password prompt:
+    > psql -d dyndis -U cl_dyndis
 --  Help
     mydb=> \h
     mydb=> \q  {to exit}
---  To read commands from the specified file:
-    mydb=> \i filename.sql
 --  To list data bases
     mydb=> \l
 --  To list schemas
     mydb=> \dn
 --  To list tables
     mydb=> \td
+--  To list users
+    mydb=> \du
+
+--  To read commands from the specified file:
+    mydb=> \i filename.sql
+
+JDBC DRIVER
+===========
+
+Note:
+----
+Out of the box, Java does not support unix sockets so the PostgreSQL® server must be configured
+to allow TCP/IP connections. Starting with server version 8.0 TCP/IP connections are allowed from
+localhost . To allow connections to other interfaces than the loopback interface, you must modify the
+postgresql.conf file’s listen_addresses setting.
+
+
+
+BREW
+====
+
+--  For compilers to find postgresql@15 you may need to set:
+    > export LDFLAGS="-L/usr/local/opt/postgresql@15/lib"
+    > export CPPFLAGS="-I/usr/local/opt/postgresql@15/include"
 
 
 
 
-    Brew messages:
-    This formula has created a default database cluster with:
-      initdb --locale=C -E UTF-8 /usr/local/var/postgresql@15
-    For more details, read:
-      https://www.postgresql.org/docs/15/app-initdb.html
+HELP
+====
 
-  For compilers to find postgresql@15 you may need to set:
-    export LDFLAGS="-L/usr/local/opt/postgresql@15/lib"
-    export CPPFLAGS="-I/usr/local/opt/postgresql@15/include"
+--  To loop sql files in directory
 
-    To restart postgresql@15 after an upgrade:
-      brew services restart postgresql@15
-    Or, if you don't want/need a background service you can just run:
-      /usr/local/opt/postgresql@15/bin/postgres -D /usr/local/var/postgresql@15
-
-.........
-To loop sql files in directory
-
-https://stackoverflow.com/questions/44957258/how-to-run-sql-files-in-a-directory-in-order-by-file-name-in-psql
+    https://stackoverflow.com/questions/44957258/how-to-run-sql-files-in-a-directory-in-order-by-file-name-in-psql
