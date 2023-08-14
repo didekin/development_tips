@@ -1,2 +1,2 @@
 # some_docs
-Documentation for C, R and Java projects.
+My cheatsheets for some technologies I have worked with.
