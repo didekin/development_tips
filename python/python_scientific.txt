@@ -1,0 +1,21 @@
+PLOTS
+=====
+
+--  Basic:
+    > import matplotlib.pyplot as plt
+
+    > plt.plot([1, 2, 3, 4], [1, 7, 3, 5])
+    > plt.savefig('fig_1')   // format png
+    > plt.savefig('files/fig_1.jpg', format='jpg')
+    > plt.show()  // To show in plots pannel.
+
+--  To set the current figure to the figure numbered n:
+    > plt.figure(n)
+
+
+
+SOURCE
+======
+
+To split your code in a set of executable cells to run each separately just add # %% lines where appropriate.
+> # %%

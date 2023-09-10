@@ -1,28 +1,8 @@
-INSTALLATION (of python installer from python.org)
-============
+CHARACTERS
+==========
 
---  In /usr/bin
-    python3
---  In /usr/local/bin
-    pip3 -> ../../../Library/Frameworks/Python.framework/Versions/3.11/bin/pip3
-    pip3.11 -> ../../../Library/Frameworks/Python.framework/Versions/3.11/bin/pip3.11
-    pstree -> ../Cellar/pstree/2.40/bin/pstree
-    pydoc3 -> ../../../Library/Frameworks/Python.framework/Versions/3.11/bin/pydoc3
-    pydoc3.11 -> ../../../Library/Frameworks/Python.framework/Versions/3.11/bin/pydoc3.11
-    python3 -> ../../../Library/Frameworks/Python.framework/Versions/3.11/bin/python3
-    python3-config -> ../../../Library/Frameworks/Python.framework/Versions/3.11/bin/python3-config
-    python3-intel64 -> ../../../Library/Frameworks/Python.framework/Versions/3.11/bin/python3-intel64
-    python3.11 -> ../../../Library/Frameworks/Python.framework/Versions/3.11/bin/python3.11
-    python3.11-config -> ../../../Library/Frameworks/Python.framework/Versions/3.11/bin/python3.11-config
-    python3.11-intel64 -> ../../../Library/Frameworks/Python.framework/Versions/3.11/bin/python3.11-intel64
---  In /Library
-    /Library/Frameworks/Python.framework
---  In /Applications
-    /Applications/Python 3.11
---  In ~/
-    Library/Application Support/JetBrains
-    Library/Caches/JetBrains
-    Library/Logs/JetBrains
+--  To see the default encoding:
+    > sys.getdefaultencoding()
 
 COLLECTIONS
 ===========
@@ -42,6 +22,7 @@ COLLECTIONS
     L = [(x, y)
        for x in range(6) if x%2 == 0
        for y in range(6) if y%3 == 0]
+
 --  Dictionnary comprehension
     {key: value for id1, id2 in iterable if test}
     {w: d for d, w in number_to_word.items() if d < 10}
@@ -52,7 +33,7 @@ CONTROL FLOW
 ============
 
 --  Conditional expressions: expr1 if condition else expr2
-    > print((x if x > z else z) if x > y else (y if y > z else z)  # OR
+    > print((x if x > z else z) if x > y else (y if y > z else z))  # OR
     > x = y if y > z else z
 
 EDITION
@@ -70,13 +51,25 @@ EDITION
     -   Wrapping the whole line ith bracketing, i.e., parentheses, square brackets, and braces, and putting a '+'
         at the end of each piece of the line.
 
-EXECUTION
-=========
+EXCEPTIONS
+==========
 
---  To run a selection of source code from the editor in console:
+
+
+EXECUTION (with INPUTS)
+=======================
+
+--  To run a program directly in the console:
+    > python3 trash.py  // in the directory of trash.py
+--  To run a selection of source code from the Pycharm editor in console:
     shortcut: ^ + SHIFT + E
 --  To run file in console:
     > ^ + ENTER
+
+--  To ask interactively a user to enter a value:
+    >   nom_ville = input("Entrez le nom de la ville : ")
+--  To run a program passing arguments to it:
+    -- ArgumentParser from module argparse
 
 FUNCTIONS
 =========
@@ -88,29 +81,44 @@ FUNCTIONS
 HELP
 ====
 
+--  In ipython and notebook:
+    >str?  // p.e.
 --  To get interactive help in the console:
     > help()
     To exit:
     > quit
 --  To get help about a particular function:
     > help(nameFunction)
+    > help(math.ceil)  // function in module math
+
+
+MODULES
+=======
+
+--  To  import a module:
+    > import math
+--  To see the functions in a module
+    > dir(math)
 
 NUMBERS
 =======
 
 --  When a float is converted to an int, the number is truncated (not rounded).
+--  Complex number:
+    > 2 + 2j
+    > 2 + 2.j
+    > 2 + 2*1.j
 
-OBJECT SYSTEM
+
+OBJECT/TYPE SYSTEM
 =============
 
 --  To know the type of an object:
     > type(object)
+    > isinstance(23,int)
 --  Multiple assignment:
     > x, y = 2, 3
     > x, y = y, x
-
-
-
 
 OPERATORS
 =========
@@ -124,20 +132,36 @@ OPERATORS
     > not mybooleanValue
 --  Other operators on type bool: 'and', 'or'.
 
-STRINGS - PRINTING
-==================
+PRINTING
+========
+
+--  print(...) insert the spaces betweeen the arguments passed.
+--  print(...) by default insert a new line character at the end of the arguments. To avoid this, an 'end' argument can be passed.
 
 --  To inline variables in text:
-    > print(f"hello, {name}")  # name is a variable.
-    > print ("Add 10 to 12 and 14, and get %s and %s" % (twentytwo, twentyfour)) # twentytwo, twentyfour are vars.
+    >   print(f"hello, {expression}")  # The expression can be result of calling a function.
+        On peut ajouter le f devant toutes les formes de strings, qu'ils commencent par ' ou " ou ''' ou """.
+    > print ("Add 10 to 12 and 14, and get %s and %s" % (twentytwo, twentyfour)) # twentytwo, twentyfour are vars. The final % is the operator.
     > print("log(x): ", pylab.log(x))
+
 --  To include a curly brace in the string denoted by an f-string use two braces:
     > print(f'{{{3*5}}}')   # prints {15}.
 --  The expression inside an f-string can contain modifiers that control the appearance of the output string.
     These modifiers are separated from the expression denoting the value to be modified by a colon (:).
     > f'{3.14159:.2f}'  # evaluates to '3.14'
+    Pour forcer un petit entier à s'afficher sur 4 caractères, avec des 0 ajoutés au début si nécessaire:
+    >   f"{x:04d}"  // if x = 15, then print(f"{x:04d}") -> '0015'
+
 --  To print a number with a ',' thousand separator: (problems with a . separator)
     > print(f"z:,")  # z is a float number.
+
+REGULAR EXPRESSIONS
+===================
+
+
+
+STRINGS
+=======
 
 --  To concatenate string varibles with spaces in between:
     > print(var1,var2)
@@ -155,6 +179,8 @@ STRINGS - PRINTING
     > varstring[::-1]
 --  The expression 'abc'[:] is semantically equivalent to 'abc'[0:len('abc')]
 
+--  To check if a sequence of characters is a string:
+    > "def" in "abcdefcdefghefghijk"
 --  To iterate over characters of a string:
     > for ch in 'ad123fg': ...
 

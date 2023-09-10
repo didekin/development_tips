@@ -1,0 +1,57 @@
+python installer from python.org
+================================
+
+--  In /usr/bin
+    python3
+--  In /usr/local/bin
+    pip3 -> ../../../Library/Frameworks/Python.framework/Versions/3.11/bin/pip3
+    pip3.11 -> ../../../Library/Frameworks/Python.framework/Versions/3.11/bin/pip3.11
+    pstree -> ../Cellar/pstree/2.40/bin/pstree
+    pydoc3 -> ../../../Library/Frameworks/Python.framework/Versions/3.11/bin/pydoc3
+    pydoc3.11 -> ../../../Library/Frameworks/Python.framework/Versions/3.11/bin/pydoc3.11
+    python3 -> ../../../Library/Frameworks/Python.framework/Versions/3.11/bin/python3
+    python3-config -> ../../../Library/Frameworks/Python.framework/Versions/3.11/bin/python3-config
+    python3-intel64 -> ../../../Library/Frameworks/Python.framework/Versions/3.11/bin/python3-intel64
+    python3.11 -> ../../../Library/Frameworks/Python.framework/Versions/3.11/bin/python3.11
+    python3.11-config -> ../../../Library/Frameworks/Python.framework/Versions/3.11/bin/python3.11-config
+    python3.11-intel64 -> ../../../Library/Frameworks/Python.framework/Versions/3.11/bin/python3.11-intel64
+--  In /Library
+    /Library/Frameworks/Python.framework
+--  In /Applications
+    /Applications/Python 3.11
+--  In ~/
+    Library/Application Support/JetBrains
+    Library/Caches/JetBrains
+    Library/Logs/JetBrains
+
+
+conda
+=====
+
+--  Installation in /Users/pedro/miniconda3
+--  To see environments:
+    > conda env list
+--  To activate an environment:
+    > conda activate my_env
+--  To install a package in a specific environment from a specific repository ('conda-forge', in this case):
+    > conda activate my_env
+    > conda install -c conda-forge package-name
+--  To initiate the conda console, once activated an environment (base, in the example):
+    (base) pedro@Pedros-MacBook-Air ~ > python
+    > which python // /Users/pedro/miniconda3/bin/python
+--  To exit conda python console:
+    > exit()
+
+
+ipython
+=======
+
+    > pip install ipython
+    --  In /Users/pedro
+        --  .ipython
+
+Packages
+========
+
+--  In /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages
+
