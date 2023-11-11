@@ -4,19 +4,37 @@ CHARACTERS
 --  To see the default encoding:
     > sys.getdefaultencoding()
 
-CLASSES-OBJECTS
-===============
-
---  To know the type of an object:
-    > type(object)
-    > isinstance(23,int)
---  Multiple assignment:
-    > x, y = 2, 3
-    > x, y = y, x
+CLASSES-OBJECTS ASSIGNMENTS
+===========================
 
 --  To define an empty class:
     > class Foo:
           pass
+
+--  To know the type of an object:
+    > type(object)
+    > isinstance(23,int)
+    > isinstance(myarg, (tuple, list))
+--  L'opérateur 'is' permet de savoir si deux valeurs correspondent au même objet en mémoire.
+    > a is b
+    La fonction id() retourne un identificateur unique pour chaque objet; un modèle mental acceptable est celui d'adresse mémoire.
+    (a is b)  ⟺  (id(a) == id(b))
+
+--  Pour annuler la définition d'une variable:
+    > del varname
+    > del listname[2:10:3]  // liste
+    > del d['a']  // dictionnaire
+    > del listname[2:10:3], d['a']  // plusieurs arguments
+
+--  Multiple assignment:
+    > x, y = 2, 3
+    > x, y = y, x
+--  Pour affecter le même objet à plusieurs variables:
+    > a = b= 'hola'
+--  La sémantique de '+=' est différente suivant que l'objet référencé par le terme de gauche est mutable ou immuable.
+    > a = b = [] // a += [1]  // print(a) --> [1], print(b) --> [1]
+    > a = b = 1  // a += 1  // print(a) --> 2, print(b) --> 1
+
 
 COLLECTIONS
 ===========
@@ -43,17 +61,34 @@ COLLECTIONS
     Mais append et extend ne sont par exemple pas disponibles sur les chaînes de caractères, qui sont immuables.
 --  list.insert(index, [values]) is equivalent to list[index:index] = [values]
 
+--  L'affectation a, a, a = mylist est equivalent à a = list[0]; a = list[1]; a = list[2] ---> a = 3 if mylist = [1,2,3]
+
+--  To delete an element of a mutable collection:
+    > del mylist[i]
+
 --  List comprehension:
     [expr for elem in iterable if test]
     L = [(x, y)
        for x in range(6) if x%2 == 0
        for y in range(6) if y%3 == 0]
 
+--  To create an empty dictionnary:
+    > mydict = {}
+--  To create a dictionnary with a list of tuples (key, value):
+    > mydict = dict(listtuples)  // example: annuaire = dict([('marc', 35), ('alice', 30), ('eric', 38)])
+    Other ways:
+    > annuaire = {'marc': 35, 'alice': 30, 'eric': 38}
+    > annuaire = dict(marc=35, alice=30, eric=38)
 --  Dictionnary comprehension
     {key: value for id1, id2 in iterable if test}
     {w: d for d, w in number_to_word.items() if d < 10}
     gen_code_keys = (lambda book, plain_text:({c: str(book.find(c)) for c in plain_text}))
     // where gen_code_keys is a funtction with parameters book, plain_text and returns c.
+
+--  An empty set:
+    > s = set()
+    To put values:
+    > s = {1, 'a', True}  // All the elements have to be hashable (immutable)
 
 CONTROL FLOW
 ============
@@ -138,6 +173,17 @@ FUNCTIONS
     > def foo():
           pass
 
+--  Pour typer les paramètres et le retour d'une fonction:
+    > def fact(n : int) -> int:
+          return 1 if n <= 1 else n * fact(n-1)
+    > def foo(x: List[int]) -> List[str]:
+          pass
+    > ConnectionOptions = Dict[str, str]
+      Address = Tuple[str, int]
+      Server = Tuple[Address, ConnectionOptions]
+    > def partially_typed(n1: int, n2: Any) -> Any: // partially typing.
+          return None
+
 HELP
 ====
 
@@ -175,6 +221,8 @@ OPERATORS
 =========
 
 --  '*' operator for iterable unpacking:
+    Python vous autorise à mentionner une seule fois, parmi les variables qui apparaissent à gauche de une affectation, une variable précédée de '*'.
+    Cette variable est interprétée comme une liste de longueur quelconque des éléments de la collection à gauche.
     > a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     > x, *y = a
     > y = [1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -186,10 +234,11 @@ OPERATORS
     > i ** j
 --  Floor division:
     > i//j
-
 --  Negative boolean 'not'
     > not mybooleanValue
 --  Other operators on type bool: 'and', 'or'.
+
+--  %timeit in the console to mesure the time of execution of an instruction.
 
 PRINTING
 ========
@@ -245,7 +294,7 @@ STRINGS
 =======
 
 --  To concatenate string varibles with spaces in between:
-    > print(var1,var2)
+    > print(var1,var2)<
 --  To concatenate without spaces:
     > print(var1 + var 2)
     > "abc"  "def" // quand deux chaînes apparaissent immédiatement l'une après l'autre sans opérateur, elles sont concaténées.
