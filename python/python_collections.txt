@@ -1,0 +1,87 @@
+LISTS
+=====
+
+--  All indexing in a sequence is zero-based.
+--  To copy a list:
+    > newList = oldlist[:]
+--  To create an empty list:
+    > emptyList = []
+--  The operators in and not in test for collection membership:
+    > element in col_A
+    > element not in col_A
+    > not (element in col_A)
+
+--  Not index out bounds exception in slicing, even if the first and the last index are both out of range:
+    > 'abcdefghijk'[11:20] --> ''
+--  Reverse order
+    > 'abcdefghijk'[-10:-7] -->'bcd'
+    > 'abcdefghijk'[:-3] --> 'abcdefgh'
+    > 'abcdefghijk'[2:0:-1] --> 'cb'
+
+--  Append et extend modifient la liste sur laquelle elles travaillent, alors que l'addition (+) crée un nouvel objet.
+--  On peut toujours réaliser l'addition sur tous les types séquences, puisqu'on crée un nouvel objet pour stocker le résultat de l'addition.
+    Mais append et extend ne sont par exemple pas disponibles sur les chaînes de caractères, qui sont immuables.
+--  list.insert(index, [values]) is equivalent to list[index:index] = [values]
+
+--  L'affectation a, a, a = mylist est equivalent à a = list[0]; a = list[1]; a = list[2] ---> a = 3 if mylist = [1,2,3]
+
+--  To delete an element of a mutable collection:
+    > del mylist[i]
+
+--  List comprehension:
+    [expr for elem in iterable if test]
+    L = [(x, y)
+       for x in range(6) if x%2 == 0
+       for y in range(6) if y%3 == 0]
+
+DICTIONNARY
+===========
+
+--  To create an empty dictionnary:
+    > mydict = {}
+--  To create a dictionnary with a list of tuples (key, value):
+    > mydict = dict(listtuples)  // example: annuaire = dict([('marc', 35), ('alice', 30), ('eric', 38)])
+    Other ways:
+    > annuaire = {'marc': 35, 'alice': 30, 'eric': 38}
+    > annuaire = dict(marc=35, alice=30, eric=38)
+--  Dictionnary comprehension
+    {key: value for id1, id2 in iterable if test}
+    {w: d for d, w in number_to_word.items() if d < 10}
+
+    gen_code_keys = (lambda book, plain_text:({c: str(book.find(c)) for c in plain_text}))
+    // where gen_code_keys is a funtction with parameters book, plain_text and returns c.
+
+SETS
+====
+
+--  An empty set:
+    > s = set()
+    To put values:
+    > s = {1, 'a', True}  // All the elements have to be hashable (immutable)
+
+TUPLES
+======
+
+--  To create a tuple with one element:
+    > t = (4,)  or t = 4,
+--  To convert a tuple in a list:
+    > l = list(t)
+--  To convert a list in a tuple:
+    > t2 = tuple(l)
+
+--  To change to variables:
+    > a = 1
+    > b = 2
+    > a, b = b, a
+
+--  UNPACKING
+    > liste = [1, 2, 3]
+    > gauche, milieu, droit = liste  or [gauche, milieu, droit] = list
+
+    --  '*' operator for iterable unpacking:
+    > a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    > x, *y = a
+    > y = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    Conversely:
+    > *x, y = a
+    > x = [0, 1, 2, 3, 4, 5, 6, 7, 8]
