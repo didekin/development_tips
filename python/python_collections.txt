@@ -1,3 +1,36 @@
+DICTIONNARY
+===========
+
+--  To create an empty dictionnary:
+    > mydict = {}
+--  To create a dictionnary with a list of tuples (key, value):
+    > mydict = dict(listtuples)  // example: annuaire = dict([('marc', 35), ('alice', 30), ('eric', 38)])
+    Other ways:
+    > annuaire = {'marc': 35, 'alice': 30, 'eric': 38}
+    > annuaire = dict(marc=35, alice=30, eric=38)
+--  Dictionnary comprehension
+    {key: value for id1, id2 in iterable if test}
+    {w: d for d, w in number_to_word.items() if d < 10}
+
+    gen_code_keys = (lambda book, plain_text:({c: str(book.find(c)) for c in plain_text}))
+    // where gen_code_keys is a funtction with parameters book, plain_text and returns c.
+
+GENERATORS
+==========
+
+--  > generator1 = (x**2 for x in range(100) if x%17 == 0)
+
+--  Fonction generatrice: 'yield'
+    > def f1(n, verbose=False):
+            for i in range(2, n):
+            if n % i == 0:
+                yield i
+
+--  Fonction génératrice qui appelle une autre fonction génératrice: 'yield from'
+    > def f2(n):
+          for i in f1(n):
+              yield from f1(i, verbose=True)
+
 LISTS
 =====
 
@@ -33,23 +66,6 @@ LISTS
     L = [(x, y)
        for x in range(6) if x%2 == 0
        for y in range(6) if y%3 == 0]
-
-DICTIONNARY
-===========
-
---  To create an empty dictionnary:
-    > mydict = {}
---  To create a dictionnary with a list of tuples (key, value):
-    > mydict = dict(listtuples)  // example: annuaire = dict([('marc', 35), ('alice', 30), ('eric', 38)])
-    Other ways:
-    > annuaire = {'marc': 35, 'alice': 30, 'eric': 38}
-    > annuaire = dict(marc=35, alice=30, eric=38)
---  Dictionnary comprehension
-    {key: value for id1, id2 in iterable if test}
-    {w: d for d, w in number_to_word.items() if d < 10}
-
-    gen_code_keys = (lambda book, plain_text:({c: str(book.find(c)) for c in plain_text}))
-    // where gen_code_keys is a funtction with parameters book, plain_text and returns c.
 
 SETS
 ====

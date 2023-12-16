@@ -1,0 +1,82 @@
+CHARACTERS
+==========
+
+--  To see the default encoding:
+    > sys.getdefaultencoding()
+
+PRINTING
+========
+
+--  print(...) insert the spaces betweeen the arguments passed.
+--  print(...) by default insert a new line character at the end of the arguments. To avoid this, an 'end' argument can be passed.
+
+--  To inline variables in text:
+    >   print(f"hello, {expression}")  # The expression can be result of calling a function.
+        On peut ajouter le f devant toutes les formes de strings, qu'ils commencent par ' ou " ou ''' ou """.
+    > print ("Add 10 to 12 and 14, and get %s and %s" % (twentytwo, twentyfour)) # twentytwo, twentyfour are vars. The final % is the operator.
+    > print("log(x): ", pylab.log(x))
+
+--  To include a curly brace in the string denoted by an f-string use two braces:
+    > print(f'{{{3*5}}}')   # prints {15}.
+--  The expression inside an f-string can contain modifiers that control the appearance of the output string.
+    These modifiers are separated from the expression denoting the value to be modified by a colon (:).
+    > f'{3.14159:.2f}'  # evaluates to '3.14'
+    Pour forcer un petit entier à s'afficher sur 4 caractères, avec des 0 ajoutés au début si nécessaire:
+    >   f"{x:04d}"  // if x = 15, then print(f"{x:04d}") -> '0015'
+    Pour n'obtenir que l'heure et la minute d'un objet datetime:
+    >   f"{mtime_datetime:%H:%M}"
+
+--  To print a number with a ',' thousand separator: (problems with a . separator)
+    > print(f"z:,")  # z is a float number.
+
+REGULAR EXPRESSIONS
+===================
+
+--  Module re
+    >   import re
+--  Pour savoir si un objet chaine est ou non de la forme *-*.txt
+    >   regexp = "(.*)-(.*)\.txt"
+--  re.match(regexp, sample)  ⟺  re.compile(regexp).match(sample)
+
+--  Pour chercher tous les mots se terminant par 'a' ou 'm' dans une chaîne:
+    >   print(re.findall(r"\w*[am]\W", sentence))
+--  L'attrape-tout '.' en fait n'attrape pas le caractère de fin de ligne \n. Il existe un flag re.DOTALL qui permet de
+    faire de '.' un vrai attrape-tout qui capture aussi les newline
+    Or pour l'ajouter explicitement:
+    > match = re.compile("([\w \n]*)", flags=re.UNICODE).match(sample)
+
+GROUPS
+--  Pour l'accès par rang aux groups, les indices commencent à 1.
+--  (...) les parenthèses définissent un groupe anonyme.
+--  (?P<name>...) définit un groupe nommé
+--  (?:...) permet de mettre des parenthèses mais sans créer un groupe.
+--  (?P=name) ne matche que si l'on retrouve à cet endroit de l'entrée la même sous-chaîne que celle trouvée pour le groupe name en amont.
+--  Pour ajouter comme contrainte que le premier et le dernier groupes de chiffres soient identiques:
+    >   regexp3 = "(?P<id>[0-9]+)[A-Za-z]+(?P<needle>[0-9]+)[A-Za-z]+(?P=id)"
+
+STRINGS
+=======
+
+--  To concatenate string varibles with spaces in between:
+    > print(var1,var2)<
+--  To concatenate without spaces:
+    > print(var1 + var 2)
+    > "abc"  "def" // quand deux chaînes apparaissent immédiatement l'une après l'autre sans opérateur, elles sont concaténées.
+    > print(f"pour n = {test:2d} : premier → {premier(test)}\n"
+          f" premier_sans_else → {premier_sans_else(test)}\n")
+--  To repeat a string a number of times
+    > varstringA * number   // "hola" * 5
+
+--  To cast a number, p.e., to a string:
+    > str(5)
+
+--  Negative numbers are used to index from the end of a string.
+    > 'abc'[‐1] # is 'c'.
+--  To reverse a string with all its characters:
+    > varstring[::-1]
+--  The expression 'abc'[:] is semantically equivalent to 'abc'[0:len('abc')]
+
+--  To check if a sequence of characters is a string:
+    > "def" in "abcdefcdefghefghijk"
+--  To iterate over characters of a string:
+    > for ch in 'ad123fg': ...
