@@ -1,0 +1,6 @@
+--  To list installed packages:
+    > pip list
+--  To see current configuration:
+    > pip config list
+--  To locate the cert repository:
+    > python3 -c "import ssl; print(ssl.get_default_verify_paths())"

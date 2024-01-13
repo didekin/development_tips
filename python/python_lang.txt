@@ -5,6 +5,9 @@ CLASSES-OBJECTS ASSIGNMENTS
     > class Foo:
           pass
 
+    > class DerivedClassName(modulename.BaseClassName):
+          pass
+
 --  To know the type of an object:
     > type(object)
     > isinstance(23,int)
@@ -28,6 +31,36 @@ CLASSES-OBJECTS ASSIGNMENTS
 --  La sémantique de '+=' est différente suivant que l'objet référencé par le terme de gauche est mutable ou immuable.
     > a = b = [] // a += [1]  // print(a) --> [1], print(b) --> [1]
     > a = b = 1  // a += 1  // print(a) --> 2, print(b) --> 1
+
+CLASSES DEFINITION
+
+--  Overloading: see '3. Data model' in  The Python Language Reference; specially 3.3. Special method names.
+
+--   To have (simple) index access to an object with len(myobj) > 0, it is necessary to overwrite __getitem__:
+     > def index_getitem(self, index):
+            ....
+     > Myobj.__getitem__ = index_getitem
+
+--  To have slicing in an object:
+    > def slice_getitem(self, key:
+        if isinstance(key, slice):
+            return [self[index] for index in range(*key.indices(len(self)))]
+        elif isinstance(key, int):
+            index = key
+    else:
+        raise KeyError(f"[] avec type non reconnu {key}")
+    > Myobj.__getitem__ = slicing_getitem
+
+    Avec seulement __getitem__, on peut faire une boucle sur l'objet. La méthode __iter__ n'est pas la seule façon de rendre un objet itérable.
+
+--  To have an object 'callable':
+    > myobjet = ClasseMyobj(arguments)
+    > myobjet(arg1, arg2) ⟺ myobjet.__call__(arg1, arg2)
+    Where we overwrite '__call__':
+    >   def __call__(self, *args):
+            ...
+
+
 
 CONTROL FLOW
 ============
@@ -139,6 +172,8 @@ FILES
 FUNCTIONS
 =========
 
+--  Avec la forme *args, args est toujours un tuple.  // Here, p.e. : def __init__(self, *args)
+
 --  Lambdas:
     lambda <sequence of variable names> : <expression>
     lambda x, y: x*y
@@ -157,8 +192,6 @@ FUNCTIONS
     > def partially_typed(n1: int, n2: Any) -> Any: // partially typing.
           return None
 
---  Default values in the signature of a function are shared betweeb objects returned by the function.
-
 HELP
 ====
 
@@ -173,78 +206,6 @@ HELP
     > help(math.ceil)  // function in module math
 --  To get help about a method:
     > help(list.sort)
-
-
-MODULES/SPACE-NAMES
-===================
-
-Un module est donc un objet python qui correspond à la fois à :
---  Un (seul) fichier sur le disque ;
---  Un espace de nom pour les variables du programme.
-
---  To  import a module:
-    > import math
-    > import monmodule as autremodule   // changing the name of the module
-    > from monmodule import monsymbole as autresymbole   // changing the name of a module attribute.
-    > from un_deux_trois_quatre import un as one, deux, trois as three  // resultant names = one(), deux(), three()
-    > import foo // définit une variable 'foo' qui désigne un module.
-    > import foo as bar   //  a le même effet, sauf que le module est accessible par la variable 'bar'.
-    > from foo import var // définit une variable 'var' qui désigne un attribut du module.
-    > from foo import var as newvar  // définit une variable newvar qui désigne ce même attribut.
-
-    > from importlib import import_module
-    > imported_modtools = import_module('mod' + 'tools')  // Ces deux lignes sont equivalentes à :
-    > import modtools
-
---  To see the functions in a module
-    > dir(math)
-
-BUILTINS
---  Module directly accesible: 'builtins'
-    > import builtins
-    > dir(builtins)
-    --  After changing the definition of a builtin function/variable, to reestablish its original meaning:
-        > print = builtins.print   // after print = 1, p.e.
-
---  La variable 'sys.builtin_module_names' contient le nom des modules qui sont implémentés en C et font partie intégrante de l'interpréteur.
-
-LOCAL SCOPE
---  To see the current scope's local variables in a dictionary data structure:
-        > locals()
---  To delete variable in the current scope's local variables:
-        > if 'i' in locals():
-                del i
---  Une variable de boucle est définie (assignée) dans la boucle et reste visible une fois la boucle terminée.
---  Les variables de compréhension ne fuient pas.
---  Les arguments attendus par la fonction sont considérés comme des variables locales, c'est-à-dire dans l'espace de noms de la fonction.
-
-GLOBAL VARIABLES
---  Comment fait-on alors pour modifier une variable globale depuis une fonction APRÈS l'avoir utilisée? Pour cela il faut utiliser l'instruction global:
-    > variable5 = "globale"
-      def ma_fonction5():
-          global variable5
-          print("dans la fonction", variable5)  // print 'globale'
-          variable5 = "changée localement"
-
-    No need to use 'globale' here because it has not been previously used:
-    > variable4 = "globale"
-      def ma_fonction4():
-            variable4 = "locale"
-            print(variable4)  // print 'locale'
-
---  La fonction 'globals' nous donne la liste des symboles définis au niveau de l'espace de noms du module dans lequel est définie la fonction.
-    > globals() // inside the module.
---  The function vars() when executed inside a module is similar to globals.
---  The function vars(moduleName) is similar to globals(), but it is executed outside of the module (when imported).
---  La fonction 'locals' nous donne les variables locales qui sont accessibles à cet "endroit" du code.
-
-RELOAD
---  Module importlib, fonction 'reload': elle permet de forcer le rechargement d'un module.
---  Il est possible de forcer le rechargement d'un module en l'enlevant de la variable 'sys.modules' (it is a dictionnary).
-
---  Pour charger vos propres modules ou packages, il suffit de les placer dans le répertoire où se trouve le point d'entrée:
-    > from pathlib import Path
-      Path.cwd()  // pour savoir le répertoire courant.
 
 NUMBERS
 =======

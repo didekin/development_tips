@@ -75,6 +75,11 @@ SETS
     To put values:
     > s = {1, 'a', True}  // All the elements have to be hashable (immutable)
 
+SLICES
+======
+
+--  class slice(object)
+
 TUPLES
 ======
 

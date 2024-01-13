@@ -3,12 +3,9 @@
 --  To start/stop postgres:
     > brew services start postgresql@15
     > brew services stop postgresql@15
-
---  To restart postgresql@15 after an upgrade:
-    > brew services restart postgresql@15
-    Or, if you don't want/need a background service you can just run:
-    >  /usr/local/opt/postgresql@15/bin/postgres -D /usr/local/var/postgresql@15
-
+        Aliases in .zshrc:
+        alias postgres.start='brew services start postgresql@15'
+        alias postgres.stop='brew services stop postgresql@15'
 --  To have psql in path, I added the following line to .zshrc
     > export PATH="/usr/local/opt/postgresql@15/bin:$PATH"
 --  To see if postgresql is running:
@@ -16,17 +13,17 @@
 --  To see the postgres version after starting the service
     > postgres -V
 
+--  To restart postgresql@15 after an upgrade:
+    > brew services restart postgresql@15
+    Or, if you don't want/need a background service you can just run:
+    >  /usr/local/opt/postgresql@15/bin/postgres -D /usr/local/var/postgresql@15
+
 --  To create a data base
     > createdb dyndis  {outside psql}
 --  To delete a database:
     > dropdb dyndis
 --  To log in psql
     > psql dbasename
-
---  To create a user
-    > psql CREATE USER cl_dyndis WITH PASSWORD 'dyndispswd';
---  To grant privileges to a user in a database:
-    > psql GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA dyndis TO cl_dyndis;
 
 PSQL
 ====
@@ -37,15 +34,33 @@ PSQL
     > psql -d dyndis -U cl_dyndis
 --  Help
     mydb=> \h
-    mydb=> \q  {to exit}
+--  To exit psql:
+    mydb=> \q
 --  To list data bases
     mydb=> \l
+--  To select a database:
+    mydb=> \c database_name
 --  To list schemas
     mydb=> \dn
---  To list tables
-    mydb=> \td
+--  To list tables in a specific schema:
+    mydb=> \dt schemaname.*
+
+--  To create a user
+    mydb=> CREATE USER username WITH PASSWORD 'userpswd';
+    or
+    mydb=> CREATE ROLE username LOGIN;
+    or
+    mydb=> CREATE ROLE name PASSWORD 'pswd';
+    or
+    mydb=> CREATE ROLE name PASSWORD 'pswd' LOGIN CREATEDB; // able to create DBs.
+--  To grant privileges to a user in a database:
+    mydb=> GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA dyndis TO cl_dyndis;
 --  To list users
     mydb=> \du
+    SELECT rolname FROM pg_roles;
+--  To drop a user
+    mydb=> DROP OWNED BY roleTodrop;
+    mydb=> DROP ROLE roleTodrop;
 
 --  To read commands from the specified file:
     mydb=> \i filename.sql
@@ -53,24 +68,12 @@ PSQL
 JDBC DRIVER
 ===========
 
-Note:
-----
-Out of the box, Java does not support unix sockets so the PostgreSQL® server must be configured
-to allow TCP/IP connections. Starting with server version 8.0 TCP/IP connections are allowed from
-localhost . To allow connections to other interfaces than the loopback interface, you must modify the
-postgresql.conf file’s listen_addresses setting.
-
-
-
 BREW
 ====
 
 --  For compilers to find postgresql@15 you may need to set:
     > export LDFLAGS="-L/usr/local/opt/postgresql@15/lib"
     > export CPPFLAGS="-I/usr/local/opt/postgresql@15/include"
-
-
-
 
 HELP
 ====
