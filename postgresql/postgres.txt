@@ -55,6 +55,7 @@ PSQL
     mydb=> CREATE ROLE name PASSWORD 'pswd' LOGIN CREATEDB; // able to create DBs.
 --  To grant privileges to a user in a database:
     mydb=> GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA dyndis TO cl_dyndis;
+    mydb=> GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA dyndis TO user;
 --  To list users
     mydb=> \du
     SELECT rolname FROM pg_roles;
