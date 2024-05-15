@@ -62,10 +62,7 @@ EXECUTION (with INPUTS)
 
 --  To run a program directly in the console:
     > python3 trash.py  // in the directory of trash.py
---  To run a selection of source code from the Pycharm editor in console:
-    shortcut: ^ + SHIFT + E
---  To run file in console:
-    > ^ + ENTER
+
 --  To run a file .py in terminal:
     First line in file:
     #!/usr/bin/env python3

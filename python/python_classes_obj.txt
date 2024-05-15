@@ -62,6 +62,21 @@ INFORMATION HIDING
 
 --  When the name of an attribute starts with __ (double underscore) but does not end with __, that attribute is not visible outside the class.
 
+GENERATORS
+==========
+
+--  > generator1 = (x**2 for x in range(100) if x%17 == 0)
+
+--  Fonction generatrice: 'yield'
+    > def f1(n, verbose=False):
+            for i in range(2, n):
+            if n % i == 0:
+                yield i
+
+--  Fonction génératrice qui appelle une autre fonction génératrice: 'yield from'
+    > def f2(n):
+          for i in f1(n):
+              yield from f1(i, verbose=True)
 
 OBJECTS
 -------

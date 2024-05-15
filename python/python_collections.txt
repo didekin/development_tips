@@ -15,22 +15,6 @@ DICTIONNARY
     gen_code_keys = (lambda book, plain_text:({c: str(book.find(c)) for c in plain_text}))
     // where gen_code_keys is a funtction with parameters book, plain_text and returns c.
 
-GENERATORS
-==========
-
---  > generator1 = (x**2 for x in range(100) if x%17 == 0)
-
---  Fonction generatrice: 'yield'
-    > def f1(n, verbose=False):
-            for i in range(2, n):
-            if n % i == 0:
-                yield i
-
---  Fonction génératrice qui appelle une autre fonction génératrice: 'yield from'
-    > def f2(n):
-          for i in f1(n):
-              yield from f1(i, verbose=True)
-
 LISTS
 =====
 

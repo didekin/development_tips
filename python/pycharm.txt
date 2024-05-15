@@ -1,0 +1,4 @@
+--  To run a selection of source code from the Pycharm editor in console:
+    shortcut: ^ + SHIFT + E
+--  To run file in console:
+    > ^ + ENTER
