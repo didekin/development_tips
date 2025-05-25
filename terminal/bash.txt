@@ -206,6 +206,11 @@ COMPRESSION AND CONVERSION
     $ iconv -f utf-16 -t utf-8 datos/marzo2018 > output_file
     $ iconv -f CP1250 -t utf-8 bridgestone.csv > bridgestone_utf8.csv
 
+CHECK DOWNLOAD
+
+--  md5 filename
+--  shasum -a 256 filename
+
 LIFE CYCLE
 
 -- To make two or more dirs simultaneously, use the option -p:

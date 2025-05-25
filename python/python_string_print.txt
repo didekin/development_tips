@@ -5,22 +5,29 @@ CHARACTERS
     > sys.getdefaultencoding()
 
 --  The character “\” is an escape character used to indicate that the next character should be treated in a special way.
+    >>> 'doesn\'t'  # use \' to escape the single quote...
+--- Raw strings: r'' . A raw string may not end in an odd number of \ characters (see python FAQ).
+    >>> r'doesn\'t'
+        "doesn\\'t"
 
 COMPOSING
 =========
 
+--  To concatenate variables or a variable and a literal, use '+'.
+
 --  To concatenate string varibles with spaces in between:
-    > print(var1,var2)<
+    > print(var1,var2)
 --  To concatenate without spaces:
     > print(var1 + var 2)
     > "abc"  "def" // quand deux chaînes apparaissent immédiatement l'une après l'autre sans opérateur, elles sont concaténées.
     > print(f"pour n = {test:2d} : premier → {premier(test)}\n"
           f" premier_sans_else → {premier_sans_else(test)}\n")
+
 --  To repeat a string a number of times
     > varstringA * number   // "hola" * 5
 
---  To add lines to a report:
-    > report = f'{report}\n{name}'s value is {average}'
+--  To compose a text with variables (report_0, name, average):
+    > report_1 = f'{report_0}\n{name}\'s value is {average}'
 
 MISC
 ====
