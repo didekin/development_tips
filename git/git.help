@@ -1,3 +1,9 @@
+GITHUB:
+git remote add origin https://github.com/didekin/ISL_python.git
+git branch -M main
+git push -u isl_py main
+
+
 BASICS
 ======
 

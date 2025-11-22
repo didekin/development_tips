@@ -9,18 +9,11 @@ IMPORT
 ======
 
 --  To  import a module:
-    > import math
-    > import monmodule as autremodule   // changing the name of the module
-    > from monmodule import monsymbole as autresymbole   // changing the name of a module attribute.
     > from un_deux_trois_quatre import un as one, deux, trois as three  // resultant names = one(), deux(), three()
     > import foo // définit une variable 'foo' qui désigne un module.
     > import foo as bar   //  a le même effet, sauf que le module est accessible par la variable 'bar'.
     > from foo import var // définit une variable 'var' qui désigne un attribut du module.
     > from foo import var as newvar  // définit une variable newvar qui désigne ce même attribut.
-
-    > from importlib import import_module
-    > imported_modtools = import_module('mod' + 'tools')  // Ces deux lignes sont equivalentes à :
-    > import modtools
 
 --  To see the functions in a module
     > dir(math)
