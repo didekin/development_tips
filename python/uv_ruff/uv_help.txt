@@ -1,0 +1,26 @@
+https://docs.astral.sh/uv/getting-started/installation/#docker
+
+-- to make uv add <package-name>
+   uv add <package-name>
+-- to import the dependencies declared in your existing requirements.txt file into the uv infrastructure:
+   uv add -r requirements.txt
+-- to upgrade <package-name>
+   uv add --upgrade <package-name>
+
+-- uv remove <package-name>
+
+-- to install a development dependecy:
+   uv add --dev <package-name>
+
+Locking (uv.lock) consists of capturing your project’s specific dependencies in the lockfile. This process makes it possible
+to reproduce your working environment in all possible configurations, including the Python version and distribution,
+the operating system, and the architecture.
+
+Syncing is the process of installing the required packages from the lockfile into the project’s development environment.
+
+-- to explicitly lock and sync the project:
+   uv lock
+   uv sync
+
+-- to list the packages installed in the virtual environment:
+   uv pip list

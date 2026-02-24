@@ -1,0 +1,21 @@
+# Install Ruff globally.
+  uv tool install ruff@latest
+
+# Or add Ruff to your project.
+  uv add --dev ruff
+
+# With pip.
+  pip install ruff
+
+  ruff check   # Lint all files in the current directory.
+  ruff format  # Format all files in the current directory.
+
+# To run the Ruff linter over our project
+  uv run ruff check
+# If the project's virtual environment has been activated (source .venv/bin/active on Linux and macOS):
+  ruff check
+# To resolve the issue automatically:
+  ruff check --fix
+
+# To see more details about the error message, including a code example:
+  ruff rule <rule-name>

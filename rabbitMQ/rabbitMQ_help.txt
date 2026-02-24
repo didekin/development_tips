@@ -1,0 +1,2 @@
+--  To check that is running in a certain port:
+    nc -vz localhost 5672

@@ -1,0 +1,23 @@
+-- Installation
+   $ sudo apt update
+   $ sudo apt install mkcert libnss3-tools -y
+   $ mkcert -install
+
+CERTIFICATE ISSUING (wso2 virtual machine)
+
+Since the VM IP may change, we'll use a hostname instead of the IP: wso2.local
+
+-- To create the certificate with mkcert:
+   $ mkcert wso2.local
+
+   This generates two files in ~/:
+   wso2.local.pem → certificate
+   wso2.local-key.pem → private key
+
+-- To convert certificate to PKCS12 (needed for Java)
+   $ openssl pkcs12 -export -out wso2.p12 -inkey wso2.local-key.pem \
+     \ -in wso2.local.pem -name wso2carbon -password pass:wso2carbon
+
+Make a back-up
+   $ mv wso2carbon.jks wso2carbon.jks.bak
+
