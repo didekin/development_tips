@@ -71,6 +71,9 @@ UNDO
 BRANCH
 ======
 
+-- To get a simple listing of your current branches:
+   $ git branch
+
 -- To create a branch:
    $ git branch localdev
 -- To switch to a created local branch:
@@ -104,9 +107,6 @@ BRANCH
    $ git branch -m old_branch new_branch         # Rename branch locally
    $ git push origin :old_branch                 # Delete the old branch
    $ git push --set-upstream origin new_branch   # Push the new branch, set local branch to track the new remote
-
--- To get a simple listing of your current branches:
-   $ git branch
 
 -- To get a list of remote branches:
    $ git remote show repositoryname
@@ -162,6 +162,12 @@ LOGS
 -- To print out the history of your commits, showing where your branch pointers are and how your history has diverged:
    $ git log --oneline --decorate --graph --all
 
+SSH
+===
+
+-- To add passphrases in the keychain and to avoid to enter it with every 'push':
+   $ /usr/bin/ssh-add -K
+
 TAGS
 ====
 
@@ -182,9 +188,3 @@ TAGS
 
 --  To push a single tag to the remote repository:
     $ git push remoterepositoryname tagname
-
-SSH
-===
-
--- To add passphrases in the keychain and to avoid to enter it with every 'push':
-   $ /usr/bin/ssh-add -K
